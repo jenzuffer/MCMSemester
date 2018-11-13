@@ -38,12 +38,12 @@
                     <div class="col-md-4">
                         <h5 class="second-header">Carport</h5>
                         <h6 class="second-header">Width</h6>
-                        <select class="select-option">
+                        <select class="select-option" name="width">
                             <option>Choose width</option>
                             <%= html.getDropdownFromList(width, " cm")%>
                         </select>
                         <h6 class="second-header">Length</h6>
-                        <select class="select-option">
+                        <select class="select-option" name="length">
                             <option>Choose length</option>
                             <%= html.getDropdownFromList(length, " cm")%>
                         </select>
