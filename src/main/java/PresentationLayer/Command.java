@@ -27,6 +27,7 @@ abstract class Command {
         commands.put("heightandLength", new HeightandLengths());
         //add methods here for the controller
     }
+    
 
     static Command from(HttpServletRequest request) {
         String commandName = request.getParameter("command");
