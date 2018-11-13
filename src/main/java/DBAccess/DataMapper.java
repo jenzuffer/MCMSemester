@@ -81,4 +81,105 @@ public class DataMapper {
         }
         return values;
     }
+
+    public static void CreateCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, " + name + ", " + Adress + ", " + City + ", "
+                + PhoneNumber + ", " + Email + ")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
+    public static void CreateCarport(int Heigth, int Width, int Length) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Height`,`Width`,`Length`) VALUES (NULL, " + Heigth + ", " + Width + ", " + Length + ")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
+    public static void CreateOrder(int CustomerID, int CarportID) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + CustomerID + ", " + CarportID + ")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
+    public static int getCustomerIDByPhoneNumber(String PhoneNumber) throws LoginSampleException {
+        String l_sSQL = "SELECT ID FROM `Customer` WHERE Phonenumber = " + PhoneNumber;
+        int CustomerID = 0;
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
+            if (l_rsSearch.next()) {
+                CustomerID = l_rsSearch.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+        return CustomerID;
+    }
+
+    public static int getCarportIDByCustomerID(int CustomerID) throws LoginSampleException {
+        int CarportID = 0;
+        String l_sSQL = "SELECT c1.idCarport FROM `Carport` c1, `Customer` c2, `Order` o1 WHERE c1.idCarport = o1.idCarport AND " + CustomerID + " = o1.customerID";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
+            if (l_rsSearch.next()) {
+                CarportID = l_rsSearch.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+        return CarportID;
+    }
+
+    public static void CreateProduct(String Name, int Price, String Description, int Length, int Unit) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`) VALUES (NULL," + Name + ", " + Price + ", " + Description + ", " + Length
+                + ", " + Unit + ")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
+    public static void CreateMaterial(String MaterialName) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Materials` (`ID`,`MaterialeNavn`) VALUES (NULL, " + MaterialName + ")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
+    public static void UpdateProductPrice(int ProductID, int NewPrice) throws LoginSampleException {
+        String l_sSQL = "UPDATE `Produkter` SET `Pris`= NewPrice WHERE `Id`= " + ProductID;
+         try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+    }
+
 }
