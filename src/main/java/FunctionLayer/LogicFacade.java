@@ -40,8 +40,15 @@ public class LogicFacade {
         return CreateCarport;
     }
 
-    public static Map<Integer, Integer> GetWidthAndLength() throws LoginSampleException {
-        Map<Integer, Integer> HM = DataMapper.GetWidthAndLength();
-        return HM;
+ 
+
+    public static List<Integer> GetWdith() throws LoginSampleException {
+        List<Integer> width = DataMapper.GetWidth();
+        return width;
+    }
+
+    public static List<Integer> GetLength() throws LoginSampleException {
+        List<Integer> length = DataMapper.GetLength();
+        return length;
     }
 }

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Christian
  */
- abstract class Command {
+abstract class Command {
 
     private static HashMap<String, Command> commands;
 
@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
         commands.put("CalculatePage", new CalculatePage());
         commands.put("UpdateOrder", new UpdateOrder());
         commands.put("CalculateOrder", new calculateOrder());
+        commands.put("heightandLength", new HeightandLengths());
         //add methods here for the controller
     }
 

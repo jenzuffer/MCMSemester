@@ -49,20 +49,36 @@ public class DataMapper {
         return materials;
     }
 
-    public static Map<Integer, Integer> GetWidthAndLength() throws LoginSampleException {
-        Map<Integer, Integer> HM = new HashMap();
-         try {
+    public static List<Integer> GetWidth() throws LoginSampleException {
+        List<Integer> values = new ArrayList();
+        try {
             Connection l_cCon = Connector.connection();
-            //query bliver lidt mere tricky hvis de skal havde forskellige værdier
-            String l_sSQL = "SELECT * FROM `width` m1, `length` t1 WHERE m1.width = t1.length";
+
+            String l_sSQL = "SELECT * FROM `width`";
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery();
             while (l_rsSearch.next()) {
-                 HM.put(l_rsSearch.getInt(1), l_rsSearch.getInt(2));
+                values.add(l_rsSearch.getInt(1));
             }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage());
         }
-        return HM;
+        return values;
+    }
+
+    public static List<Integer> GetLength() throws LoginSampleException {
+        List<Integer> values = new ArrayList();
+        try {
+            Connection l_cCon = Connector.connection();
+            String l_sSQL = "SELECT * FROM `length`";
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
+            while (l_rsSearch.next()) {
+                values.add(l_rsSearch.getInt(1));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return values;
     }
 }

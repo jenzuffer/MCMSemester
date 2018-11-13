@@ -11,8 +11,8 @@
 <!DOCTYPE html>
 
 <%
-    List<Integer> width = new ArrayList();
-    List<Integer> length = new ArrayList();
+    List<Integer> width = (List<Integer>)request.getAttribute("width");
+    List<Integer> length = (List<Integer>)request.getAttribute("length");
     HTMLGenerator html = new HTMLGenerator();
 %>
 

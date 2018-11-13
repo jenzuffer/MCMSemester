@@ -13,7 +13,7 @@
     </head>
     <body>
         <form name="ChangeOrder" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="CalculatePage">
+            <input type="hidden" name="command" value="heightandLength">
         </form>
         <SCRIPT LANGUAGE="JavaScript">document.forms[0].submit();</SCRIPT>
     </body>
