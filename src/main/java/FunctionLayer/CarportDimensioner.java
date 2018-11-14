@@ -5,32 +5,17 @@
  */
 package FunctionLayer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Christian
  */
 public class CarportDimensioner {
-    private int heigth;
     private int length;
     private int width;
-    private int polls;
-    private int spears;
-
-    public CarportDimensioner(int heigth, int length, int width, int polls, int spears) {
-        this.heigth = heigth;
-        this.length = length;
-        this.width = width;
-        this.polls = polls;
-        this.spears = spears;
-    }
-
-    public int getHeigth() {
-        return heigth;
-    }
-
-    public void setHeigth(int heigth) {
-        this.heigth = heigth;
-    }
+    private List<Materiale> materials = new ArrayList();
 
     public int getLength() {
         return length;
@@ -48,20 +33,11 @@ public class CarportDimensioner {
         this.width = width;
     }
 
-    public int getPolls() {
-        return polls;
+    public List<Materiale> getMaterials() {
+        return materials;
     }
 
-    public void setPolls(int polls) {
-        this.polls = polls;
-    }
-
-    public int getSpears() {
-        return spears;
-    }
-
-    public void setSpears(int spears) {
-        this.spears = spears;
-    }
-
+    
+    
+    
 }
