@@ -3,16 +3,16 @@ package FunctionLayer;
 public class Materiale {
     private String name, description, unit, type;
     private int amount, length, id;
-    private double pris;
+    private double price;
 
-    public Materiale(String name, String description, String unit, String type, int length, int id, double pris) {
+    public Materiale(String name, String description, String unit, String type, int length, int id, double price) {
         this.name = name;
         this.description = description;
         this.unit = unit;
         this.type = type;
         this.length = length;
         this.id = id;
-        this.pris = pris;
+        this.price = price;
     }
 
     
@@ -90,11 +90,11 @@ public class Materiale {
     }
 
     public double getPris() {
-        return pris;
+        return price;
     }
 
-    public void setPris(double pris) {
-        this.pris = pris;
+    public void setPris(double price) {
+        this.price = price;
     }
 
 
