@@ -82,11 +82,15 @@ public class DataMapper {
     }
 
     public static void createCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, " + name + ", " + Adress + ", " + City + ", "
-                + PhoneNumber + ", " + Email + ")";
+        String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, ?, ?, ?, ?, ?)";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.setString(1, name);
+            l_pStatement.setString(2, Adress);
+            l_pStatement.setString(3, City);
+            l_pStatement.setString(4, PhoneNumber);
+            l_pStatement.setString(5, Email);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
@@ -171,12 +175,24 @@ public class DataMapper {
     }
 
     public static void UpdateProductOrAdd(int ProductID, String Name, double Price, String Description, int length, String Unit, String Type) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + ProductID + ", " + Name + ", "
-                + Price + ", " + Description + ", " + length + ", " + Unit + ", " + Type + ""
-                + "ON DUPLICATE KEY UPDATE `Navn`= " + Name + ",`Pris`= " + Price + ",`Beskrivelse`= " + Description + ",`Længde`= " + length + ",`Enhed`= " + Unit + ",`Type`= " + Type;
+        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.setInt(1, ProductID);
+            l_pStatement.setString(2, Name);
+            l_pStatement.setDouble(3, Price);
+            l_pStatement.setString(4, Description);
+            l_pStatement.setInt(5, length);
+            l_pStatement.setString(6, Unit);
+            l_pStatement.setString(7, Type);
+            l_pStatement.setString(8, Name);
+            l_pStatement.setDouble(9, Price);
+            l_pStatement.setString(10, Description);
+            l_pStatement.setInt(11, length);
+            l_pStatement.setString(12, Unit);
+            l_pStatement.setString(13, Type);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
@@ -186,7 +202,7 @@ public class DataMapper {
     public static List<Materiale> getAllMaterialsByType(String type) throws LoginSampleException {
         List<Materiale> allMaterials = new ArrayList();
         Materiale materiale;
-        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = " + type + " ORDER BY Længde DESC;";
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = \"" + type + "\" ORDER BY Længde DESC;";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
