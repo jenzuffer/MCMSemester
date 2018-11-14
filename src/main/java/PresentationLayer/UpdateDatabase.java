@@ -5,6 +5,7 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ public class UpdateDatabase extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         System.out.println(request.getAttribute("productid"));
-        
+           request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
         return "editproducts";
     }
     

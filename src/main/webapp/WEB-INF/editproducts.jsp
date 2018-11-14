@@ -11,7 +11,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List<Materiale> list = (List) request.getAttribute("allproducts");
+    List<Materiale> list = (List<Materiale>) request.getAttribute("allproducts");
     HTMLGenerator html = new HTMLGenerator();
 %>
 <!DOCTYPE html>

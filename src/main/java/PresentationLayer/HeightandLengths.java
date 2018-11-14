@@ -25,6 +25,7 @@ public class HeightandLengths extends Command {
         List<Integer> length = LogicFacade.getLength();
         request.setAttribute("width", width);
         request.setAttribute("length", length);
+           request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
         return "editproducts";
     }
 
