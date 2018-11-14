@@ -42,12 +42,12 @@ public class LogicFacade {
 
  
 
-    public static List<Integer> GetWdith() throws LoginSampleException {
+    public static List<Integer> getWdith() throws LoginSampleException {
         List<Integer> width = DataMapper.getWidth();
         return width;
     }
 
-    public static List<Integer> GetLength() throws LoginSampleException {
+    public static List<Integer> getLength() throws LoginSampleException {
         List<Integer> length = DataMapper.getLength();
         return length;
     }

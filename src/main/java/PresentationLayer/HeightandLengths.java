@@ -21,8 +21,8 @@ public class HeightandLengths extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        List<Integer> width = LogicFacade.GetWdith();
-        List<Integer> length = LogicFacade.GetLength();
+        List<Integer> width = LogicFacade.getWdith();
+        List<Integer> length = LogicFacade.getLength();
         request.setAttribute("width", width);
         request.setAttribute("length", length);
         return "CalculateMaterials";
