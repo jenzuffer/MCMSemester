@@ -48,4 +48,10 @@ public class LogicFacade {
         List<Integer> length = DataMapper.getLength();
         return length;
     }
+    
+    
+    public static CarportDimensioner test (int length, int width, boolean tag) {
+        Calculator calc = new Calculator();
+        return calc.calculate(length, width, tag);
+    }
 }

@@ -23,7 +23,7 @@
                     <div class="container"> 
                         <form id="1111" action="FrontController" method="POST" >'
                             Update an order
-                            <input type="hidden" name="command" value="UpdateOrder"> 
+                            <input type="hidden" name="command" value="updateorder"> 
                             <label for='height'> <b>Height </b>
                             </label>
                             <input type="number" placeholder="Enter Height" name="height" required="" >

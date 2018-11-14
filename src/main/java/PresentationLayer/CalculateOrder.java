@@ -25,14 +25,16 @@ public class CalculateOrder extends Command {
             
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
-        List<Materiale> OrderMaterials = new ArrayList();
+        List<Materiale> OrderMaterials;
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
-        CarportDimensioner dimension = new CarportDimensioner(length, width);
         int indexID = 1; //tilføj måde til at sige hvilken order vi taler om
-        OrderMaterials = LogicFacade.calculateOrder(dimension, indexID);
-        session.setAttribute("ordermaterials", OrderMaterials);
-        return "customerconfirmation";
+        CarportDimensioner test = LogicFacade.test(length, width, true);
+        //OrderMaterials = LogicFacade.calculateOrder(dimension, indexID);
+        request.setAttribute("carport", test);
+       // session.setAttribute("ordermaterials", OrderMaterials);
+        //return "customerconfirmation";
+        return "itemlist";
     }
 
 }
