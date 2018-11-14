@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class DataMapper {
 
-    public static CarportDimensioner ChangeOrder(CarportDimensioner dimension, int OrderID) throws LoginSampleException {
+    public static CarportDimensioner changeOrder(CarportDimensioner dimension, int OrderID) throws LoginSampleException {
         try {
             Connection l_cCon = Connector.connection();
             String l_sSQL = "SELECT * FROM `width`";
@@ -38,7 +38,7 @@ public class DataMapper {
         return dimension;
     }
 
-    public static List<Materials> CalculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+    public static List<Materials> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
         List<Materials> materials = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -49,7 +49,7 @@ public class DataMapper {
         return materials;
     }
 
-    public static List<Integer> GetWidth() throws LoginSampleException {
+    public static List<Integer> getWidth() throws LoginSampleException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -66,7 +66,7 @@ public class DataMapper {
         return values;
     }
 
-    public static List<Integer> GetLength() throws LoginSampleException {
+    public static List<Integer> getLength() throws LoginSampleException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -82,7 +82,7 @@ public class DataMapper {
         return values;
     }
 
-    public static void CreateCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
+    public static void createCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, " + name + ", " + Adress + ", " + City + ", "
                 + PhoneNumber + ", " + Email + ")";
         try {
@@ -94,7 +94,7 @@ public class DataMapper {
         }
     }
 
-    public static void CreateCarport(int Heigth, int Width, int Length) throws LoginSampleException {
+    public static void createCarport(int Heigth, int Width, int Length) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Height`,`Width`,`Length`) VALUES (NULL, " + Heigth + ", " + Width + ", " + Length + ")";
         try {
             Connection l_cCon = Connector.connection();
@@ -105,7 +105,7 @@ public class DataMapper {
         }
     }
 
-    public static void CreateOrder(int CustomerID, int CarportID) throws LoginSampleException {
+    public static void createOrder(int CustomerID, int CarportID) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + CustomerID + ", " + CarportID + ")";
         try {
             Connection l_cCon = Connector.connection();
@@ -148,7 +148,7 @@ public class DataMapper {
         return CarportID;
     }
 
-    public static void CreateProduct(String Name, int Price, String Description, int Length, int Unit) throws LoginSampleException {
+    public static void createProduct(String Name, int Price, String Description, int Length, int Unit) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`) VALUES (NULL," + Name + ", " + Price + ", " + Description + ", " + Length
                 + ", " + Unit + ")";
         try {
@@ -160,7 +160,7 @@ public class DataMapper {
         }
     }
 
-    public static void CreateMaterial(String MaterialName) throws LoginSampleException {
+    public static void createMaterial(String MaterialName) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Materials` (`ID`,`MaterialeNavn`) VALUES (NULL, " + MaterialName + ")";
         try {
             Connection l_cCon = Connector.connection();
@@ -171,7 +171,7 @@ public class DataMapper {
         }
     }
 
-    public static void UpdateProductPrice(int ProductID, int NewPrice) throws LoginSampleException {
+    public static void updateProductPrice(int ProductID, int NewPrice) throws LoginSampleException {
         String l_sSQL = "UPDATE `Produkter` SET `Pris`= NewPrice WHERE `Id`= " + ProductID;
          try {
             Connection l_cCon = Connector.connection();
