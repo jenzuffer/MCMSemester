@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class Calculator {
 
     private List<Materiale> list = new ArrayList();
     
-    public CarportDimensioner calculate(int length, int width, boolean tag) {
+    public CarportDimensioner calculate(int length, int width, boolean tag) throws LoginSampleException {
         list.add(calculatePoles(length));
         list.add(calculateStraps(length));
         list.add(calculateRafters(length, width));
@@ -16,7 +17,16 @@ public class Calculator {
     }
 
     public Materiale calculatePoles(int length) {
-        // fjernelse til udhæng 
+        // Kald til DM metode til at få en liste tilbage på baggrund af type 
+        //(type bliver definereret her (f.eks. "træ" fordi vi ved at det skal bruges til poles))
+        // listen ville være soteret efter størst længde og heraf kan vi løbe igennem den 
+        // og trække fra efterhånden vi har brug for mindre træ)
+        
+        // -100 pga. fjernelse til udhæng 
+        
+        
+        
+        
         int newlength = length - 100;
 
         int poles = 4;
@@ -43,7 +53,14 @@ public class Calculator {
         }
     }
 
-    public Materiale calculateRafters(int length, int width) {
+    public Materiale calculateRafters(int length, int width) throws LoginSampleException {
+        
+        List<Materiale> listOfWood = LogicFacade.test2("spærtræ");
+        
+        for (Materiale materiale : listOfWood) {
+            materiale.getLength()
+        }
+        
         if (width <= 300) {
             return new Materiale("45x195mm. ubh.", "spær, monteres på rem", "stk", 1 + (length / 55) / 2, 600);
         }

@@ -1,9 +1,23 @@
 package FunctionLayer;
 
 public class Materiale {
-    private String name, description, unit;
-    private int amount, length;
+    private String name, description, unit, type;
+    private int amount, length, id;
+    private double pris;
 
+    public Materiale(String name, String description, String unit, String type, int length, int id, double pris) {
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.type = type;
+        this.length = length;
+        this.id = id;
+        this.pris = pris;
+    }
+
+    
+    
+    
     public Materiale(String name, String description, String unit, int length) {
         this.name = name;
         this.description = description;
@@ -57,6 +71,30 @@ public class Materiale {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getPris() {
+        return pris;
+    }
+
+    public void setPris(double pris) {
+        this.pris = pris;
     }
 
 

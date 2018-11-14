@@ -54,4 +54,9 @@ public class LogicFacade {
         Calculator calc = new Calculator();
         return calc.calculate(length, width, tag);
     }
+    
+    public static List<Materiale> test2 (String string) throws LoginSampleException {
+        return DataMapper.getAllMaterialsByType(string);
+    } 
+    
 }
