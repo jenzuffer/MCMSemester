@@ -24,14 +24,14 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script src="Ressources/Script.js"></script>
+
         <title>Edit products</title>
     </head>
     <body>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <h6 class="second-header">Add/Edit products</h6>
+                    <h5 class="second-header">Add/Edit products</h5>
                     <form action="FrontController" method="post">
                         <div class="form-group">
                             <label>Productname</label>
@@ -47,29 +47,18 @@
                             <label>Type</label>
                             <input type="text" class="form-control" name="type" id="type-field">
                         </div>
+                        <input type="hidden" name="productid" value="" id="product-id">
                         <input type="hidden" name="command" value="updatedatabase">
-                        <input type="submit" class="btn-primary" value="Add">
+                        <input type="submit" class="btn btn-primary" value="Add/Edit">
                     </form>
                 </div>
                 <div class="col-md-8">
                     <table class="table" id="database-table">
-                        <%= html.getDatabase(list)%>
+                        <%= html.getDatabase(list) %>
                     </table>
                 </div>
             </div>
         </div>
-        <script>
-            var table = document.getElementById('database-table'), rIndex;
-            for (var i = 1; i < table.rows.length; i++) {
-                table.rows[i].onclick = function () {
-                    document.getElementById("name-field").value = this.cells[0].innerHTML;
-                    document.getElementById("price-field").value = this.cells[1].innerHTML;
-                    document.getElementById("desc-field").value = this.cells[2].innerHTML;
-                    document.getElementById("length-field").value = this.cells[3].innerHTML;
-                    document.getElementById("unit-field").value = this.cells[4].innerHTML;
-                    document.getElementById("type-field").value = this.cells[5].innerHTML;
-                };
-            }
-        </script>
+        <script src="Ressources/Script.js"></script>
     </body>
 </html>
