@@ -4,12 +4,14 @@
     Author     : mwn
 --%>
 
+<%@page import="FunctionLayer.LogicFacade"%>
+<%@page import="FunctionLayer.Materiale"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List list = new ArrayList();
+    List<Materiale> list = LogicFacade.test3();
     HTMLGenerator html = new HTMLGenerator();
 %>
 <!DOCTYPE html>

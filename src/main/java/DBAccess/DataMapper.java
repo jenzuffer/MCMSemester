@@ -202,7 +202,7 @@ public class DataMapper {
     public static List<Materiale> getAllMaterials() throws LoginSampleException {
         List<Materiale> allMaterials = new ArrayList();
         Materiale materiale;
-        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Type, Lændge, Id, Pris FROM `Produkter`";
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Type, Længde, Id, Pris FROM `Produkter`";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);

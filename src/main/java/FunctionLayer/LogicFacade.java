@@ -59,4 +59,8 @@ public class LogicFacade {
         return DataMapper.getAllMaterialsByType(string);
     } 
     
+    public static List<Materiale> test3 () throws LoginSampleException {
+        return DataMapper.getAllMaterials();
+    } 
+    
 }
