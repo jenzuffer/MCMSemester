@@ -198,4 +198,22 @@ public class DataMapper {
         }
         return allMaterials;
     }
+
+    public static List<Materiale> getAllMaterials() throws LoginSampleException {
+        List<Materiale> allMaterials = new ArrayList();
+        Materiale materiale;
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Type, Lændge, Id, Pris FROM `Produkter`";
+        try {
+            Connection l_cCon = Connector.connection();
+            Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
+            while (l_rsSearch.next()) {
+                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6),  l_rsSearch.getInt(7));
+                allMaterials.add(materiale);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+        return allMaterials;
+    }
 }
