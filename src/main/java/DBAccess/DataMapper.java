@@ -184,7 +184,7 @@ public class DataMapper {
     public static List<Materiale> getAllMaterialsByType(String type) throws LoginSampleException {
         List<Materiale> allMaterials = new ArrayList();
         Materiale materiale;
-        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = " + type + "";
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = " + type + " ORDER BY Længde DESC;";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
