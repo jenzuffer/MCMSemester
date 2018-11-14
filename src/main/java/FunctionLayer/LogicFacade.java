@@ -18,37 +18,37 @@ import java.util.Map;
  */
 public class LogicFacade {
 
-    public static List<CarportDimensioner> GetMaterials() {
+    public static List<CarportDimensioner> getMaterials() {
         List<CarportDimensioner> TotalMaterials = new ArrayList();
 
         return TotalMaterials;
     }
 
-    public static CarportDimensioner ChangeOrder(int OrderID, CarportDimensioner dimension) throws LoginSampleException {
-        dimension = DataMapper.ChangeOrder(dimension, OrderID);
+    public static CarportDimensioner changeOrder(int OrderID, CarportDimensioner dimension) throws LoginSampleException {
+        dimension = DataMapper.changeOrder(dimension, OrderID);
         throw new LoginSampleException("materials length: " + dimension.getLength());
     }
 
-    public static List<Materials> CalculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
-        List<Materials> materials = DataMapper.CalculateOrder(dimension, indexID);
+    public static List<Materials> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+        List<Materials> materials = DataMapper.calculateOrder(dimension, indexID);
 
         return materials;
     }
 
-    public static CarportDimensioner CreateCarport(int height, int width, int length, int polls, int spears) {
-        CarportDimensioner CreateCarport = new CarportDimensioner(height, width, length, polls, spears);
-        return CreateCarport;
+    public static CarportDimensioner createCarport(int length, int width) {
+        CarportDimensioner createCarport = new CarportDimensioner(length, width);
+        return createCarport;
     }
 
  
 
     public static List<Integer> GetWdith() throws LoginSampleException {
-        List<Integer> width = DataMapper.GetWidth();
+        List<Integer> width = DataMapper.getWidth();
         return width;
     }
 
     public static List<Integer> GetLength() throws LoginSampleException {
-        List<Integer> length = DataMapper.GetLength();
+        List<Integer> length = DataMapper.getLength();
         return length;
     }
 }
