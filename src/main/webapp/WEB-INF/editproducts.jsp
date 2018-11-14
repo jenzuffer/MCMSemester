@@ -50,11 +50,12 @@
                         <input type="hidden" name="productid" id="productid">
                         <input type="hidden" name="command" value="updatedatabase">
                         <input type="submit" class="btn btn-primary" value="Add/Edit">
+                        <button id="btn-clear" type="button" class="btn btn-danger" onclick="clearTextfields()">Clear</button>
                     </form>
                 </div>
                 <div class="col-md-8">
                     <table class="table" id="database-table">
-                        <%= html.getDatabase(list) %>
+                        <%= html.getDatabase(list)%>
                     </table>
                 </div>
             </div>

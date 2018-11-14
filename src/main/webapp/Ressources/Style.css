@@ -20,3 +20,7 @@ and open the template in the editor.
 .second-header {
     padding-top: 10px;
 }
+
+#btn-clear {
+    float: right;
+}
