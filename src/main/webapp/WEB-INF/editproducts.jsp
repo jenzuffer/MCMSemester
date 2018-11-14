@@ -47,7 +47,7 @@
                             <label>Type</label>
                             <input type="text" class="form-control" name="type" id="type-field">
                         </div>
-                        <input type="hidden" name="productid" value="" id="product-id">
+                        <input type="hidden" name="productid" id="productid">
                         <input type="hidden" name="command" value="updatedatabase">
                         <input type="submit" class="btn btn-primary" value="Add/Edit">
                     </form>
