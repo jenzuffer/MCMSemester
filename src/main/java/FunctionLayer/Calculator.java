@@ -1,6 +1,5 @@
 package FunctionLayer;
 
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +54,7 @@ public class Calculator {
 
     public Materiale calculateRafters(int length, int width) throws LoginSampleException {
         
-        List<Materiale> listOfWood = LogicFacade.test2("spærtræ");
+        List<Materiale> listOfWood = LogicFacade.listOfMaterialsByType("spærtræ");
         
         for (Materiale materiale : listOfWood) {
             

@@ -55,11 +55,11 @@ public class LogicFacade {
         return calc.calculate(length, width, tag);
     }
     
-    public static List<Materiale> test2 (String string) throws LoginSampleException {
+    public static List<Materiale> listOfMaterialsByType (String string) throws LoginSampleException {
         return DataMapper.getAllMaterialsByType(string);
     } 
     
-    public static List<Materiale> test3 () throws LoginSampleException {
+    public static List<Materiale> listOfAllMaterials () throws LoginSampleException {
         return DataMapper.getAllMaterials();
     } 
     
