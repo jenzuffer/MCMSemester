@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -171,7 +172,7 @@ public class DataMapper {
 
     public static void updateProductPrice(int ProductID, int NewPrice) throws LoginSampleException {
         String l_sSQL = "UPDATE `Produkter` SET `Pris`= NewPrice WHERE `Id`= " + ProductID;
-         try {
+        try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             l_pStatement.executeUpdate();
@@ -180,4 +181,21 @@ public class DataMapper {
         }
     }
 
+    public static List<Materiale> getAllMaterialsByType(String type) throws LoginSampleException {
+        List<Materiale> allMaterials = new ArrayList();
+        Materiale materiale;
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = " + type + "";
+        try {
+            Connection l_cCon = Connector.connection();
+            Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
+            while (l_rsSearch.next()) {
+                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getInt(4));
+                allMaterials.add(materiale);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+        return allMaterials;
+    }
 }
