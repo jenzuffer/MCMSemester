@@ -60,7 +60,13 @@ public class LogicFacade {
     } 
     
     public static List<Materiale> listOfAllMaterials () throws LoginSampleException {
+        
         return DataMapper.getAllMaterials();
     } 
+
+    public static void updateProductOrAdd(int ID, String name, Double price, String description, Integer length, String unit, String type) throws LoginSampleException {
+        //throw new LoginSampleException("ID: " + ID + " name: " + name);
+        DataMapper.UpdateProductOrAdd(ID, name, price, description, length, unit, type);
+    }
     
 }

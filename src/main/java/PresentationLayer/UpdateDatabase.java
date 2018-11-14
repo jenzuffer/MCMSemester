@@ -18,8 +18,11 @@ public class UpdateDatabase extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        if (request.getParameter("productid") != null) {
+            LogicFacade.updateProductOrAdd(Integer.valueOf(request.getParameter("productid")), request.getParameter("name"), Double.valueOf(request.getParameter("price")), request.getParameter("description"), Integer.valueOf(request.getParameter("length")), request.getParameter("unit"), request.getParameter("type"));
+        }
         request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
         return "editproducts";
     }
-    
+
 }
