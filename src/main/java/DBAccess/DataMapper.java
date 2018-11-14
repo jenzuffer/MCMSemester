@@ -170,8 +170,10 @@ public class DataMapper {
         }
     }
 
-    public static void updateProductPrice(int ProductID, int NewPrice) throws LoginSampleException {
-        String l_sSQL = "UPDATE `Produkter` SET `Pris`= NewPrice WHERE `Id`= " + ProductID;
+    public static void UpdateProductOrAdd(int ProductID, String Name, double Price, String Description, int length, String Unit, String Type) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + ProductID + ", " + Name + ", "
+                + Price + ", " + Description + ", " + length + ", " + Unit + ", " + Type + ""
+                + "ON DUPLICATE KEY UPDATE `Navn`= " + Name + ",`Pris`= " + Price + ",`Beskrivelse`= " + Description + ",`Længde`= " + length + ",`Enhed`= " + Unit + ",`Type`= " + Type;
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
@@ -208,7 +210,7 @@ public class DataMapper {
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
-                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6),  l_rsSearch.getInt(7));
+                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6), l_rsSearch.getInt(7));
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {
