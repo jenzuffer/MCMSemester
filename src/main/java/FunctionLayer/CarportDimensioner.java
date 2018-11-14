@@ -15,8 +15,15 @@ import java.util.List;
 public class CarportDimensioner {
     private int length;
     private int width;
-    private List<Materiale> materials = new ArrayList();
+    private List<Materiale> materials;
 
+    public CarportDimensioner(int length, int width, List<Materiale> materials) {
+        this.length = length;
+        this.width = width;
+        this.materials = materials;
+    }
+
+    
     public CarportDimensioner(int length, int width) {
         this.length = length;
         this.width = width;
@@ -43,6 +50,11 @@ public class CarportDimensioner {
         return materials;
     }
 
+    public void setMaterials(List<Materiale> materials) {
+        this.materials = materials;
+    }
+
+    
     
     
     
