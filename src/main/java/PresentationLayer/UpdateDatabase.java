@@ -18,8 +18,7 @@ public class UpdateDatabase extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        System.out.println(request.getAttribute("productid"));
-           request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
+        request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
         return "editproducts";
     }
     

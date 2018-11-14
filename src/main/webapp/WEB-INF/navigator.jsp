@@ -20,12 +20,12 @@
     <body>
         
         <form action="FrontController" method="POST">
-            <input type="hidden" name="command" value="updateorder"> 
+            <input type="hidden" name="command" value="heightandlength"> 
             <input type="submit" value="Calculator">
         </form>
         
         <form action="FrontController" method="POST">
-            <input type="hidden" name="command" value="editproducts"> 
+            <input type="hidden" name="command" value="updatedatabase"> 
             <input type="submit" value="EditProducts">
         </form>
         

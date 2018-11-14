@@ -5,7 +5,6 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Mark
  */
-public class EditProducts extends Command {
+public class Demos extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
-        return "editproducts";
         
+        return "navigator";
     }
-    
+
 }
