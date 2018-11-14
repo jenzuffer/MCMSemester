@@ -19,6 +19,7 @@ public class UpdateDatabase extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         request.setAttribute("allproducts", LogicFacade.listOfAllMaterials());
+        
         return "editproducts";
     }
     
