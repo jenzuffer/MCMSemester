@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.CarportDimensioner;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Materiale;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class CalculateOrder extends Command {
             
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
-        List<Materials> OrderMaterials = new ArrayList();
+        List<Materiale> OrderMaterials = new ArrayList();
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         CarportDimensioner dimension = new CarportDimensioner(length, width);

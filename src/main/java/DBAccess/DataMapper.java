@@ -7,15 +7,13 @@ package DBAccess;
 
 import FunctionLayer.CarportDimensioner;
 import FunctionLayer.LoginSampleException;
-import PresentationLayer.Materials;
+import FunctionLayer.Materiale;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -38,8 +36,8 @@ public class DataMapper {
         return dimension;
     }
 
-    public static List<Materials> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
-        List<Materials> materials = new ArrayList();
+    public static List<Materiale> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+        List<Materiale> materials = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
             String l_sSQL = "SELECT * FROM `Materiale` WHERE id = " + indexID;

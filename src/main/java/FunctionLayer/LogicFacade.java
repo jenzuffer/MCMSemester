@@ -6,11 +6,8 @@
 package FunctionLayer;
 
 import DBAccess.DataMapper;
-import PresentationLayer.Materials;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -29,8 +26,8 @@ public class LogicFacade {
         throw new LoginSampleException("materials length: " + dimension.getLength());
     }
 
-    public static List<Materials> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
-        List<Materials> materials = DataMapper.calculateOrder(dimension, indexID);
+    public static List<Materiale> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+        List<Materiale> materials = DataMapper.calculateOrder(dimension, indexID);
 
         return materials;
     }
