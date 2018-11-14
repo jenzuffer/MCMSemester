@@ -4,6 +4,13 @@ public class Materiale {
     private String name, description, unit;
     private int amount, length;
 
+    public Materiale(String name, String description, String unit, int length) {
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.length = length;
+    }
+    
     public Materiale(String name, String description, String unit, int amount, int length) {
         this.name = name;
         this.description = description;
