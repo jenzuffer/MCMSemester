@@ -28,7 +28,7 @@ public class HTMLGenerator {
                 + "    <tr>\n"
                 + "      <th scope=\"col\">Name</th>\n"
                 + "      <th scope=\"col\">Length</th>\n"
-                + "      <th scope=\"col\">Pieces</th>\n"
+                + "      <th scope=\"col\">Amount</th>\n"
                 + "      <th scope=\"col\">Unit</th>\n"
                 + "      <th scope=\"col\">Description</th>\n"
                 + "    </tr>\n"
@@ -37,15 +37,15 @@ public class HTMLGenerator {
 
         for (Materiale materiale : tableData) {
             sb.append("<tr><td>")
-                    .append(materiale.getNavn())
+                    .append(materiale.getName())
                     .append("</td><td>")
-                    .append(materiale.getLængde())
+                    .append(materiale.getLength())
                     .append("</td><td>")
-                    .append(materiale.getAntal())
+                    .append(materiale.getAmount())
                     .append("</td><td>")
-                    .append(materiale.getEnhed())
+                    .append(materiale.getUnit())
                     .append("</td><td>")
-                    .append(materiale.getBeskrivelse())
+                    .append(materiale.getDescription())
                     .append("</td>")
               .append("</tr>");
         }
