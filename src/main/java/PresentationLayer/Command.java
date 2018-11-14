@@ -25,6 +25,9 @@ abstract class Command {
         commands.put("updateorder", new UpdateOrder());
         commands.put("calculatecrder", new CalculateOrder());
         commands.put("heightandlength", new HeightandLengths());
+        commands.put("editproducts", new EditProducts());
+        commands.put("updatedatabase", new UpdateDatabase());
+       
         //add methods here for the controller
     }
     

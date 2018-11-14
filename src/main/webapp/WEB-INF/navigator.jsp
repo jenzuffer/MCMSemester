@@ -18,8 +18,17 @@
         <title></title>
     </head>
     <body>
-        <form>
-            
+        
+        <form action="FrontController" method="POST">
+            <input type="hidden" name="command" value="updateorder"> 
+            <input type="submit" value="Calculator">
         </form>
+        
+        <form action="FrontController" method="POST">
+            <input type="hidden" name="command" value="editproducts"> 
+            <input type="submit" value="EditProducts">
+        </form>
+        
+        
     </body>
 </html>
