@@ -89,11 +89,11 @@ public class Materiale {
         this.id = id;
     }
 
-    public double getPris() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPris(double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
