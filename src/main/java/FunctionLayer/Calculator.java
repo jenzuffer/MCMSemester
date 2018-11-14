@@ -58,7 +58,7 @@ public class Calculator {
         List<Materiale> listOfWood = LogicFacade.test2("spærtræ");
         
         for (Materiale materiale : listOfWood) {
-            materiale.getLength()
+            materiale.getLength();
         }
         
         if (width <= 300) {

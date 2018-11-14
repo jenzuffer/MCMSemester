@@ -50,7 +50,7 @@ public class LogicFacade {
     }
     
     
-    public static CarportDimensioner test (int length, int width, boolean tag) {
+    public static CarportDimensioner test (int length, int width, boolean tag) throws LoginSampleException {
         Calculator calc = new Calculator();
         return calc.calculate(length, width, tag);
     }
