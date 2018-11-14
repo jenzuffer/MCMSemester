@@ -17,6 +17,12 @@ public class CarportDimensioner {
     private int width;
     private List<Materiale> materials = new ArrayList();
 
+    public CarportDimensioner(int length, int width) {
+        this.length = length;
+        this.width = width;
+    }
+
+
     public int getLength() {
         return length;
     }

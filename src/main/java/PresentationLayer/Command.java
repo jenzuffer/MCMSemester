@@ -20,11 +20,11 @@ abstract class Command {
 
     private static void initCommands() {
         commands = new HashMap<>();
-        commands.put("ChangeOrder", new changeOrder());
+        commands.put("ChangeOrder", new ChangeOrder());
         commands.put("CalculatePage", new CalculatePage());
         commands.put("UpdateOrder", new UpdateOrder());
-        commands.put("CalculateOrder", new calculateOrder());
-        commands.put("heightandLength", new HeightandLengths());
+        commands.put("CalculateOrder", new CalculateOrder());
+        commands.put("HeightAndLength", new HeightandLengths());
         //add methods here for the controller
     }
     
