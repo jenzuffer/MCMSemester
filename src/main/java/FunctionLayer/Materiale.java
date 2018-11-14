@@ -1,41 +1,56 @@
 package FunctionLayer;
 
 public class Materiale {
-    private int bøf = 0;
-    private String navn, beskrivelse, enhed;
-    private int antal, længde;
+    private String name, description, unit;
+    private int amount, length;
 
-    public Materiale(String navn, int længde, int antal, String enhed, String beskrivelse) {
-        this.navn = navn;
-        this.beskrivelse = beskrivelse;
-        this.enhed = enhed;
-        this.antal = antal;
-        this.længde = længde;
+    public Materiale(String name, String description, String unit, int amount, int length) {
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.amount = amount;
+        this.length = length;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
     }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEnhed() {
-        return enhed;
+    public String getDescription() {
+        return description;
     }
 
-    public int getAntal() {
-        return antal;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getLængde() {
-        return længde;
+    public String getUnit() {
+        return unit;
     }
 
-    
-    
-    
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
+    }
+
+
 }
-
-
