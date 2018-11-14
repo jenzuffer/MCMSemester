@@ -30,7 +30,7 @@ public class UpdateOrder extends Command {
         int Order = request.getSession().getAttribute("OrderID") == null ? 0 : (int) request.getSession().getAttribute("OrderID");
         dimension = LogicFacade.changeOrder(Order, dimension);
         session.setAttribute("dimension", dimension);
-        return "OrderUpdateConfirmation";
+        return "orderupdateconfirmation";
     }
 
 }

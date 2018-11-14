@@ -18,7 +18,7 @@ public class ChangeOrder extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         
-        return "ChangeOrder";
+        return "changeorder";
     }
 
    
