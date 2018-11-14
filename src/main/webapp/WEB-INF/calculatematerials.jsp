@@ -86,7 +86,7 @@
                 <div class="col-md-12" style="padding-top: 20px">
                     <button class="btn btn-primary" onclick="update()" >Send inquiry</button>        
                 </div>
-                <input type="hidden" name="command" value="calculatecrder">
+                <input type="hidden" name="command" value="calculateorder">
             </div>
         </div>
     </form>

@@ -55,7 +55,6 @@ public class Calculator {
                 iLength -= materiale.getLength();
             }
         }
-
         if (width <= 300) {
             return new Materiale("45x195mm. ubh.", "spær, monteres på rem", "stk", 1 + (length / 55) / 2, 600);
         }
