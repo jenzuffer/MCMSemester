@@ -26,7 +26,12 @@ public class CalculateOrder extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         List<Materiale> OrderMaterials;
-        
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String city = request.getParameter("city");
+        String number = (request.getParameter("pnumber"));
+        String email = request.getParameter("email");
+        LogicFacade.createCustomer(name, address, city, number, email);
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         int indexID = 1; //tilføj måde til at sige hvilken order vi taler om

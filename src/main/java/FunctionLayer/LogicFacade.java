@@ -68,5 +68,9 @@ public class LogicFacade {
         //throw new LoginSampleException("ID: " + ID + " name: " + name);
         DataMapper.UpdateProductOrAdd(ID, name, price, description, length, unit, type);
     }
+
+    public static void createCustomer(String name, String address, String city, String number, String email) throws LoginSampleException {
+       DataMapper.createCustomer(name, address, city, number, email);
+    }
     
 }
