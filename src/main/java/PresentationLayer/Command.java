@@ -21,7 +21,6 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("changeorder", new ChangeOrder());
-        commands.put("calculatepage", new CalculatePage());
         commands.put("updateorder", new UpdateOrder());
         commands.put("calculateorder", new CalculateOrder());
         commands.put("heightandlength", new HeightandLengths());

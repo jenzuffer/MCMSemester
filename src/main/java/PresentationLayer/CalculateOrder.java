@@ -26,6 +26,7 @@ public class CalculateOrder extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         List<Materiale> OrderMaterials;
+        
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         int indexID = 1; //tilføj måde til at sige hvilken order vi taler om

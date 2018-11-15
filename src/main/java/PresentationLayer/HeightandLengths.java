@@ -21,7 +21,7 @@ public class HeightandLengths extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        List<Integer> width = LogicFacade.getWdith();
+        List<Integer> width = LogicFacade.getWidth();
         List<Integer> length = LogicFacade.getLength();
         request.setAttribute("width", width);
         request.setAttribute("length", length);
