@@ -8,10 +8,10 @@ public class Calculator {
     private List<Materiale> list = new ArrayList();
 
     public CarportDimensioner calculate(int length, int width, boolean tag) throws LoginSampleException {
-        list.add(calculatePoles(length));
-        list.add(calculateStraps(length));
-        list.add(calculateRafters(length, width));
-        list.add(calculateRoof(length, width));
+        //list.add(calculatePoles(length));
+        //list.add(calculateStraps(length));
+        calculateRafters(length, width);
+        //list.add(calculateRoof(length, width));
         return new CarportDimensioner(length, width, list);
     }
 
@@ -47,19 +47,47 @@ public class Calculator {
         }
     }
 
-    public Materiale calculateRafters(int length, int width) throws LoginSampleException {
+    public void calculateRafters(int length, int width) throws LoginSampleException {
+
+        int iWidth = width;
         int iLength = length;
+        int amountOfPieces = length / 55;
+
         List<Materiale> listOfWood = LogicFacade.listOfMaterialsByType("spærtræ");
         for (Materiale materiale : listOfWood) {
-            if (length > materiale.getLength()) {
-                iLength -= materiale.getLength();
+
+            System.out.println(iWidth);
+            System.out.println(materiale.getLength());
+            // gør ting
+            if (iWidth >= materiale.getLength()) {
+                materiale.addToAmount(amountOfPieces);
+                iWidth = iWidth - materiale.getLength();
+            }
+            System.out.println(iWidth);
+            System.out.println();
+
+            int count = 0;
+            if (materiale.getAmount() > 0) {
+                for (; count < iWidth * amountOfPieces / materiale.getLength(); count++) {
+                    materiale.addToAmount(1);
+                }
+                if (materiale == listOfWood.get(listOfWood.size() - 1)) {
+                    materiale.addToAmount(1);
+                }
+            }
+
+            // slut
+            //materiale.addToAmount(countOfPiecesToAdd);
+            if (materiale.getAmount() > 0) {
+                list.add(materiale);
+            }
+            if (iWidth * amountOfPieces < listOfWood.get(listOfWood.size() - 1).getLength()) {
+                Materiale lastMateriale = listOfWood.get(listOfWood.size() - 1);
+                lastMateriale.addToAmount(1);
+                list.add(lastMateriale);
+                break;
             }
         }
-        if (width <= 300) {
-            return new Materiale("45x195mm. ubh.", "spær, monteres på rem", "stk", 1 + (length / 55) / 2, 600);
-        }
-
-        return new Materiale("45x195mm. ubh.", "spær, monteres på rem", "stk", length / 55, 600);
     }
 
     public Materiale calculateRoof(int length, int width) {
@@ -71,6 +99,10 @@ public class Calculator {
 //          lav en liste af materialer
 //          return length/106*2;
         }
+
+    }
+
+    public void fixMaterialsInList() {
 
     }
 

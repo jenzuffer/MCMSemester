@@ -60,6 +60,10 @@ public class Materiale {
     public int getAmount() {
         return amount;
     }
+    
+    public void addToAmount(int amount) {
+        this.amount += amount;
+    }
 
     public void setAmount(int amount) {
         this.amount = amount;
