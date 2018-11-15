@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class CalculateOrder extends Command {
 
     @Override
-            
+
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         HttpSession session = request.getSession();
         List<Materiale> OrderMaterials;
@@ -31,14 +31,16 @@ public class CalculateOrder extends Command {
         String city = request.getParameter("city");
         String number = (request.getParameter("pnumber"));
         String email = request.getParameter("email");
-        LogicFacade.createCustomer(name, address, city, number, email);
+        if (!name.isEmpty() && !address.isEmpty() && !city.isEmpty() && !number.isEmpty() && !email.isEmpty()) {
+            LogicFacade.createCustomer(name, address, city, number, email);
+        }
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         int indexID = 1; //tilføj måde til at sige hvilken order vi taler om
         CarportDimensioner test = LogicFacade.calculateCarportList(length, width, true);
         //OrderMaterials = LogicFacade.calculateOrder(dimension, indexID);
         request.setAttribute("carport", test);
-       // session.setAttribute("ordermaterials", OrderMaterials);
+        // session.setAttribute("ordermaterials", OrderMaterials);
         //return "customerconfirmation";
         return "itemlist";
     }
