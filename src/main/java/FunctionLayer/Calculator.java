@@ -11,6 +11,7 @@ public class Calculator {
         //list.add(calculatePoles(length));
         //list.add(calculateStraps(length));
         calculateRafters(length, width);
+        calculateScrews(length, width);
         //list.add(calculateRoof(length, width));
         return new CarportDimensioner(length, width, list);
     }
@@ -90,20 +91,49 @@ public class Calculator {
         }
     }
 
-    public Materiale calculateRoof(int length, int width) {
-        if (width % 600 == 0) {
-            return new Materiale("plastmo ecolite blåtonet", "tagplader monteres på spær", "stk", length / 106, 600);
-        } else {
-            // antal plader på 6 meter og et andet sæt på minimums længde
-            return new Materiale("plastmo ecolite blåtonet", "tagplader monteres på spær", "stk", (length / 106) * 2, 600);
-//          lav en liste af materialer
-//          return length/106*2;
+    public void calculateRoof(int length, int width) throws LoginSampleException {
+        int iLength = length;
+        int iWidthLength = length;
+        int iWidthIndex = 0;
+        int iWidth = 55;
+        int index = 0;
+        List<Materiale> listofRoof = LogicFacade.listOfMaterialsByType("tag");
+        while (iWidthLength > 0) {
+            iWidthIndex++;
+            iWidthLength -= iWidth;
         }
-
+        for (Materiale materiale : listofRoof) {
+            //lengths
+            while (iLength > materiale.getLength()) {
+                materiale.setAmount(iWidthIndex);
+                list.add(materiale);
+                iLength -= materiale.getLength();
+            }
+        }
+        if (iLength > 0) {
+            for (int i = 0; i < listofRoof.size(); i++) {
+                if (iLength > listofRoof.get(i).getLength()) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index == 0) {
+                index = listofRoof.size() - 1;
+            }
+            listofRoof.get(index).setAmount(iWidthIndex);
+            list.add(listofRoof.get(index));
+        }
     }
 
-    public void fixMaterialsInList() {
-
+    public void calculateScrews(int length, int width) throws LoginSampleException {
+        List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
+         for (Materiale materiale : listofScrews) {
+             materiale.addToAmount(1);
+             list.add(materiale);
+         }
+    }
+    public void fixMaterialsInList() throws LoginSampleException {
+        
     }
 
 }
