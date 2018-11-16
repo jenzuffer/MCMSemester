@@ -51,41 +51,49 @@ public class Calculator {
     public void calculateRafters(int length, int width) throws LoginSampleException {
 
         int iWidth = width;
-        int iLength = length;
-        int amountOfPieces = length / 55;
+        double coverPiece = length / 55;
+        int amountOfPieces = 0;
+        if (coverPiece != (double) length / 55) {
+            amountOfPieces = length / 55 + 1;
+        } else {
+            amountOfPieces = length / 55;
+        }
 
+        
         List<Materiale> listOfWood = LogicFacade.listOfMaterialsByType("spærtræ");
         for (Materiale materiale : listOfWood) {
-
-            System.out.println(iWidth);
-            System.out.println(materiale.getLength());
-            // gør ting
             if (iWidth >= materiale.getLength()) {
+                System.out.println("ADDER I FØRSTE IF");
                 materiale.addToAmount(amountOfPieces);
                 iWidth = iWidth - materiale.getLength();
             }
-            System.out.println(iWidth);
-            System.out.println();
 
             int count = 0;
+            
             if (materiale.getAmount() > 0) {
                 for (; count < iWidth * amountOfPieces / materiale.getLength(); count++) {
                     materiale.addToAmount(1);
                 }
-                if (materiale == listOfWood.get(listOfWood.size() - 1)) {
-                    materiale.addToAmount(1);
-                }
             }
-
-            // slut
-            //materiale.addToAmount(countOfPiecesToAdd);
+            
+            if (iWidth == width && listOfWood.get(listOfWood.size()-1) == materiale) {
+                materiale.addToAmount(amountOfPieces);
+            }
+            
             if (materiale.getAmount() > 0) {
                 list.add(materiale);
             }
+            
+            if (iWidth <= 0) {
+                break;
+            }
+            
             if (iWidth * amountOfPieces < listOfWood.get(listOfWood.size() - 1).getLength()) {
                 Materiale lastMateriale = listOfWood.get(listOfWood.size() - 1);
                 lastMateriale.addToAmount(1);
-                list.add(lastMateriale);
+                if (materiale != listOfWood.get(listOfWood.size()-1)) {
+                    list.add(lastMateriale);
+                }
                 break;
             }
         }
