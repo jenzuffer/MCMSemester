@@ -175,24 +175,29 @@ public class DataMapper {
     }
 
     public static void UpdateProductOrAdd(int ProductID, String Name, double Price, String Description, int length, String Unit, String Type) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (?, ?, ?, ?, ?, ?, ?)"
-                + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";
+        String l_sSQL = "";
+        if (ProductID != 0) {
+            l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + ProductID + ", ?, ?, ?, ?, ?, ?)"
+                    + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";
+        } else {
+            l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (NULL, ?, ?, ?, ?, ?, ?)"
+                    + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";
+        }
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
-            l_pStatement.setInt(1, ProductID);
-            l_pStatement.setString(2, Name);
-            l_pStatement.setDouble(3, Price);
-            l_pStatement.setString(4, Description);
-            l_pStatement.setInt(5, length);
-            l_pStatement.setString(6, Unit);
-            l_pStatement.setString(7, Type);
-            l_pStatement.setString(8, Name);
-            l_pStatement.setDouble(9, Price);
-            l_pStatement.setString(10, Description);
-            l_pStatement.setInt(11, length);
-            l_pStatement.setString(12, Unit);
-            l_pStatement.setString(13, Type);
+            l_pStatement.setString(1, Name);
+            l_pStatement.setDouble(2, Price);
+            l_pStatement.setString(3, Description);
+            l_pStatement.setInt(4, length);
+            l_pStatement.setString(5, Unit);
+            l_pStatement.setString(6, Type);
+            l_pStatement.setString(7, Name);
+            l_pStatement.setDouble(8, Price);
+            l_pStatement.setString(9, Description);
+            l_pStatement.setInt(10, length);
+            l_pStatement.setString(11, Unit);
+            l_pStatement.setString(12, Type);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);

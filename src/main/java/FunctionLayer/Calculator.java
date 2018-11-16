@@ -11,7 +11,7 @@ public class Calculator {
         //list.add(calculatePoles(length));
         //list.add(calculateStraps(length));
         calculateRafters(length, width);
-        calculateScrews(length, width);
+        //calculateScrews(length, width);
         //list.add(calculateRoof(length, width));
         return new CarportDimensioner(length, width, list);
     }
