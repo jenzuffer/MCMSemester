@@ -8,7 +8,7 @@ public class Calculator {
     private List<Materiale> list = new ArrayList();
 
     public CarportDimensioner calculate(int length, int width, boolean tag) throws LoginSampleException {
-        //list.add(calculatePoles(length));
+        calculatePoles(length, width);
         //list.add(calculateStraps(length));
         calculateRafters(length, width);
         //calculateScrews(length, width);
@@ -16,12 +16,18 @@ public class Calculator {
         return new CarportDimensioner(length, width, list);
     }
 
-    public Materiale calculatePoles(int length) {
+    public void calculatePoles(int length, int width) throws LoginSampleException {
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
+        // poles er ikke afhængig af length eller width men af typen af carport (fladt tag eller skråtag)
+        
+        
+        
+        
+/*
         // Kald til DM metode til at få en liste tilbage på baggrund af type 
         //(type bliver definereret her (f.eks. "træ" fordi vi ved at det skal bruges til poles))
         // listen ville være soteret efter størst længde og heraf kan vi løbe igennem den 
         // og trække fra efterhånden vi har brug for mindre træ)
-
         // -100 pga. fjernelse til udhæng 
         int newlength = length - 100;
 
@@ -35,6 +41,7 @@ public class Calculator {
             return new Materiale("97x97mm. trykimp. Stolpe",
                     "stolper nedgraves 90 cm. i jord", "stk", poles, 300);
         }
+        */
     }
 
     public Materiale calculateStraps(int length) {
@@ -59,39 +66,37 @@ public class Calculator {
             amountOfPieces = length / 55;
         }
 
-        
-        List<Materiale> listOfWood = LogicFacade.listOfMaterialsByType("spærtræ");
-        for (Materiale materiale : listOfWood) {
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
+        for (Materiale materiale : listOfMaterials) {
             if (iWidth >= materiale.getLength()) {
-                System.out.println("ADDER I FØRSTE IF");
                 materiale.addToAmount(amountOfPieces);
                 iWidth = iWidth - materiale.getLength();
             }
 
             int count = 0;
-            
+
             if (materiale.getAmount() > 0) {
                 for (; count < iWidth * amountOfPieces / materiale.getLength(); count++) {
                     materiale.addToAmount(1);
                 }
             }
-            
-            if (iWidth == width && listOfWood.get(listOfWood.size()-1) == materiale) {
+
+            if (iWidth == width && listOfMaterials.get(listOfMaterials.size() - 1) == materiale) {
                 materiale.addToAmount(amountOfPieces);
             }
-            
+
             if (materiale.getAmount() > 0) {
                 list.add(materiale);
             }
-            
+
             if (iWidth <= 0) {
                 break;
             }
-            
-            if (iWidth * amountOfPieces < listOfWood.get(listOfWood.size() - 1).getLength()) {
-                Materiale lastMateriale = listOfWood.get(listOfWood.size() - 1);
+
+            if (iWidth * amountOfPieces < listOfMaterials.get(listOfMaterials.size() - 1).getLength()) {
+                Materiale lastMateriale = listOfMaterials.get(listOfMaterials.size() - 1);
                 lastMateriale.addToAmount(1);
-                if (materiale != listOfWood.get(listOfWood.size()-1)) {
+                if (materiale != listOfMaterials.get(listOfMaterials.size() - 1)) {
                     list.add(lastMateriale);
                 }
                 break;
@@ -99,6 +104,7 @@ public class Calculator {
         }
     }
 
+ /*
     public void calculateRoof(int length, int width) throws LoginSampleException {
         int iLength = length;
         int iWidthLength = length;
@@ -132,16 +138,17 @@ public class Calculator {
             list.add(listofRoof.get(index));
         }
     }
-
+     */
     public void calculateScrews(int length, int width) throws LoginSampleException {
         List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
-         for (Materiale materiale : listofScrews) {
-             materiale.addToAmount(1);
-             list.add(materiale);
-         }
+        for (Materiale materiale : listofScrews) {
+            materiale.addToAmount(1);
+            list.add(materiale);
+        }
     }
+
     public void fixMaterialsInList() throws LoginSampleException {
-        
+
     }
 
 }
