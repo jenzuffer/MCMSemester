@@ -9,7 +9,7 @@ public class Calculator {
 
     public CarportDimensioner calculate(int length, int width, boolean tag) throws LoginSampleException {
         calculatePoles(length, width);
-        //list.add(calculateStraps(length));
+        calculateStraps(length);
         calculateRafters(length, width);
         //calculateScrews(length, width);
         //list.add(calculateRoof(length, width));
@@ -17,42 +17,65 @@ public class Calculator {
     }
 
     public void calculatePoles(int length, int width) throws LoginSampleException {
+
+        int saveLength = length;
+        int saveWidth = width;
+
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         // poles er ikke afhængig af length eller width men af typen af carport (fladt tag eller skråtag)
-        
-        
-        
-        
-/*
-        // Kald til DM metode til at få en liste tilbage på baggrund af type 
-        //(type bliver definereret her (f.eks. "træ" fordi vi ved at det skal bruges til poles))
-        // listen ville være soteret efter størst længde og heraf kan vi løbe igennem den 
-        // og trække fra efterhånden vi har brug for mindre træ)
-        // -100 pga. fjernelse til udhæng 
-        int newlength = length - 100;
 
-        int poles = 4;
+        int x = 1, y = 1;
 
-        if (newlength > 300) {
-            return new Materiale("97x97mm. trykimp. Stolpe",
-                    "stolper nedgraves 90 cm. i jord", "stk", poles + 2, 300);
-
-        } else {
-            return new Materiale("97x97mm. trykimp. Stolpe",
-                    "stolper nedgraves 90 cm. i jord", "stk", poles, 300);
+        while (saveLength > 0) {
+            x = x + 1;
+            saveLength = saveLength - 300;
         }
-        */
+        System.out.println(x);
+        while (saveWidth > 0) {
+            y = y + 1;
+            saveWidth = saveWidth - 450;
+        }
+
+        Materiale lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
+        lastPole.addToAmount(x*y);
+        list.add(lastPole);
+        
+
     }
 
-    public Materiale calculateStraps(int length) {
-        if (length <= 300) {
-            return new Materiale("45x195mm. spærtræ ubh.", "remme", "stk", 1, 600);
+    public void calculateStraps(int length) throws LoginSampleException {
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
+        int totalLength = length*2;
+        
+        for (Materiale Material : listOfMaterials) {
+            
+            
+            if (totalLength / Material.getLength() > 0) {
+                Material.addToAmount(totalLength / Material.getLength());
+                totalLength = totalLength - ((totalLength / Material.getLength()) * Material.getLength());
+                Material.setDescription("Remme i sider, sadles ned i stolper");
+            }
+
+            if (totalLength < Material.getLength() && Material == listOfMaterials.get(listOfMaterials.size()-1)) {
+                Material.addToAmount(1);
+            }
+            
+            
+
+            if (Material.getAmount() > 0) {
+                list.add(Material);
+                Material.setDescription("Remme i sider, sadles ned i stolper");
+            }
+            
+            
+            
+            
         }
-        if (length <= 600) {
-            return new Materiale("45x195mm. spærtræ ubh.", "remme", "stk", 2, 600);
-        } else {
-            return new Materiale("45x195mm. spærtræ ubh.", "remme", "stk", 3, 600);
-        }
+        
+        
+        
+        
+        
     }
 
     public void calculateRafters(int length, int width) throws LoginSampleException {
@@ -104,7 +127,7 @@ public class Calculator {
         }
     }
 
- /*
+    /*
     public void calculateRoof(int length, int width) throws LoginSampleException {
         int iLength = length;
         int iWidthLength = length;
