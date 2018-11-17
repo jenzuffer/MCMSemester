@@ -11,7 +11,7 @@ public class Calculator {
         calculatePoles(length, width);
         calculateStraps(length);
         calculateRafters(length, width);
-        //calculateScrews(length, width);
+        calculateScrews(length, width);
         //list.add(calculateRoof(length, width));
         return new CarportDimensioner(length, width, list);
     }
@@ -27,55 +27,44 @@ public class Calculator {
         int x = 1, y = 1;
 
         while (saveLength > 0) {
-            x = x + 1;
-            saveLength = saveLength - 300;
+            x++;
+            saveLength -= 300;
         }
         System.out.println(x);
         while (saveWidth > 0) {
-            y = y + 1;
-            saveWidth = saveWidth - 450;
+            y++;
+            saveWidth -= 450;
         }
 
         Materiale lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
-        lastPole.addToAmount(x*y);
+        lastPole.addToAmount(x * y);
         list.add(lastPole);
-        
 
     }
 
     public void calculateStraps(int length) throws LoginSampleException {
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
-        int totalLength = length*2;
-        
+        int totalLength = length * 2;
+
         for (Materiale Material : listOfMaterials) {
-            
-            
+
             if (totalLength / Material.getLength() > 0) {
                 Material.addToAmount(totalLength / Material.getLength());
                 totalLength = totalLength - ((totalLength / Material.getLength()) * Material.getLength());
                 Material.setDescription("Remme i sider, sadles ned i stolper");
             }
 
-            if (totalLength < Material.getLength() && Material == listOfMaterials.get(listOfMaterials.size()-1)) {
+            if (totalLength < Material.getLength() && Material == listOfMaterials.get(listOfMaterials.size() - 1)) {
                 Material.addToAmount(1);
             }
-            
-            
 
             if (Material.getAmount() > 0) {
                 list.add(Material);
                 Material.setDescription("Remme i sider, sadles ned i stolper");
             }
-            
-            
-            
-            
+
         }
-        
-        
-        
-        
-        
+
     }
 
     public void calculateRafters(int length, int width) throws LoginSampleException {
@@ -163,10 +152,28 @@ public class Calculator {
     }
      */
     public void calculateScrews(int length, int width) throws LoginSampleException {
+        int iLength = length;
+        int iWidth = width;
+        int amount = 0;
+        //tagplader har length af 600 og 360, for hver tagplade kræver vi en pakke  platsmo bundskruer
         List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
-        for (Materiale materiale : listofScrews) {
-            materiale.addToAmount(1);
-            list.add(materiale);
+        List<Materiale> ListOfRoofMaterial = LogicFacade.listOfMaterialsByType("tagplader");
+        List<Materiale> roofMaterialsForScrews = new ArrayList();
+
+        for (Materiale roofmaterial : ListOfRoofMaterial) {
+            while (iLength > roofmaterial.getLength()) {
+                roofMaterialsForScrews.add(roofmaterial);
+                iLength -= roofmaterial.getLength();
+            }
+        }
+        while (iLength > 0) {
+            roofMaterialsForScrews.add(ListOfRoofMaterial.get(ListOfRoofMaterial.size() - 1));
+            iLength -= ListOfRoofMaterial.get(ListOfRoofMaterial.size() - 1).getLength();
+        }
+        amount = roofMaterialsForScrews.size();
+        for (Materiale screwMaterials : listofScrews) {
+            screwMaterials.addToAmount(amount);
+            list.add(screwMaterials);
         }
     }
 
