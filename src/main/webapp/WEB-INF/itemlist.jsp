@@ -16,7 +16,7 @@
     CarportDimensioner carport = (CarportDimensioner) request.getAttribute("carport");
     List<Materiale> materials = carport.getMaterials();
     HTMLGenerator html = new HTMLGenerator();
-    
+
 %>
 
 <html>
@@ -35,9 +35,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <table class="table">
-                        <%= html.getTableFromList(materials) %>
+                        <%= html.getTableFromList(materials)%>
                     </table>
                 </div>
+                <!-- SVG siden for carporten -->
+                <jsp:include page="SVGcarport.jsp" />
             </div>
         </div>
     </body>
