@@ -37,6 +37,7 @@ public class CalculateShed {
             amount += 2;
             circumference -= 18;
         }
+        System.out.println("Amount: " + amount);
         Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
         material.addToAmount(amount);
         list.add(material);

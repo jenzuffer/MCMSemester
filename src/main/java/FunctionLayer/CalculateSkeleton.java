@@ -12,7 +12,8 @@ public class CalculateSkeleton {
         calculateStraps(length);
         calculateRafters(length, width);
         CalculateScrews.calculateScrewsclass(length, width, list);
-        CalculateShed.calculatePoles(200, 400, width, list);
+        CalculateShed.calculatePoles(240, 530, width, list);
+        CalculateShed.calculateCladding(240, 530, list);
         
         return new CarportDimensioner(length, width, list);
     }
