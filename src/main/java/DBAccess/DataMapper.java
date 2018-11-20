@@ -214,6 +214,7 @@ public class DataMapper {
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
                 materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getInt(4));
+                materiale.setType(type);
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {

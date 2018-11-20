@@ -15,7 +15,6 @@ public class CalculateShed {
     
     public static void calculatePoles(int length, int width, int carportWidth, List<Materiale> list) throws LoginSampleException {
         int numberOfPoles = 0;
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         
         if(width == carportWidth && carportWidth <= 300 || width <= 300) {
             numberOfPoles = 2;
@@ -25,9 +24,9 @@ public class CalculateShed {
 
         if(length >= 300) numberOfPoles += 2;
 
-        Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
-        material.addToAmount(numberOfPoles);
-        list.add(material);
+        for (Materiale materiale : list) {
+            if(materiale.getType().equalsIgnoreCase("stolpe")) materiale.addToAmount(numberOfPoles);
+        }
     }
     
     public static void calculateCladding(int length, int width, List<Materiale> list) throws LoginSampleException {
