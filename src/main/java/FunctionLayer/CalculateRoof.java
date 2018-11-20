@@ -12,12 +12,13 @@ import java.util.List;
  * @author Christian
  */
 public class CalculateRoof {
-    
-    public static void CalculateFlatRoofPlates(int length, List<Materiale> list) throws LoginSampleException {
+
+    public static void CalculateRoofPlates(int length, List<Materiale> list, boolean tag) throws LoginSampleException {
         List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
         int StrapsAmount = CalculateStrapsAmount(length);
-        //throw new LoginSampleException("CalculateFlatRoofPlates StrapsAmount: " + StrapsAmount);
-
+        if (tag) {
+            StrapsAmount *= 1.5;
+        }
         int saveLength = length; //eksempel 450
         int IndexX = 0;
         int iLength = 55;
@@ -27,7 +28,7 @@ public class CalculateRoof {
                 listofRoofPlates.get(IndexX).addToAmount(1);
             }
             if (listofRoofPlates.get(IndexX).getAmount() > 0) {
-                listofRoofPlates.get(IndexX).setDescription("tagplader monteres på spær");
+                listofRoofPlates.get(IndexX).setDescription("tagplader der monteres på spær");
                 listofRoofPlates.get(IndexX).setAmount(listofRoofPlates.get(IndexX).getAmount() * StrapsAmount);
                 list.add(listofRoofPlates.get(IndexX));
             }
@@ -49,7 +50,7 @@ public class CalculateRoof {
             }
         }
     }
-    
+
     private static int CalculateStrapsAmount(int length) throws LoginSampleException {
         int count = 0;
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
