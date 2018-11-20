@@ -13,6 +13,7 @@ import FunctionLayer.CarportDimensioner;
  */
 public class SVGofCarport {
 
+    private CarportDimensioner carport;
     private int svgDimensionX;
     private int svgDimensionY;
     private int length;
@@ -28,14 +29,31 @@ public class SVGofCarport {
         this.svgDimensionY = svgDimensionY;
         length = carport.getLength();
         width = carport.getWidth();
+        this.carport = carport;
         
-        finalResult = "<rect x='" + svgDimensionX + 100 + "' y='" + svgDimensionY + 100 + "'"
-                + " width='" + 100 + "' height='100'" + "style=\"stroke: #000000; />";
         
-        // lav SVG kode her og sæt det ind som en string. Dette ville automatisk blive overført til SWGworkshop JSP'en
-        // som er inkluderet i itemList.jsp for nu.
-
+        
+        finalResult = "";
+        
+    
         return finalResult;
+    }
+    
+    
+    
+    public String placePoles() {
+        /*
+        på baggrund af carportens længde / antal af materialer til rådighed for stolper, 
+        dividere carportens længde med antal af stolper minus 1 og placer dem ved hver division
+        f.eks. 360 cm / 3(-1) stolper = 1 stolpe per 180 cm startende fra og til; 0, 180, 360
+       
+        
+        */
+        return "";
+    }
+    
+    public String placeRafters() {
+        return "";
     }
 
 }
