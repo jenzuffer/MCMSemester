@@ -21,22 +21,20 @@ public class SVGofCarport {
 
     // tag imod canvas størrelse og carportdimension objekt
     // find dimensioner af materialer i databasen / find dem i caportdimensioner via en liste. 
-    
-    
     // TODO: måske skal vi hente og gemme materialerne i listen med lidt mere info fra DB.
     // ellers bliver det svært at filtrere det og vide hvad vi skal bruge og hvor det skal bruges.
     public String initSVGOfCarport(int svgDimensionX, int svgDimensionY, CarportDimensioner carport) {
         this.svgDimensionX = svgDimensionX;
         this.svgDimensionY = svgDimensionY;
+        length = carport.getLength();
+        width = carport.getWidth();
         
-        
+        finalResult = "<rect x='" + svgDimensionX + 100 + "' y='" + svgDimensionY + 100 + "'"
+                + " width='" + 100 + "' height='100'" + "style=\"stroke: #000000; />";
         
         // lav SVG kode her og sæt det ind som en string. Dette ville automatisk blive overført til SWGworkshop JSP'en
         // som er inkluderet i itemList.jsp for nu.
-        
-        finalResult +="";
-        
-        
+
         return finalResult;
     }
 
