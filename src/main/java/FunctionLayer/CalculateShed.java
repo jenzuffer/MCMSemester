@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CalculateShed {
     
-    public void calculatePoles(int length, int width, int carportWidth, List<Materiale> list) throws LoginSampleException {
+    public static void calculatePoles(int length, int width, int carportWidth, List<Materiale> list) throws LoginSampleException {
         int numberOfPoles = 0;
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         
@@ -30,7 +30,7 @@ public class CalculateShed {
         list.add(material);
     }
     
-    public void calculateCladding(int length, int width, List<Materiale> list) throws LoginSampleException {
+    public static void calculateCladding(int length, int width, List<Materiale> list) throws LoginSampleException {
         int circumference = length * 2 + width * 2;
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
         int amount = 0;
