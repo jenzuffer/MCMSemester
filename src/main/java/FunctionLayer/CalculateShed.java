@@ -36,7 +36,7 @@ public class CalculateShed {
                 materiale.addToAmount(numberOfPoles);
             }
         }
-
+        System.out.println("Stolper: " + numberOfPoles);
         numOfPoles = numberOfPoles;
     }
 
@@ -48,7 +48,7 @@ public class CalculateShed {
             amount += 2;
             circumference -= 16;
         }
-
+        System.out.println("Cladding: " + amount);
         Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
         material.addToAmount(amount);
         list.add(material);
@@ -68,7 +68,7 @@ public class CalculateShed {
             numberWidth += 4;
             poles += 2;
         }
-
+        
         Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
         material.setDescription("Løsholter i skur gavle og sider");
         material.addToAmount(numberWidth + numberLength);
