@@ -14,26 +14,18 @@ import java.util.List;
  */
 public class CalculateScrews {
 
-    public static void calculateScrewsclass(int length, int width, List<Materiale> list) throws LoginSampleException {
+    public static void calculateScrewsclass(int length, int width, List<Materiale> list, boolean tag) throws LoginSampleException {
         int iLength = length;
         int iWidth = width;
         int amount = 0;
+        
+        //CalculateRoof.CalculateRoofPlates();
         //tagplader har length af 600 og 360, for hver tagplade kræver vi en pakke  platsmo bundskruer
         List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
         List<Materiale> ListOfRoofMaterial = LogicFacade.listOfMaterialsByType("tagplader");
         List<Materiale> roofMaterialsForScrews = new ArrayList();
 
-        for (Materiale roofmaterial : ListOfRoofMaterial) {
-            while (iLength > roofmaterial.getLength()) {
-                roofMaterialsForScrews.add(roofmaterial);
-                iLength -= roofmaterial.getLength();
-            }
-        }
-        while (iLength > 0) {
-            roofMaterialsForScrews.add(ListOfRoofMaterial.get(ListOfRoofMaterial.size() - 1));
-            iLength -= ListOfRoofMaterial.get(ListOfRoofMaterial.size() - 1).getLength();
-        }
-        amount = roofMaterialsForScrews.size();
+        
         for (Materiale screwMaterials : listofScrews) {
             screwMaterials.addToAmount(amount);
             list.add(screwMaterials);

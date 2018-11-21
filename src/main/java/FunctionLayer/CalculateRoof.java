@@ -43,16 +43,6 @@ public class CalculateRoof {
             if (listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() % 2 != 0) {
                 listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount(1);
             }
-            //throw new LoginSampleException("amount: " + listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount());
-            /*
-            listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount((listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() / 6) * 2);
-            int index = list.indexOf(listofRoofPlates.get(listofRoofPlates.size() - 1));
-            if (index == -1) {
-                list.add(listofRoofPlates.get(listofRoofPlates.size() - 1));
-            } else {
-                list.get(index).addToAmount((listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() / 6) * 2);
-            }
-             */
         }
     }
 

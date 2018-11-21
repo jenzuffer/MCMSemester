@@ -11,10 +11,11 @@ public class CalculateSkeleton {
         calculatePoles(length, width);
         calculateStraps(length);
         calculateRafters(length, width);
-        CalculateScrews.calculateScrewsclass(length, width, list);
+        CalculateScrews.calculateScrewsclass(length, width, list, tag);
         CalculateShed.calculatePoles(shedLength, shedWidth, width, list);
         CalculateShed.calculateCladding(shedLength, shedWidth, list);
-        CalculateShed.calculateWoodForCladding(length, width, list);
+        CalculateShed.calculateWoodForCladding(shedLength, shedWidth, list);
+        
         CalculateRoof.CalculateRoofPlates(length, width, list, tag);
         return new CarportDimensioner(length, width, list);
     }
