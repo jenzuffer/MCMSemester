@@ -31,8 +31,13 @@
                 </marker>
             </defs>
 
+            
+            <%=new SVGofCarport().carport(carport) %>
+            
+            <!-- 
             <rect x='0' y='0' width='100%' height='100%' style="stroke:#000000; fill:#ffffff;"/>";
             <rect x='50' y='50' width='<%=length%>' height='<%=width%>' style="stroke:#000000; fill:#ffffff;"/>";
+            -->
 
 
 
@@ -42,7 +47,7 @@
                   font-size="15px" 
                   text-anchor="center" 
                   fill="black"> 
-            <%=length%> 
+            Length: <%=length%> 
             </text>
             <text x="5" 
                   y="<%=width / 2 + 40%>" 
@@ -50,19 +55,19 @@
                   font-size="15px" 
                   text-anchor="center" 
                   fill="black">
-            <%=width%>
+            Width: <%=width%>
             </text>
 
 
             <line label="test" 
-                  x1="50"  y1="40"     
-                  x2="<%=length + 50%>" y2="40" 
+                  x1="50"  y1="20"     
+                  x2="<%=length + 50%>" y2="20" 
                   style="stroke:#006600;
                   marker-start: url(#beginArrow); 
                   marker-end: url(#endArrow);"/>
             <line label="test" 
-                  x1="40"  y1="50"     
-                  x2="40" y2="<%=width + 50%>" 
+                  x1="20"  y1="50"     
+                  x2="20" y2="<%=width + 50%>" 
                   style="stroke:#006600;
                   marker-start: url(#beginArrow); 
                   marker-end: url(#endArrow);"/>
