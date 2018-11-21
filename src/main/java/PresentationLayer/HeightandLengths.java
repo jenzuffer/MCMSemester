@@ -23,8 +23,12 @@ public class HeightandLengths extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         List<Integer> width = LogicFacade.getWidth();
         List<Integer> length = LogicFacade.getLength();
+        List<Integer> shedWidth = LogicFacade.getShedWidth();
+        List<Integer> shedLength = LogicFacade.getShedLength();
         request.setAttribute("width", width);
         request.setAttribute("length", length);
+        request.setAttribute("shedwidth", shedWidth);
+        request.setAttribute("shedlength", shedLength);
         return "calculatematerials";
     }
 

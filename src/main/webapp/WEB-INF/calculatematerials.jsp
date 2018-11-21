@@ -13,6 +13,8 @@
 <%
     List<Integer> width = (List<Integer>)request.getAttribute("width");
     List<Integer> length = (List<Integer>)request.getAttribute("length");
+    List<Integer> shedWidth = (List<Integer>) request.getAttribute("shedwidth");
+    List<Integer> shedLength = (List<Integer>) request.getAttribute("shedlength");
     HTMLGenerator html = new HTMLGenerator();
 %>
 
@@ -47,18 +49,18 @@
                             <option>Choose length</option>
                             <%= html.getDropdownFromList(length, " cm")%>
                         </select>
-                        <!--
                         <hr>
                         <h5 class="second-header">Shed</h5>
                         <h6 class="second-header">Width</h6>
-                        <select class="select-option">
-                            <option>(Not implemented yet)</option>
+                        <select class="select-option" name="shedWidth">
+                            <option>Choose width</option>
+                            <%= html.getDropdownFromList(shedWidth, " cm")%>
                         </select>
                         <h6 class="second-header">Lengfdsfth</h6>
-                        <select class="select-option">
-                            <option>(Not implemented yet)</option>
+                        <select class="select-option" name="shedLength">
+                            <option>Choose length</option>
+                            <%= html.getDropdownFromList(shedLength, " cm")%>
                         </select>
-                        -->
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">

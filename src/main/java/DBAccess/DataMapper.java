@@ -80,6 +80,39 @@ public class DataMapper {
         }
         return values;
     }
+    
+        public static List<Integer> getShedWidth() throws LoginSampleException {
+        List<Integer> values = new ArrayList();
+        try {
+            Connection l_cCon = Connector.connection();
+
+            String l_sSQL = "SELECT * FROM `ShedWidth`";
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
+            while (l_rsSearch.next()) {
+                values.add(l_rsSearch.getInt(1));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return values;
+    }
+
+    public static List<Integer> getShedLength() throws LoginSampleException {
+        List<Integer> values = new ArrayList();
+        try {
+            Connection l_cCon = Connector.connection();
+            String l_sSQL = "SELECT * FROM `ShedLength`";
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
+            while (l_rsSearch.next()) {
+                values.add(l_rsSearch.getInt(1));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return values;
+    }
 
     public static void createCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, ?, ?, ?, ?, ?)";

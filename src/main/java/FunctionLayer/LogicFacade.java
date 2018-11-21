@@ -37,8 +37,6 @@ public class LogicFacade {
         return createCarport;
     }
 
- 
-
     public static List<Integer> getWidth() throws LoginSampleException {
         List<Integer> width = DataMapper.getWidth();
         return width;
@@ -48,21 +46,30 @@ public class LogicFacade {
         List<Integer> length = DataMapper.getLength();
         return length;
     }
-    
-    
-    public static CarportDimensioner calculateCarportList (int length, int width, boolean tag) throws LoginSampleException {
+
+    public static List<Integer> getShedWidth() throws LoginSampleException {
+        List<Integer> width = DataMapper.getShedWidth();
+        return width;
+    }
+
+    public static List<Integer> getShedLength() throws LoginSampleException {
+        List<Integer> length = DataMapper.getShedLength();
+        return length;
+    }
+
+    public static CarportDimensioner calculateCarportList(int length, int width, boolean tag) throws LoginSampleException {
         CalculateSkeleton calc = new CalculateSkeleton();
         return calc.calculate(length, width, tag);
     }
-    
-    public static List<Materiale> listOfMaterialsByType (String string) throws LoginSampleException {
+
+    public static List<Materiale> listOfMaterialsByType(String string) throws LoginSampleException {
         return DataMapper.getAllMaterialsByType(string);
-    } 
-    
-    public static List<Materiale> listOfAllMaterials () throws LoginSampleException {
-        
+    }
+
+    public static List<Materiale> listOfAllMaterials() throws LoginSampleException {
+
         return DataMapper.getAllMaterials();
-    } 
+    }
 
     public static void updateProductOrAdd(int ID, String name, Double price, String description, Integer length, String unit, String type) throws LoginSampleException {
         //throw new LoginSampleException("ID: " + ID + " name: " + name);
@@ -70,7 +77,7 @@ public class LogicFacade {
     }
 
     public static void createCustomer(String name, String address, String city, String number, String email) throws LoginSampleException {
-       DataMapper.createCustomer(name, address, city, number, email);
+        DataMapper.createCustomer(name, address, city, number, email);
     }
-    
+
 }
