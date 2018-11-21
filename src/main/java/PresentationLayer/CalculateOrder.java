@@ -31,8 +31,12 @@ public class CalculateOrder extends Command {
         String city = request.getParameter("city");
         String number = (request.getParameter("pnumber"));
         String email = request.getParameter("email");
-        if (!name.isEmpty() && !address.isEmpty() && !city.isEmpty() && !number.isEmpty() && !email.isEmpty()) {
-            LogicFacade.createCustomer(name, address, city, number, email);
+        try {
+            if (!name.isEmpty() && !address.isEmpty() && !city.isEmpty() && !number.isEmpty() && !email.isEmpty()) {
+                LogicFacade.createCustomer(name, address, city, number, email);
+            }
+        } catch(NullPointerException e) {
+            
         }
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));

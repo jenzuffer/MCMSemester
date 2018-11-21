@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group">
                             <label>Phonenumber</label>
-                            <input type="number" name="pnumber" class="form-control" placeholder="Enter phonenumber">
+                            <input type="tel" name="pnumber" class="form-control" placeholder="Enter phonenumber">
                         </div>
                         <div class="form-group">
                             <label>Email</label>
@@ -92,6 +92,14 @@
             </div>
         </div>
     </form>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="width" value="600">
+                            <input type="hidden" name="length" value="780">
+                            <input type="hidden" name="shedwidth" value="530">
+                            <input type="hidden" name="shedlength" value="210">
+                            <input type="hidden" name="command" value="calculateorder">
+                            <input type="submit" value="Fog standard carport">
+                        </form>
     <script type="text/javascript">
         Function update()
         {
