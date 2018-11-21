@@ -57,9 +57,9 @@ public class LogicFacade {
         return length;
     }
 
-    public static CarportDimensioner calculateCarportList(int length, int width, boolean tag) throws LoginSampleException {
+    public static CarportDimensioner calculateCarportList(int length, int width, int shedLength, int shedWidth, boolean tag) throws LoginSampleException {
         CalculateSkeleton calc = new CalculateSkeleton();
-        return calc.calculate(length, width, tag);
+        return calc.calculate(length, width, shedLength, shedWidth, tag);
     }
 
     public static List<Materiale> listOfMaterialsByType(String string) throws LoginSampleException {

@@ -7,13 +7,13 @@ public class CalculateSkeleton {
 
     private List<Materiale> list = new ArrayList();
 
-    public CarportDimensioner calculate(int length, int width, boolean tag) throws LoginSampleException {
+    public CarportDimensioner calculate(int length, int width, int shedLength, int shedWidth, boolean tag) throws LoginSampleException {
         calculatePoles(length, width);
         calculateStraps(length);
         calculateRafters(length, width);
         CalculateScrews.calculateScrewsclass(length, width, list);
-        CalculateShed.calculatePoles(240, 530, width, list);
-        CalculateShed.calculateCladding(240, 530, list);
+        CalculateShed.calculatePoles(shedLength, shedWidth, width, list);
+        CalculateShed.calculateCladding(shedLength, shedWidth, list);
         CalculateRoof.CalculateRoofPlates(length, list, tag);
         return new CarportDimensioner(length, width, list);
     }
