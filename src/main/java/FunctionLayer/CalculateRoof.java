@@ -28,10 +28,12 @@ public class CalculateRoof {
                 listofRoofPlates.get(IndexX).addToAmount(1);
             }
             listofRoofPlates.get(IndexX).setDescription("tagplader der monteres på spær");
-            listofRoofPlates.get(IndexX).addToAmount(RaftersAmount);
+            listofRoofPlates.get(IndexX).addToAmount((RaftersAmount / 6) * 2);
             list.add(listofRoofPlates.get(IndexX));
             IndexX++;
         }
+        //throw new LoginSampleException("saveLength: " + saveLength + " amount: " + listofRoofPlates.get(IndexX - 1).getAmount() +  " raftersamount: " + RaftersAmount);
+
         if (saveLength > 0 && saveLength < iLength) {
             list.get(list.size() - 1).addToAmount(1);
         } else if (saveLength > 0 && IndexX == listofRoofPlates.size()) {
@@ -39,12 +41,12 @@ public class CalculateRoof {
                 saveLength -= listofRoofPlates.get(listofRoofPlates.size() - 1).getLength();
                 listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount(1);
             }
-            listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount(listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount());
+            listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount((listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() / 6) * 2);
             int index = list.indexOf(listofRoofPlates.get(listofRoofPlates.size() - 1));
             if (index == -1) {
                 list.add(listofRoofPlates.get(listofRoofPlates.size() - 1));
             } else {
-                list.get(index).addToAmount(listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount());
+                list.get(index).addToAmount((listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() / 6) * 2);
             }
         }
     }
