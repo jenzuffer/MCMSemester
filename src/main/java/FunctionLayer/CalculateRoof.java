@@ -13,25 +13,23 @@ import java.util.List;
  */
 public class CalculateRoof {
 
-    public static void CalculateRoofPlates(int length, List<Materiale> list, boolean tag) throws LoginSampleException {
+    public static void CalculateRoofPlates(int length, int width, List<Materiale> list, boolean tag) throws LoginSampleException {
         List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
-        int StrapsAmount = CalculateStrapsAmount(length);
+        int RaftersAmount = calculateRaftersAmount(length, width);
         if (tag) {
-            StrapsAmount *= 1.5;
+            RaftersAmount *= 1.5;
         }
         int saveLength = length; //eksempel 450
         int IndexX = 0;
         int iLength = 55;
         while (saveLength > iLength && IndexX < listofRoofPlates.size()) {
-            while (saveLength > listofRoofPlates.get(IndexX).getLength()) {
+            while (saveLength >= listofRoofPlates.get(IndexX).getLength()) {
                 saveLength -= listofRoofPlates.get(IndexX).getLength();
                 listofRoofPlates.get(IndexX).addToAmount(1);
             }
-            if (listofRoofPlates.get(IndexX).getAmount() > 0) {
-                listofRoofPlates.get(IndexX).setDescription("tagplader der monteres på spær");
-                listofRoofPlates.get(IndexX).setAmount(listofRoofPlates.get(IndexX).getAmount() * StrapsAmount);
-                list.add(listofRoofPlates.get(IndexX));
-            }
+            listofRoofPlates.get(IndexX).setDescription("tagplader der monteres på spær");
+            listofRoofPlates.get(IndexX).addToAmount(RaftersAmount);
+            list.add(listofRoofPlates.get(IndexX));
             IndexX++;
         }
         if (saveLength > 0 && saveLength < iLength) {
@@ -41,7 +39,7 @@ public class CalculateRoof {
                 saveLength -= listofRoofPlates.get(listofRoofPlates.size() - 1).getLength();
                 listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount(1);
             }
-            listofRoofPlates.get(listofRoofPlates.size() - 1).setAmount(listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount() * StrapsAmount);
+            listofRoofPlates.get(listofRoofPlates.size() - 1).addToAmount(listofRoofPlates.get(listofRoofPlates.size() - 1).getAmount());
             int index = list.indexOf(listofRoofPlates.get(listofRoofPlates.size() - 1));
             if (index == -1) {
                 list.add(listofRoofPlates.get(listofRoofPlates.size() - 1));
@@ -51,22 +49,46 @@ public class CalculateRoof {
         }
     }
 
-    private static int CalculateStrapsAmount(int length) throws LoginSampleException {
-        int count = 0;
+    public static int calculateRaftersAmount(int length, int width) throws LoginSampleException {
+        int countReturn = 0;
+        int iWidth = width;
+        double coverPiece = length / 55;
+        int amountOfPieces = 0;
+        if (coverPiece != (double) length / 55) {
+            amountOfPieces = length / 55 + 1;
+        } else {
+            amountOfPieces = length / 55;
+        }
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
-        int totalLength = length * 2;
-        for (Materiale Material : listOfMaterials) {
-            if (totalLength / Material.getLength() > 0) {
-                Material.addToAmount(totalLength / Material.getLength());
-                totalLength = totalLength - ((totalLength / Material.getLength()) * Material.getLength());
+        for (Materiale materiale : listOfMaterials) {
+            if (iWidth >= materiale.getLength()) {
+                materiale.addToAmount(amountOfPieces);
+                iWidth = iWidth - materiale.getLength();
             }
-            if (totalLength < Material.getLength() && Material == listOfMaterials.get(listOfMaterials.size() - 1)) {
-                Material.addToAmount(1);
+            int count = 0;
+            if (materiale.getAmount() > 0) {
+                for (; count < iWidth * amountOfPieces / materiale.getLength(); count++) {
+                    materiale.addToAmount(1);
+                }
             }
-            if (Material.getAmount() > 0) {
-                count += Material.getAmount();
+            if (iWidth == width && listOfMaterials.get(listOfMaterials.size() - 1) == materiale) {
+                materiale.addToAmount(amountOfPieces);
+            }
+            if (materiale.getAmount() > 0) {
+                countReturn += materiale.getAmount();
+            }
+            if (iWidth <= 0) {
+                break;
+            }
+            if (iWidth * amountOfPieces < listOfMaterials.get(listOfMaterials.size() - 1).getLength()) {
+                Materiale lastMateriale = listOfMaterials.get(listOfMaterials.size() - 1);
+                lastMateriale.addToAmount(1);
+                if (materiale != listOfMaterials.get(listOfMaterials.size() - 1)) {
+                    countReturn += lastMateriale.getAmount();
+                }
+                break;
             }
         }
-        return count;
+        return countReturn;
     }
 }

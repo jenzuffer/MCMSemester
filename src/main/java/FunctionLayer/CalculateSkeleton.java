@@ -14,7 +14,7 @@ public class CalculateSkeleton {
         CalculateScrews.calculateScrewsclass(length, width, list);
         CalculateShed.calculatePoles(shedLength, shedWidth, width, list);
         CalculateShed.calculateCladding(shedLength, shedWidth, list);
-        CalculateRoof.CalculateRoofPlates(length, list, tag);
+        CalculateRoof.CalculateRoofPlates(length, width, list, tag);
         return new CarportDimensioner(length, width, list);
     }
 
