@@ -52,12 +52,12 @@
                         <hr>
                         <h5 class="second-header">Shed</h5>
                         <h6 class="second-header">Width</h6>
-                        <select class="select-option" name="shedWidth">
+                        <select class="select-option" name="shedwidth">
                             <option>Choose width</option>
                             <%= html.getDropdownFromList(shedWidth, " cm")%>
                         </select>
-                        <h6 class="second-header">Lengfdsfth</h6>
-                        <select class="select-option" name="shedLength">
+                        <h6 class="second-header">Length</h6>
+                        <select class="select-option" name="shedlength">
                             <option>Choose length</option>
                             <%= html.getDropdownFromList(shedLength, " cm")%>
                         </select>
