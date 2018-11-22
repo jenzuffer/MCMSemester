@@ -4,7 +4,7 @@
     Author     : mwn
 --%>
 
-<%@page import="FunctionLayer.CarportDimensioner"%>
+<%@page import="FunctionLayer.Carport"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
 <%@page import="FunctionLayer.Materiale"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 
 <%
-    CarportDimensioner carport = (CarportDimensioner) request.getAttribute("carport");
+    Carport carport = (Carport) request.getAttribute("carport");
     List<List<Materiale>> listOfListsOfMaterials = carport.getListOfLists();
     HTMLGenerator html = new HTMLGenerator();
 
