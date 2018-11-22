@@ -15,25 +15,25 @@ import java.util.List;
  */
 public class LogicFacade {
 
-    public static List<CarportDimensioner> getMaterials() {
-        List<CarportDimensioner> TotalMaterials = new ArrayList();
+    public static List<Carport> getMaterials() {
+        List<Carport> TotalMaterials = new ArrayList();
 
         return TotalMaterials;
     }
 
-    public static CarportDimensioner changeOrder(int OrderID, CarportDimensioner dimension) throws LoginSampleException {
+    public static Carport changeOrder(int OrderID, Carport dimension) throws LoginSampleException {
         dimension = DataMapper.changeOrder(dimension, OrderID);
         throw new LoginSampleException("materials length: " + dimension.getLength());
     }
 
-    public static List<Materiale> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+    public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
         List<Materiale> materials = DataMapper.calculateOrder(dimension, indexID);
 
         return materials;
     }
 
-    public static CarportDimensioner createCarport(int length, int width) {
-        CarportDimensioner createCarport = new CarportDimensioner(length, width);
+    public static Carport createCarport(int length, int width) {
+        Carport createCarport = new Carport(length, width);
         return createCarport;
     }
 
@@ -57,7 +57,7 @@ public class LogicFacade {
         return length;
     }
 
-    public static CarportDimensioner calculateCarportList(CarportDimensioner carport) throws LoginSampleException {
+    public static Carport calculateCarportList(Carport carport) throws LoginSampleException {
         Calculator calculator = new Calculator(carport);
         return calculator.getCalculatedCarport();
     }

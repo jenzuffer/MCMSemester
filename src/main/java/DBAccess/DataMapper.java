@@ -5,7 +5,7 @@
  */
 package DBAccess;
 
-import FunctionLayer.CarportDimensioner;
+import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Materiale;
 import java.sql.Connection;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class DataMapper {
 
-    public static CarportDimensioner changeOrder(CarportDimensioner dimension, int OrderID) throws LoginSampleException {
+    public static Carport changeOrder(Carport dimension, int OrderID) throws LoginSampleException {
         try {
             Connection l_cCon = Connector.connection();
             String l_sSQL = "SELECT * FROM `width`";
@@ -37,7 +37,7 @@ public class DataMapper {
         return dimension;
     }
 
-    public static List<Materiale> calculateOrder(CarportDimensioner dimension, int indexID) throws LoginSampleException {
+    public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
         List<Materiale> materials = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();

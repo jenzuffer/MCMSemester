@@ -1,6 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.CarportDimensioner;
+import FunctionLayer.Carport;
 import FunctionLayer.Materiale;
 
 /**
@@ -9,7 +9,7 @@ import FunctionLayer.Materiale;
  */
 public class SVGofCarport {
 
-    public String carport(CarportDimensioner carport) {
+    public String carport(Carport carport) {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x='50' y='50' width='").append(carport.getLength()).append("' height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
@@ -72,7 +72,7 @@ public class SVGofCarport {
      */
     public static void main(String[] args) {
         SVGofCarport test = new SVGofCarport();
-        String f = test.carport(new CarportDimensioner(600, 300));
+        String f = test.carport(new Carport(600, 300));
         System.out.println(f);
     }
 

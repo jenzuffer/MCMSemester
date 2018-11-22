@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Christian
  */
-public class CarportDimensioner {
+public class Carport {
     private int length;
     private int width;
     private int shedLength;
@@ -30,7 +30,7 @@ public class CarportDimensioner {
         this.listOfLists = listOfLists;
     }
 
-    public CarportDimensioner(int length, int width, int shedLength, int shedWidth, boolean shedChosen, boolean roofChosen) {
+    public Carport(int length, int width, int shedLength, int shedWidth, boolean shedChosen, boolean roofChosen) {
         this.length = length;
         this.width = width;
         this.shedLength = shedLength;
@@ -74,14 +74,14 @@ public class CarportDimensioner {
     }
     
     
-    public CarportDimensioner(int length, int width, List<Materiale> materials) {
+    public Carport(int length, int width, List<Materiale> materials) {
         this.length = length;
         this.width = width;
         this.materials = materials;
     }
 
     
-    public CarportDimensioner(int length, int width) {
+    public Carport(int length, int width) {
         this.length = length;
         this.width = width;
     }

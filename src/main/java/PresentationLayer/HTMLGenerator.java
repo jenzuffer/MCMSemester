@@ -6,6 +6,8 @@
 package PresentationLayer;
 
 import FunctionLayer.Materiale;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,7 +24,7 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public String getTableFromList(List<Materiale> tableData) {
+    public String getTableFromList(List<List<Materiale>> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
                 + "    <tr>\n"
@@ -34,20 +36,26 @@ public class HTMLGenerator {
                 + "    </tr>\n"
                 + "  </thead>\n"
                 + "  <tbody>");
-
-        for (Materiale materiale : tableData) {
-            sb.append("<tr><td>")
-                    .append(materiale.getName())
-                    .append("</td><td>")
-                    .append(materiale.getLength())
-                    .append("</td><td>")
-                    .append(materiale.getAmount())
-                    .append("</td><td>")
-                    .append(materiale.getUnit())
-                    .append("</td><td>")
-                    .append(materiale.getDescription())
-                    .append("</td>")
-                    .append("</tr>");
+        
+//        HashMap<String, List<Materiale>> HM = new HashMap();
+//        Collection<List<Materiale>> materialeilist = HM.values();
+//        
+        
+        for (List<Materiale> list : tableData) {
+            for (Materiale materiale : list) {
+                sb.append("<tr><td>")
+                        .append(materiale.getName())
+                        .append("</td><td>")
+                        .append(materiale.getLength())
+                        .append("</td><td>")
+                        .append(materiale.getAmount())
+                        .append("</td><td>")
+                        .append(materiale.getUnit())
+                        .append("</td><td>")
+                        .append(materiale.getDescription())
+                        .append("</td>")
+                        .append("</tr>");
+            }
         }
         sb.append("</tbody>");
 

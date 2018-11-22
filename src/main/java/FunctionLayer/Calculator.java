@@ -23,9 +23,9 @@ public class Calculator {
     private int shedWidth;
     private int shedLength;
     private boolean tag;
-    private CarportDimensioner carport;
+    private Carport carport;
     
-    public Calculator(CarportDimensioner carport) throws LoginSampleException {
+    public Calculator(Carport carport) throws LoginSampleException {
         this.carport = carport;
         length = carport.getLength();
         width = carport.getWidth();
@@ -96,8 +96,8 @@ public class Calculator {
     }
     
     
-    public CarportDimensioner getCalculatedCarport() {
-        
+    public Carport getCalculatedCarport() {
+        combineLists(); 
         carport.setListOfLists(ListOfAllLists);
         return carport;
     }

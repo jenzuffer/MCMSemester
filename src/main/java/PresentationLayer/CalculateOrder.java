@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.CarportDimensioner;
+import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Materiale;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class CalculateOrder extends Command {
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         int shedWidth = Integer.valueOf(request.getParameter("shedwidth")) == null ? 0 : Integer.valueOf(request.getParameter("shedwidth"));
         int shedLength = Integer.valueOf(request.getParameter("shedlength")) == null ? 0 : Integer.valueOf(request.getParameter("shedlength"));
-        CarportDimensioner carport = LogicFacade.calculateCarportList(new CarportDimensioner(length, width, shedLength, shedWidth, true, true));
+        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, true, true));
         
         request.setAttribute("carport", carport);
         // session.setAttribute("ordermaterials", OrderMaterials);

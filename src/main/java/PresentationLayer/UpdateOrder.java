@@ -7,7 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.CarportDimensioner;
+import FunctionLayer.Carport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +26,7 @@ public class UpdateOrder extends Command {
         HttpSession session = request.getSession();
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
-        CarportDimensioner dimension = LogicFacade.createCarport(width, length);
+        Carport dimension = LogicFacade.createCarport(width, length);
         int Order = request.getSession().getAttribute("OrderID") == null ? 0 : (int) request.getSession().getAttribute("OrderID");
         dimension = LogicFacade.changeOrder(Order, dimension);
         session.setAttribute("dimension", dimension);
