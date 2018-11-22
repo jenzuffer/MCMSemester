@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class CalculateRoof {
 
-    public static List<Materiale> CalculateRoofPlates(int length, int width, boolean tag) throws LoginSampleException {
+        
+    public List<Materiale> CalculateRoofPlates(int length, int width, boolean tag) throws LoginSampleException {
         List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
         List<Materiale> returnlist = new ArrayList();
         int RaftersAmount = calculateRaftersAmount(length, width);
@@ -50,7 +51,7 @@ public class CalculateRoof {
         return returnlist;
     }
 
-    public static int calculateRaftersAmount(int length, int width) throws LoginSampleException {
+    public int calculateRaftersAmount(int length, int width) throws LoginSampleException {
         int countReturn = 0;
         int iWidth = width;
         double coverPiece = length / 55;

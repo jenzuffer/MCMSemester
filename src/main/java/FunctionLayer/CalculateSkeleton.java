@@ -5,25 +5,9 @@ import java.util.List;
 
 public class CalculateSkeleton {
 
-    private List<Materiale> list = new ArrayList();
-    private List<List> testlist = new ArrayList();
-
-    public CarportDimensioner calculate(int length, int width, int shedLength, int shedWidth, boolean tag) throws LoginSampleException {
-        calculatePoles(length, width);
-        calculateStraps(length);
-        calculateRafters(length, width);
-        list = CalculateScrews.calculateScrewsclass(length, width, tag);
-        testlist.add(list);
-        CalculateShed.calculatePoles(shedLength, shedWidth, width, list);
-        CalculateShed.calculateCladding(shedLength, shedWidth, list);
-        CalculateShed.calculateWoodForCladding(shedLength, shedWidth, list);
-        list = CalculateRoof.CalculateRoofPlates(length, width, tag);
-        testlist.add(list);
-        return new CarportDimensioner(length, width, list);
-    }
-
-    public void calculatePoles(int length, int width) throws LoginSampleException {
-
+    
+    public List<Materiale> calculatePoles(int length, int width) throws LoginSampleException {
+        List<Materiale> returnList = new ArrayList();
         int saveLength = length;
         int saveWidth = width;
 
@@ -36,7 +20,6 @@ public class CalculateSkeleton {
             x++;
             saveLength -= 300;
         }
-        System.out.println(x);
         while (saveWidth > 0) {
             y++;
             saveWidth -= 450;
@@ -44,11 +27,12 @@ public class CalculateSkeleton {
 
         Materiale lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
         lastPole.addToAmount(x * y);
-        list.add(lastPole);
-
+        returnList.add(lastPole);
+        return returnList;
     }
 
-    public void calculateStraps(int length) throws LoginSampleException {
+    public List<Materiale> calculateStraps(int length) throws LoginSampleException {
+        List<Materiale> returnList = new ArrayList();
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         int totalLength = length * 2;
 
@@ -65,16 +49,17 @@ public class CalculateSkeleton {
             }
 
             if (Material.getAmount() > 0) {
-                list.add(Material);
+                returnList.add(Material);
                 Material.setDescription("Remme i sider, sadles ned i stolper");
             }
 
         }
+        return returnList;
 
     }
 
-    public void calculateRafters(int length, int width) throws LoginSampleException {
-
+    public List<Materiale> calculateRafters(int length, int width) throws LoginSampleException {
+        List<Materiale> returnList = new ArrayList();
         int iWidth = width;
         double coverPiece = length / 55;
         int amountOfPieces = 0;
@@ -104,7 +89,7 @@ public class CalculateSkeleton {
             }
 
             if (materiale.getAmount() > 0) {
-                list.add(materiale);
+                returnList.add(materiale);
             }
 
             if (iWidth <= 0) {
@@ -115,11 +100,12 @@ public class CalculateSkeleton {
                 Materiale lastMateriale = listOfMaterials.get(listOfMaterials.size() - 1);
                 lastMateriale.addToAmount(1);
                 if (materiale != listOfMaterials.get(listOfMaterials.size() - 1)) {
-                    list.add(lastMateriale);
+                    returnList.add(lastMateriale);
                 }
                 break;
             }
         }
+        return returnList;
     }
 
     public void fixMaterialsInList() throws LoginSampleException {

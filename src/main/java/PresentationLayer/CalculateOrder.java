@@ -42,8 +42,9 @@ public class CalculateOrder extends Command {
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         int shedWidth = Integer.valueOf(request.getParameter("shedwidth")) == null ? 0 : Integer.valueOf(request.getParameter("shedwidth"));
         int shedLength = Integer.valueOf(request.getParameter("shedlength")) == null ? 0 : Integer.valueOf(request.getParameter("shedlength"));
-        CarportDimensioner test = LogicFacade.calculateCarportList(length, width, shedLength, shedWidth, true);
-        request.setAttribute("carport", test);
+        CarportDimensioner carport = LogicFacade.calculateCarportList(new CarportDimensioner(length, width, shedLength, shedWidth, true, true));
+        
+        request.setAttribute("carport", carport);
         // session.setAttribute("ordermaterials", OrderMaterials);
         //return "customerconfirmation";
         return "itemlist";

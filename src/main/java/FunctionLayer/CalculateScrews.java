@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class CalculateScrews {
 
-    public static List<Materiale> calculateScrewsclass(int length, int width, boolean tag) throws LoginSampleException {
+    public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
         List<Materiale> returnlist = new ArrayList();
         int amount = 0;
         List<Materiale> roofMaterialsForScrews;
-        roofMaterialsForScrews = CalculateRoof.CalculateRoofPlates(length, width, tag);
+        roofMaterialsForScrews = roof;
         for (int i = 0; i < roofMaterialsForScrews.size(); i++) {
             amount += roofMaterialsForScrews.get(i).getAmount();
         }
@@ -30,7 +30,7 @@ public class CalculateScrews {
         return returnlist;
     }
 
-    public static List<Materiale> calculateStainlessSteal(int length, int width, boolean tag) throws LoginSampleException {
+    public List<Materiale> calculateStainlessSteel(int length, int width, boolean tag) throws LoginSampleException {
         List<Materiale> returnlist = new ArrayList();
         if (tag) {
             List<Materiale> ListofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
