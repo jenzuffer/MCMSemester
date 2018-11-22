@@ -6,17 +6,19 @@ import java.util.List;
 public class CalculateSkeleton {
 
     private List<Materiale> list = new ArrayList();
+    private List<List> testlist = new ArrayList();
 
     public CarportDimensioner calculate(int length, int width, int shedLength, int shedWidth, boolean tag) throws LoginSampleException {
         calculatePoles(length, width);
         calculateStraps(length);
         calculateRafters(length, width);
-        CalculateScrews.calculateScrewsclass(length, width, list, tag);
+        list = CalculateScrews.calculateScrewsclass(length, width, tag);
+        testlist.add(list);
         CalculateShed.calculatePoles(shedLength, shedWidth, width, list);
         CalculateShed.calculateCladding(shedLength, shedWidth, list);
         CalculateShed.calculateWoodForCladding(shedLength, shedWidth, list);
-        
-        CalculateRoof.CalculateRoofPlates(length, width, list, tag);
+        list = CalculateRoof.CalculateRoofPlates(length, width, tag);
+        testlist.add(list);
         return new CarportDimensioner(length, width, list);
     }
 
@@ -119,8 +121,6 @@ public class CalculateSkeleton {
             }
         }
     }
-
-    
 
     public void fixMaterialsInList() throws LoginSampleException {
 

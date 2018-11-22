@@ -14,18 +14,31 @@ import java.util.List;
  */
 public class CalculateScrews {
 
-    public static void calculateScrewsclass(int length, int width, List<Materiale> list, boolean tag) throws LoginSampleException {
-        int iLength = length;
+    public static List<Materiale> calculateScrewsclass(int length, int width, boolean tag) throws LoginSampleException {
+        List<Materiale> returnlist = new ArrayList();
         int amount = 0;
-        List<Materiale> roofMaterialsForScrews = new ArrayList();
-        CalculateRoof.CalculateRoofPlates(length, width, roofMaterialsForScrews, tag);
+        List<Materiale> roofMaterialsForScrews;
+        roofMaterialsForScrews = CalculateRoof.CalculateRoofPlates(length, width, tag);
         for (int i = 0; i < roofMaterialsForScrews.size(); i++) {
             amount += roofMaterialsForScrews.get(i).getAmount();
         }
         List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
         for (Materiale screwMaterials : listofScrews) {
             screwMaterials.addToAmount(amount / 2);
-            list.add(screwMaterials);
+            returnlist.add(screwMaterials);
         }
+        return returnlist;
+    }
+
+    public static List<Materiale> calculateStainlessSteal(int length, int width, boolean tag) throws LoginSampleException {
+        List<Materiale> returnlist = new ArrayList();
+        if (tag) {
+            List<Materiale> ListofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
+            for (Materiale screwMaterials : ListofStainlessSteal) {
+                screwMaterials.addToAmount(2);
+                returnlist.add(screwMaterials);
+            }
+        }
+        return returnlist;
     }
 }
