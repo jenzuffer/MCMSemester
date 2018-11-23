@@ -13,15 +13,12 @@ public class SVGofCarport {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x='50' y='50' width='").append(carport.getLength()).append("' height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
-
         int length = carport.getLength();
         int x = 1;
-
         while (length > 0) {
             x++;
             length -= 300;
         }
-
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < x; j++) {
                 sb.append(placePoles(j * (carport.getLength() / (x - 1)), i, carport.getWidth()));
@@ -29,22 +26,46 @@ public class SVGofCarport {
         }
         // sb.append(placeRafters(carport));
         sb.append(LinesVertical(carport.getLength(), carport.getWidth()));
+        /*
+        if (carport.isShedChosen()) {
+            sb.append(CrossLinesWithShed(carport.getLength(), carport.getWidth(), carport.getShedLength(), carport.getShedWidth()));
+        } else {
+            sb.append(CrossLines(carport.getLength(), carport.getWidth()));
+        }
+         */
+        sb.append(placeStraps(carport.getLength(), carport.getWidth()));
         return sb.toString();
     }
 
     public String placePoles(int length, int side, int width) {
         length += 100;
         String pole = "";
-        if (side % 2 == 0) {
-            pole = "<rect x='" + (length + 50 - 10) + "' y='" + (width * side + 50 - 10) + "' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n";
+        int saveWidth = width;
+        /*
+        if (side == 1) {
+            saveWidth -= 30;
         } else {
-            pole = "<rect x='" + (length + 50 - 10) + "' y='" + (width * side + 50 - 10) + "' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n";
+            saveWidth -= 30;
+        }
+        */
+        //nok aldrig % 2 == 0
+        if (side % 2 == 0) {
+            pole = "<rect x='" + (length + 50 - 10) + "' y='" + (saveWidth * side + 80 - 10) + "' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n";
+        } else {
+            pole = "<rect x='" + (length + 50 - 10) + "' y='" + (saveWidth * side + 20 - 10) + "' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n";
         }
         return pole;
     }
 
-    public String placeStraps() {
-        return "";
+    public String placeStraps(int length, int width) {
+        StringBuilder str = new StringBuilder();
+        width += 50;
+        int DistanceToWidth = width - 30;
+        str.append("<line y1='").append(DistanceToWidth).append("' y2='").append(DistanceToWidth).append("'"
+                + "x2='").append(50).append("' x1='").append(length + 50).append("' stroke='black'/>");
+        str.append("<line y1='").append(50 + 30).append("' y2='").append(50 + 30).append("'"
+                + "x2='").append(50).append("' x1='").append(length + 50).append("' stroke='black'/>");
+        return str.toString();
     }
 
     public String LinesVertical(int length, int width) {
@@ -62,6 +83,21 @@ public class SVGofCarport {
             str.append("<line x1='").append(length).append("' x2='").append(length).append("' y1='").append(width).append(""
                     + "' y2='50' stroke='black'/>");
         }
+        return str.toString();
+    }
+
+    public String CrossLines(int length, int width) {
+        StringBuilder str = new StringBuilder();
+        int linesDistanceInitial = 105;
+        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append((length - (length * 0.70))).append("' y1='").append(width).append(""
+                + "' y2='50' stroke='black'/>");
+        return str.toString();
+    }
+
+    public String CrossLinesWithShed(int length, int width, int shedLength, int shedWidth) {
+        StringBuilder str = new StringBuilder();
+        int linesDistanceInitial = 105;
+
         return str.toString();
     }
 
