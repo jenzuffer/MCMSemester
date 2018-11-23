@@ -4,7 +4,7 @@
     Author     : Mark
 --%>
 
-<%@page import="FunctionLayer.CarportDimensioner"%>
+<%@page import="FunctionLayer.Carport"%>
 <%@page import="PresentationLayer.SVGofCarport"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
     <body>
         
         <%
-            CarportDimensioner carport = (CarportDimensioner) request.getAttribute("carport");
+            Carport carport = (Carport) request.getAttribute("carport");
             int width = carport.getWidth();
             int length = carport.getLength();
         %>
