@@ -21,7 +21,13 @@ public class SVGofCarport {
         }
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < x; j++) {
-                sb.append(placePoles(j * (carport.getLength() / (x - 1)), i, carport.getWidth()));
+                if (j == 0) {
+                    sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / x)), i, carport.getWidth()));
+                } else {
+                    sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / (x-1))), i, carport.getWidth()));
+                }
+                
+                
             }
         }
         // sb.append(placeRafters(carport));
@@ -38,17 +44,9 @@ public class SVGofCarport {
     }
 
     public String placePoles(int length, int side, int width) {
-        length += 100;
+        //length += 100;
         String pole = "";
         int saveWidth = width;
-        /*
-        if (side == 1) {
-            saveWidth -= 30;
-        } else {
-            saveWidth -= 30;
-        }
-        */
-        //nok aldrig % 2 == 0
         if (side % 2 == 0) {
             pole = "<rect x='" + (length + 50 - 10) + "' y='" + (saveWidth * side + 80 - 10) + "' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n";
         } else {
