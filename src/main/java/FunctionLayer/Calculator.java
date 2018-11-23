@@ -1,6 +1,8 @@
 package FunctionLayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ public class Calculator {
     private List<Materiale> listOfCarportPoleMaterials;
     private List<Materiale> listOfCarportStrapsMaterials;
     private List<Materiale> listOfCarportRaftersMaterials;
-    private List<List<Materiale>> ListOfAllLists = new ArrayList();
+    private LinkedHashMap<String,List<Materiale>> HMOfAllLists = new LinkedHashMap();
     private int length;
     private int width;
     private int shedWidth;
@@ -36,8 +38,8 @@ public class Calculator {
         listOfScrewsMaterials = new CalculateScrews().calculateScrewsClass(length, width, tag, listOfRoofMaterials);
         listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(length, width, tag);
         listOfShedPoleMaterials = new CalculateShed().calculatePoles(shedLength, shedWidth, width);
-        listOfShedCladdingMaterials = new CalculateShed().calculateCladding(length, width);
-        listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(length, width);
+        listOfShedCladdingMaterials = new CalculateShed().calculateCladding(shedLength, shedWidth);
+        listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(shedLength, shedWidth);
         listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(length, width); 
         listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(length);
         listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(length, width);
@@ -79,26 +81,27 @@ public class Calculator {
         return listOfCarportRaftersMaterials;
     }
 
-    public List<List<Materiale>> getListOfAllLists() {
-        return ListOfAllLists;
+    public HashMap<String, List<Materiale>> getHMOfAllLists() {
+        return HMOfAllLists;
     }
+
     
     public void combineLists() {
-        ListOfAllLists.add(listOfCarportPoleMaterials);
-        ListOfAllLists.add(listOfCarportRaftersMaterials);
-        ListOfAllLists.add(listOfCarportStrapsMaterials);
-        ListOfAllLists.add(listOfRoofMaterials);
-        ListOfAllLists.add(listOfScrew2Materials);
-        ListOfAllLists.add(listOfScrewsMaterials);
-        ListOfAllLists.add(listOfShedCladdingMaterials);
-        ListOfAllLists.add(listOfShedPoleMaterials);
-        ListOfAllLists.add(listOfShedWoodCladdingMaterials);
+        HMOfAllLists.put("carportpoles", listOfCarportPoleMaterials);
+        HMOfAllLists.put("caportrafters", listOfCarportRaftersMaterials);
+        HMOfAllLists.put("caportstraps", listOfCarportStrapsMaterials);
+        HMOfAllLists.put("roof", listOfRoofMaterials);
+        HMOfAllLists.put("screws", listOfScrew2Materials);
+        HMOfAllLists.put("screws2", listOfScrewsMaterials);
+        HMOfAllLists.put("shedcladding", listOfShedCladdingMaterials);
+        HMOfAllLists.put("shedpole", listOfShedPoleMaterials);
+        HMOfAllLists.put("shedwoodcladding", listOfShedWoodCladdingMaterials);
     }
     
     
     public Carport getCalculatedCarport() {
         combineLists(); 
-        carport.setListOfLists(ListOfAllLists);
+        carport.setListOfLists(HMOfAllLists);
         return carport;
     }
     

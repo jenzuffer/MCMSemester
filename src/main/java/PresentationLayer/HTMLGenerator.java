@@ -24,7 +24,7 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public String getTableFromList(List<List<Materiale>> tableData) {
+    public String getTableFromList(Collection<List<Materiale>> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
                 + "    <tr>\n"
@@ -37,9 +37,9 @@ public class HTMLGenerator {
                 + "  </thead>\n"
                 + "  <tbody>");
         
-//        HashMap<String, List<Materiale>> HM = new HashMap();
-//        Collection<List<Materiale>> materialeilist = HM.values();
-//        
+        HashMap<String, List<Materiale>> HM = new HashMap();
+        Collection<List<Materiale>> materialeilist = HM.values();
+        
         
         for (List<Materiale> list : tableData) {
             for (Materiale materiale : list) {

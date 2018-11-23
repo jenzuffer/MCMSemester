@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,6 +14,7 @@ import java.util.List;
  * @author Christian
  */
 public class Carport {
+
     private int length;
     private int width;
     private int shedLength;
@@ -20,13 +22,13 @@ public class Carport {
     private boolean shedChosen;
     private boolean roofChosen;
     private List<Materiale> materials;
-    private List<List<Materiale>> listOfLists;
+    private HashMap<String, List<Materiale>> listOfLists;
 
-    public List<List<Materiale>> getListOfLists() {
+    public HashMap<String, List<Materiale>> getListOfLists() {
         return listOfLists;
     }
 
-    public void setListOfLists(List<List<Materiale>> listOfLists) {
+    public void setListOfLists(HashMap<String, List<Materiale>> listOfLists) {
         this.listOfLists = listOfLists;
     }
 
@@ -39,6 +41,17 @@ public class Carport {
         this.roofChosen = roofChosen;
         materials = new ArrayList<>();
         materials.add(new Materiale("hest", "hej", "miav", 5));
+    }
+
+    public Carport(int length, int width, List<Materiale> materials) {
+        this.length = length;
+        this.width = width;
+        this.materials = materials;
+    }
+
+    public Carport(int length, int width) {
+        this.length = length;
+        this.width = width;
     }
 
     public int getShedLength() {
@@ -72,20 +85,6 @@ public class Carport {
     public void setRoofChosen(boolean roofChosen) {
         this.roofChosen = roofChosen;
     }
-    
-    
-    public Carport(int length, int width, List<Materiale> materials) {
-        this.length = length;
-        this.width = width;
-        this.materials = materials;
-    }
-
-    
-    public Carport(int length, int width) {
-        this.length = length;
-        this.width = width;
-    }
-
 
     public int getLength() {
         return length;
@@ -111,8 +110,4 @@ public class Carport {
         this.materials = materials;
     }
 
-    
-    
-    
-    
 }

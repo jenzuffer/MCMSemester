@@ -4,6 +4,7 @@
     Author     : mwn
 --%>
 
+<%@page import="java.util.Collection"%>
 <%@page import="FunctionLayer.Carport"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
 <%@page import="FunctionLayer.Materiale"%>
@@ -14,7 +15,7 @@
 
 <%
     Carport carport = (Carport) request.getAttribute("carport");
-    List<List<Materiale>> listOfListsOfMaterials = carport.getListOfLists();
+    Collection<List<Materiale>> listOfListsOfMaterials = carport.getListOfLists().values();
     HTMLGenerator html = new HTMLGenerator();
 
 %>
