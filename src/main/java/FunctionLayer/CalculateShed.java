@@ -16,6 +16,8 @@ public class CalculateShed {
 
     private static int numOfPoles;
 
+    
+    
     public List<Materiale> calculatePoles(int shedLength, int shedWidth, int width) throws LoginSampleException {
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         List<Materiale> returnList = new ArrayList();
@@ -41,11 +43,11 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Materiale> calculateCladding(int length, int width) throws LoginSampleException {
+    public List<Materiale> calculateCladding(int shedLength, int shedWidth) throws LoginSampleException {
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
         List<Materiale> returnList = new ArrayList();
         
-        int circumference = length * 2 + width * 2;
+        int circumference = shedLength * 2 + shedWidth * 2;
         int amount = 0;
         while (circumference > 0) {
             amount += 2;
@@ -58,14 +60,14 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Materiale> calculateWoodForCladding(int length, int width) throws LoginSampleException {
+    public List<Materiale> calculateWoodForCladding(int shedLength, int shedWidth) throws LoginSampleException {
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");
         List<Materiale> returnList = new ArrayList();
         int numberWidth = 4;
         int numberLength = 4;
         int poles = 2;
 
-        if (length >= 600) {
+        if (shedLength >= 600) {
             numberLength = 8;
         }
 
@@ -80,4 +82,19 @@ public class CalculateShed {
         returnList.add(material);
         return returnList;
     }
+    
+    
+//    public static void main(String[] args) throws LoginSampleException {
+//        List<List<Materiale>> list = new ArrayList();
+//        CalculateShed s= new CalculateShed();
+//        list.add(s.calculatePoles(210, 530, 600));
+//        list.add(s.calculateCladding(210, 530));
+//        list.add(s.calculateWoodForCladding(210, 530));
+//        
+//        for (List<Materiale> list1 : list) {
+//            for (Materiale m : list1) {
+//                System.out.println(m.getName() + " " + m.getAmount());
+//            }
+//        }
+//    }
 }
