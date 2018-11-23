@@ -40,9 +40,10 @@ public class CalculateOrder extends Command {
         }
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
+        boolean checkShed = !request.getParameter("shedwidth").contains("Choose");
         int shedWidth = request.getParameter("shedwidth").contains("Choose") ? 0 : Integer.valueOf(request.getParameter("shedwidth"));
         int shedLength = request.getParameter("shedlength").contains("Choose") ? 0 : Integer.valueOf(request.getParameter("shedlength"));
-        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, true, true));
+        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, checkShed, true));
         
         request.setAttribute("carport", carport);
         // session.setAttribute("ordermaterials", OrderMaterials);

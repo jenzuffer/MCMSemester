@@ -37,11 +37,13 @@ public class Calculator {
         listOfRoofMaterials = new CalculateRoof().CalculateRoofPlates(length, width, tag);
         listOfScrewsMaterials = new CalculateScrews().calculateScrewsClass(length, width, tag, listOfRoofMaterials);
         listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(length, width, tag);
-        listOfShedPoleMaterials = new CalculateShed().calculatePoles(shedLength, shedWidth, width);
-        listOfShedCladdingMaterials = new CalculateShed().calculateCladding(shedLength, shedWidth);
-        listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(shedLength, shedWidth);
         listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(length, width); 
         listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(length);
+        if (carport.isShedChosen()) {
+            listOfShedPoleMaterials = new CalculateShed().calculatePoles(shedLength, shedWidth, width);
+            listOfShedCladdingMaterials = new CalculateShed().calculateCladding(shedLength, shedWidth);
+            listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(shedLength, shedWidth);
+        }
         listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(length, width);
     }
 
@@ -93,9 +95,12 @@ public class Calculator {
         HMOfAllLists.put("roof", listOfRoofMaterials);
         HMOfAllLists.put("screws", listOfScrew2Materials);
         HMOfAllLists.put("screws2", listOfScrewsMaterials);
-        HMOfAllLists.put("shedcladding", listOfShedCladdingMaterials);
-        HMOfAllLists.put("shedpole", listOfShedPoleMaterials);
-        HMOfAllLists.put("shedwoodcladding", listOfShedWoodCladdingMaterials);
+        if (carport.isShedChosen()) {
+            HMOfAllLists.put("shedcladding", listOfShedCladdingMaterials);
+            HMOfAllLists.put("shedpole", listOfShedPoleMaterials);
+            HMOfAllLists.put("shedwoodcladding", listOfShedWoodCladdingMaterials);
+            
+        }
     }
     
     
