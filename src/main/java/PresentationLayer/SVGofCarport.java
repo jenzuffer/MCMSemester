@@ -9,7 +9,7 @@ import FunctionLayer.Materiale;
  */
 public class SVGofCarport {
 
-    public String carport(Carport carport) {
+    public static String carport(Carport carport) {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x='50' y='50' width='").append(carport.getLength()).append("' height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
@@ -73,7 +73,7 @@ public class SVGofCarport {
         return str.toString();
     }
 
-    public String LinesVertical(int length, int width) {
+    public static String LinesVertical(int length, int width) {
         StringBuilder str = new StringBuilder();
         int linesDistance = 50;
         int distance = linesDistance;
@@ -91,7 +91,7 @@ public class SVGofCarport {
         return str.toString();
     }
 
-    public String CrossLines(int length, int width) {
+    public static String CrossLines(int length, int width) {
         StringBuilder str = new StringBuilder();
         int linesDistanceInitial = 105;
         str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append((length - (length * 0.70))).append("' y1='").append(width).append(""
@@ -99,7 +99,7 @@ public class SVGofCarport {
         return str.toString();
     }
 
-    public String CrossLinesWithShed(int length, int width, int shedLength, int shedWidth) {
+    public static String CrossLinesWithShed(int length, int width, int shedLength, int shedWidth) {
         StringBuilder str = new StringBuilder();
         int linesDistanceInitial = 105;
 
