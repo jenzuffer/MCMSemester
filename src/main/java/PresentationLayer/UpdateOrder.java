@@ -28,7 +28,6 @@ public class UpdateOrder extends Command {
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         Carport dimension = LogicFacade.createCarport(width, length);
         int Order = request.getSession().getAttribute("OrderID") == null ? 0 : (int) request.getSession().getAttribute("OrderID");
-        dimension = LogicFacade.changeOrder(Order, dimension);
         session.setAttribute("dimension", dimension);
         return "orderupdateconfirmation";
     }

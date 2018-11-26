@@ -21,11 +21,6 @@ public class LogicFacade {
         return TotalMaterials;
     }
 
-    public static Carport changeOrder(int OrderID, Carport dimension) throws LoginSampleException {
-        dimension = DataMapper.changeOrder(dimension, OrderID);
-        throw new LoginSampleException("materials length: " + dimension.getLength());
-    }
-
     public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
         List<Materiale> materials = DataMapper.calculateOrder(dimension, indexID);
 

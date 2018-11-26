@@ -31,6 +31,7 @@
         <title>Order Modification</title>
     </head>
     <body>
+        <jsp:include page="navigator.jsp" />
         <div class="text-center">
             <h3 class="header">Calculate Materials for an Order</h3>
             <hr>

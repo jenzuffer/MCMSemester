@@ -22,21 +22,6 @@ import java.util.List;
  */
 public class DataMapper {
 
-    public static Carport changeOrder(Carport dimension, int OrderID) throws LoginSampleException {
-        try {
-            Connection l_cCon = Connector.connection();
-            String l_sSQL = "SELECT * FROM `width`";
-            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
-            ResultSet l_rsSearch = l_pStatement.executeQuery();
-            while (l_rsSearch.next()) {
-
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
-        }
-        return dimension;
-    }
-
     public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
         List<Materiale> materials = new ArrayList();
         try {
