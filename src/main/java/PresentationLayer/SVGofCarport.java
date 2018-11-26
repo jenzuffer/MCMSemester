@@ -50,7 +50,7 @@ public class SVGofCarport {
         return sb.toString();
     }
 
-    public String placePoles(int length, int side, int width) {
+    public static String placePoles(int length, int side, int width) {
         //length += 100;
         String pole = "";
         int saveWidth = width;
