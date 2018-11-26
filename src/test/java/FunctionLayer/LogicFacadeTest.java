@@ -12,18 +12,18 @@ import static org.junit.Assert.*;
  * @author Mark
  */
 public class LogicFacadeTest {
-    
+
     public LogicFacadeTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -55,15 +55,28 @@ public class LogicFacadeTest {
         assertEquals(expResult, result.getListOfLists().size());
         // TODO review the generated test code and remove the default call to fail.
     }
-    
-    
+
+
+    /**
+     * Test of getWidth method, of class LogicFacade.
+     */
     @Test
-    public void testChangeOrder() throws Exception {
-        Carport carport = new Carport(360, 390, 0, 0, true, true);
-        
-    
-    
-    
+    public void testGetWidth() throws Exception {
+        int expResult = 18; // expected number of options for the menu
+        List<Integer> result = LogicFacade.getWidth();
+        assertEquals(expResult, result.size());
+        // TODO review the generated test code and remove the default call to fail.
+    }
+
+    /**
+     * Test of getLength method, of class LogicFacade.
+     */
+    @Test
+    public void testGetLength() throws Exception {
+        int expResult = 19;
+        List<Integer> result = LogicFacade.getLength();
+        assertEquals(expResult, result.size());
+        // TODO review the generated test code and remove the default call to fail.
     }
 
 }
