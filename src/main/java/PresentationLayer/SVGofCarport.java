@@ -62,7 +62,7 @@ public class SVGofCarport {
         return pole;
     }
 
-    public String placeStraps(int length, int width) {
+    public static String placeStraps(int length, int width) {
         StringBuilder str = new StringBuilder();
         width += 50;
         int DistanceToWidth = width - 30;

@@ -30,4 +30,20 @@ public class presentationSVGTest {
         poleTest = SVGofCarport.placePoles(length, side, width);
         assertEquals(poleTest, "<rect x='90' y='170' width='20' height='20' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
     }
+
+    @Test
+    public void placeStraps() {
+        int length = 80;
+        int width = 240;
+        String Straps = SVGofCarport.placeStraps(length, width);
+        assertEquals(Straps, "<line y1='260' y2='260'"
+                + "x2='50' x1='130' stroke='black'/><line y1='80' y2='80'"
+                + "x2='50' x1='130' stroke='black'/>");
+        length += 60;
+        width += 40;
+        Straps = SVGofCarport.placeStraps(length, width);
+        assertEquals(Straps, "<line y1='300' y2='300'"
+                + "x2='50' x1='190' stroke='black'/><line y1='80' y2='80'"
+                + "x2='50' x1='190' stroke='black'/>");
+    }
 }
