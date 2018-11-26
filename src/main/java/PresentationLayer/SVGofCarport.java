@@ -23,7 +23,14 @@ public class SVGofCarport {
             for (int j = 0; j < x; j++) {
                 if (j == 0) {
                     sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / x)), i, carport.getWidth()));
+                
+                
                 } else {
+                    if (j+1 == x) {
+                        sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / (x-1))), i, carport.getWidth()));
+                        
+                    }
+                    
                     sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / (x-1))), i, carport.getWidth()));
                 }
                 
