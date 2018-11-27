@@ -11,8 +11,8 @@ package FunctionLayer;
  */
 public class User {
     
-    private String Name, Address, city, phonenumber, email;
-
+    private String Name, Address, city, phonenumber, email, password;
+    
     public User(String Name, String Address, String city, String phonenumber, String email) {
         this.Name = Name;
         this.Address = Address;
@@ -21,6 +21,22 @@ public class User {
         this.email = email;
     }
 
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
+    
     public String getName() {
         return Name;
     }
