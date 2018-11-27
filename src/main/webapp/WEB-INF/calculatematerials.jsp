@@ -125,6 +125,7 @@
 
                 $("#toggle-shed-btn").click(function () {
                     $(".shed-form").slideToggle();
+                    console.log("fsadkmsf")
                 });
             });
         </script>
