@@ -21,7 +21,7 @@
             int length = carport.getLength();
         %>
 
-        <svg width="45%" height="45%" viewbox="0 0 <%=length + 100%> <%=width + 100%>">
+        <svg width="100%" height="100%" viewbox="0 0 <%=length + 100%> <%=width + 100%>">
             <defs>
                 <marker id="beginArrow" markerWidth="9" markerHeight="9" refX="1" refY="4" orient="auto">
                     <path d="M0,4 L8,0 L8,8 L0,4" style="fill: #000000s;" />

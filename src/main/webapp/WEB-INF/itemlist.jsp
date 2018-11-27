@@ -35,14 +35,22 @@
         <jsp:include page="navigator.jsp" />
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <table class="table">
                         <%= html.getTableFromList(listOfListsOfMaterials)%>
                     </table>
                 </div>
-                <!-- SVG siden for carporten -->
-                <jsp:include page="SVGcarport.jsp" />
-                
+                <div class="col-md-6">
+                    <jsp:include page="SVGcarport.jsp" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="FrontController" method="post">
+                        <input type="hidden" name="command" value="pdf">
+                        <input type="submit" value="Generate PDF">
+                    </form>
+                </div>
             </div>
         </div>
     </body>

@@ -27,6 +27,7 @@ abstract class Command {
         commands.put("updatedatabase", new UpdateDatabase());
         commands.put("demos", new Demos());
         commands.put("createuser", new CreateUser());
+        commands.put("pdf", new PdfGen());
         //add methods here for the controller
     }
     
