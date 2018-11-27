@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
-import FunctionLayer.Materiale;
+import FunctionLayer.LoginSampleException;
 
 /**
  *
@@ -9,7 +9,7 @@ import FunctionLayer.Materiale;
  */
 public class SVGofCarport {
 
-    public static String carport(Carport carport) {
+    public static String carport(Carport carport) throws LoginSampleException {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x='50' y='50' width='").append(carport.getLength()).append("' height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
@@ -22,30 +22,22 @@ public class SVGofCarport {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < x; j++) {
                 if (j == 0) {
-                    sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / x)), i, carport.getWidth()));
-                
-                
+                    sb.append(placePoles(100 + (j * (carport.getLength() / (x - 1) - 100 / x)), i, carport.getWidth()));
+
                 } else {
-                    if (j+1 == x) {
-                        sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / (x-1))), i, carport.getWidth()));
-                        
+                    if (j + 1 == x) {
+                        sb.append(placePoles(100 + (j * (carport.getLength() / (x - 1) - 100 / (x - 1))), i, carport.getWidth()));
+
                     }
-                    
-                    sb.append(placePoles(100+(j * (carport.getLength() / (x - 1) - 100 / (x-1))), i, carport.getWidth()));
+
+                    sb.append(placePoles(100 + (j * (carport.getLength() / (x - 1) - 100 / (x - 1))), i, carport.getWidth()));
                 }
-                
-                
+
             }
         }
         // sb.append(placeRafters(carport));
         sb.append(LinesVertical(carport.getLength(), carport.getWidth()));
-        /*
-        if (carport.isShedChosen()) {
-            sb.append(CrossLinesWithShed(carport.getLength(), carport.getWidth(), carport.getShedLength(), carport.getShedWidth()));
-        } else {
-            sb.append(CrossLines(carport.getLength(), carport.getWidth()));
-        }
-         */
+        sb.append(CrossLinesAndShed(carport.getLength(), carport.getWidth(), carport.isShedChosen(), carport.getShedLength(), carport.getShedWidth()));
         sb.append(placeStraps(carport.getLength(), carport.getWidth()));
         return sb.toString();
     }
@@ -91,18 +83,33 @@ public class SVGofCarport {
         return str.toString();
     }
 
-    public static String CrossLines(int length, int width) {
+    public static String CrossLinesAndShed(int length, int width, boolean isshedchoosen, int shedlength, int shedwidth) {
         StringBuilder str = new StringBuilder();
-        int linesDistanceInitial = 105;
-        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append((length - (length * 0.70))).append("' y1='").append(width).append(""
-                + "' y2='50' stroke='black'/>");
-        return str.toString();
-    }
-
-    public static String CrossLinesWithShed(int length, int width, int shedLength, int shedWidth) {
-        StringBuilder str = new StringBuilder();
-        int linesDistanceInitial = 105;
-
+        int linesDistanceInitial = 100;
+        int shedmove = 0;
+        if (isshedchoosen) {
+            shedmove = length - (shedlength + 15); // 15 afstand fra slutning
+        } else {
+            if (length > 300 && length <= 600) {
+                shedmove = length - (int) (length * 0.30);
+            } else if (length > 600) {
+                shedmove = length - (int) (length * 0.225);
+            } else {
+                shedmove = length - (int) ((length * 0.25));
+            }
+        }
+        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='").append(width + 25).append(""
+                + "' y2='80' stroke='black'/>");
+        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='80' y2='").append(width + 25).append("' stroke='black'/>");
+        if (isshedchoosen) {
+            str.append("<line x1='").append(shedmove).append("' x2='").append(shedmove).append("' y1='").append(shedwidth + 25).append(""
+                    + "' y2='80' stroke='black'/>");
+            str.append("<line x1='").append((shedmove + shedlength)).append("' x2='").append((shedlength + shedmove)).append("' y1='").append(shedwidth + 25).append(""
+                    + "' y2='80' stroke='black'/>");
+            str.append("<line x1='").append(shedmove).append("' x2='").append((shedlength + shedmove)).append("' y1='").append(shedwidth + 25).append(""
+                    + "' y2='").append(shedwidth + 25).append("' stroke='black'/>");
+            str.append("<line x1='").append(shedmove).append("' x2='").append((shedlength + shedmove)).append("' y1='80' y2='80' stroke='black'/>");
+        }
         return str.toString();
     }
 
@@ -111,7 +118,7 @@ public class SVGofCarport {
         return "";
     }
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws LoginSampleException {
         SVGofCarport test = new SVGofCarport();
         String f = test.carport(new Carport(600, 300));
         System.out.println(f);

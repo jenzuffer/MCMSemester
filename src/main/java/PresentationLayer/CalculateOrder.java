@@ -24,7 +24,6 @@ public class CalculateOrder extends Command {
     @Override
 
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        HttpSession session = request.getSession();
         List<Materiale> OrderMaterials;
         String name = request.getParameter("name");
         String address = request.getParameter("address");
