@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class CreateUser extends Command {
         }
         User user = new User(email, password1);
         request.getSession().setAttribute("user", user);
-        
+        LogicFacade.createUser(user);
         return "navigator";
     }
 }

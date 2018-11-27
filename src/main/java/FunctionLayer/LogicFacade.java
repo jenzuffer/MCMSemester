@@ -6,6 +6,7 @@
 package FunctionLayer;
 
 import DBAccess.DataMapper;
+import DBAccess.UserMapper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,4 +76,8 @@ public class LogicFacade {
         DataMapper.createCustomer(name, address, city, number, email);
     }
 
+    public static void createUser(User user) throws LoginSampleException {
+        UserMapper.createUser(user);
+    }
+    
 }

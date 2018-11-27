@@ -11,11 +11,13 @@ package FunctionLayer;
  */
 public class User {
     
-    private String Name, Address, city, phonenumber, email, password;
+    private String name, address, city, phonenumber, email, password;
+    private String role = "customer";
+    private int id;
     
     public User(String Name, String Address, String city, String phonenumber, String email) {
-        this.Name = Name;
-        this.Address = Address;
+        this.name = name;
+        this.address = Address;
         this.city = city;
         this.phonenumber = phonenumber;
         this.email = email;
@@ -26,7 +28,22 @@ public class User {
         this.password = password;
     }
 
-    
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -38,11 +55,11 @@ public class User {
     
     
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public String getCity() {
