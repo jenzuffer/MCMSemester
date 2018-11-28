@@ -25,7 +25,7 @@ public class PDFRenderer extends Command {
         try {
             PDFGenerator pdf = new PDFGenerator(carport);
         } catch (IOException ex) {
-            System.out.println("Failed");
+            ex.printStackTrace();
         }
         return "renderpdf";
     }

@@ -47,9 +47,11 @@ public class PDFGenerator {
         this.carport = carport;
         this.document = new PDDocument();
         setFrontPage();
-        drawTable(carport.getMaterials());
-        setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
+        drawTable(carport.getListOfLists());
+        //setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
         pdf = new File(TEMP_PATH);
+        System.out.println(pdf.getAbsolutePath());
+        System.out.println(pdf.getPath());
         document.save(pdf);
         document.close();
     }
@@ -86,14 +88,15 @@ public class PDFGenerator {
         float bottomMargin = 0;
         List<List> data = new ArrayList();
         data.add(new ArrayList<>(Arrays.asList(HEADERS)));
-        map.values()
-        for (int i = 1; i <= list.size(); i++) {
+
+        
+        for (List<Materiale> list : map.values()) {
             for (Materiale m : list) {
                 data.add(new ArrayList<>(
                         Arrays.asList(m.getName(), m.getLength(), m.getAmount(), m.getUnit(), m.getDescription())));
             }
         }
-        
+               
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, document, page, true, true);
         DataTable t = new DataTable(dataTable, page);
         t.addListToTable(data, DataTable.HASHEADER);
@@ -119,7 +122,16 @@ public class PDFGenerator {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Start");
-        Carport carport = new Carport(400, 780, 250, 200, true, false);
+        Carport carport = new Carport(400, 214, 250, 200, true, false);
+        HashMap<String, List<Materiale>> hm = new HashMap();
+        List<Materiale> list = new ArrayList();
+        
+        list.add(new Materiale("test", "hest", "knap", 2));
+        list.add(new Materiale("test", "hest", "knap", 2));
+        list.add(new Materiale("test", "hest", "knap", 2));
+        list.add(new Materiale("test", "hest", "knap", 2));
+        hm.put("test", list);
+        carport.setListOfLists(hm);
         new PDFGenerator(carport);
         System.out.println("Finish");
     }
