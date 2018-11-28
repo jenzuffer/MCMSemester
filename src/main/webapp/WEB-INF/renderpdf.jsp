@@ -15,6 +15,6 @@
         <title>PDF</title>
     </head>
     <body>
-        <embed src="Ressources/pdf.pdf" width="100%" height="2600"/>
+        <embed src="Ressources/template.pdf" width="100%" height="2600"/>
     </body>
 </html>

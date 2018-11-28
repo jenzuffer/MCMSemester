@@ -11,14 +11,16 @@ import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.PDPageTree;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
@@ -29,17 +31,14 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
  */
 public class PDFGenerator {
 
-    private final String PATH = "src/main/webapp/Ressources/";
-    private final String IMG_PATH = "src/main/webapp/Ressources/FogLogo.png";
-    private final String JSP_PATH = "";
-    private final String PDF_PREFIX = "pdf";
-    private final String PDF_SUFFIX = ".pdf";
+    private final String TEMP_PATH = "src/main/webapp/Ressources/template.pdf";
+    private final String TEMP_IMG_PATH = "src/main/webapp/Ressources/logo.png";
 
     private Carport carport;
     private final String[] HEADERS = {"Name", "Length", "Amount", "Unit", "Description"};
 
     private PDDocument document;
-    private File pdf = new File(PATH + PDF_PREFIX + PDF_SUFFIX);
+    private File pdf;
 
     private final PDFont FONT_NORMAL = PDType1Font.HELVETICA;
     private final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
@@ -49,7 +48,8 @@ public class PDFGenerator {
         this.document = new PDDocument();
         setFrontPage();
         drawTable(carport.getMaterials());
-        setImageOnFrontPage(IMG_PATH, -75, 617);
+        setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
+        pdf = new File(TEMP_PATH);
         document.save(pdf);
         document.close();
     }
@@ -76,7 +76,7 @@ public class PDFGenerator {
         cs.close();
     }
 
-    private void drawTable(List<Materiale> list) throws IOException {
+    private void drawTable(HashMap<String, List<Materiale>> map) throws IOException {
         PDPage page = new PDPage();
         document.addPage(page);
         float margin = 20;
@@ -86,12 +86,14 @@ public class PDFGenerator {
         float bottomMargin = 0;
         List<List> data = new ArrayList();
         data.add(new ArrayList<>(Arrays.asList(HEADERS)));
+        map.values()
         for (int i = 1; i <= list.size(); i++) {
             for (Materiale m : list) {
                 data.add(new ArrayList<>(
                         Arrays.asList(m.getName(), m.getLength(), m.getAmount(), m.getUnit(), m.getDescription())));
             }
         }
+        
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, document, page, true, true);
         DataTable t = new DataTable(dataTable, page);
         t.addListToTable(data, DataTable.HASHEADER);
@@ -117,8 +119,8 @@ public class PDFGenerator {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Start");
-        Carport carport = new Carport(580, 780, 250, 200, true, false);
-        PDFGenerator generator = new PDFGenerator(carport);
+        Carport carport = new Carport(400, 780, 250, 200, true, false);
+        new PDFGenerator(carport);
         System.out.println("Finish");
     }
 }
