@@ -28,7 +28,7 @@ public class UserMapper {
             int id = ids.getInt(1);
             user.setId(id);
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Email already in use or failure to create user");
+            throw new LoginSampleException("Email already in use or failure to create user " + ex.getMessage());
         }
 
     }

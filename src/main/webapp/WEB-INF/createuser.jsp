@@ -27,23 +27,44 @@
                     <font size="+5"> 
                         Create an user
                     </font>
+                    <br>
+                    Fields with an  *  needs to be filled out.
                 </label>
                 <div class="row">
                     <div class='col-md-8'>
                         <div class="form-group"> 
-                            <label>Email</label>
+                            <label>*Email</label>
                             <input type='email' name='email' class="form-control" placeholder='Enter your email..'>
                         </div>
                         <div class="form-group"> 
-                            <label>Enter a password</label>
-                            <input pattern=".{8,}" type='password' name='password' class="form-control" placeholder='Enter an password..'
+                            <label>*Enter a password</label>
+                            <input pattern=".{8,}" type='password' name='firstpassword' class="form-control" placeholder='Enter an password..'
                                    required title="Username has to be atleast 8 characters long">
                         </div>
                         <div class="form-group"> 
-                            <label>Retype the password</label>
-                            <input type='password' name='passwordcheck' class="form-control" placeholder='Retype the password..'>
+                            <label>*Retype the password</label>
+                            <input type='password' name='secondpassword' class="form-control" placeholder='Retype the password..'>
+                        </div>
+                        <div class="form-group"> 
+                            <label>Name</label>
+                            <input type='text' name='name' class="form-control" placeholder='Enter your full name..'>
+                        </div>
+                        <div class="form-group"> 
+                            <label>Address</label>
+                            <input type='text' name='address' class="form-control" placeholder='Enter your Address..'>
+                        </div>
+                        <div class="form-group"> 
+                            <label>City</label>
+                            <input type='text' name='city' class="form-control" placeholder='Enter the city your in..'>
+                        </div>
+                        <div class="form-group"> 
+                            <label>Phonenumber</label>
+                            <input type='tel' name='phone' class="form-control" placeholder='tlf. nr.'>
                         </div>
                         <button class="btn btn-primary" onclick="update()" >Create user</button>
+                    </div>
+                    <div class="col-md-8"> 
+                        
                     </div>
                 </div>
             </div>

@@ -9,20 +9,28 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="Ressources/Style.css">
     </head>
     <body>
-        
-        <form action="FrontController" method="POST">
-            <input type="hidden" name="command" value="heightandlength"> 
-            <input type="submit" value="Go to calculator">
-        </form>
-        
-        <form action="FrontController" method="POST">
-            <input type="hidden" name="command" value="updatedatabase"> 
-            <input type="submit" value="Edit products">
-        </form>
-        
-        
+        <div class='container-fluid'>
+
+            <div class="row" >
+                <div class="col-md-8">
+                    <form action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="heightandlength"> 
+                        <input type="submit" value="Go to calculator">
+                    </form>
+                    <form action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="gotocreateuser"> 
+                        <input type="submit" value="Sign up">
+                    </form>
+                    <form action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="updatedatabase"> 
+                        <input type="submit" value="Edit products">
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

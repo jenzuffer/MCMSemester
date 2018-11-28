@@ -15,8 +15,12 @@ public class CreateUser extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         String email = request.getParameter("email");
-        String password1 = request.getParameter("password");
-        String password2 = request.getParameter("passwordcheck");
+        String password1 = request.getParameter("firstpassword");
+        String password2 = request.getParameter("secondpassword");
+        String name = request.getParameter("name");
+        String address = request.getParameter("address");
+        String city = request.getParameter("city");
+        String phone = request.getParameter("phone");
         if (!password1.equals(password2)) {
             throw new LoginSampleException("Passwords does not match");
         }

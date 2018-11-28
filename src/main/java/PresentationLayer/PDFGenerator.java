@@ -117,7 +117,7 @@ public class PDFGenerator {
 
     public static void main(String[] args) throws IOException {
         System.out.println("Start");
-        Carport carport = new Carport(580, 780, 200, 200, true, true);
+        Carport carport = new Carport(580, 780, 250, 200, true, false);
         PDFGenerator generator = new PDFGenerator(carport);
         System.out.println("Finish");
     }
