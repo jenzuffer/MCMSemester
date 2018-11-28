@@ -38,9 +38,6 @@ public class CalculateOrder extends Command {
             
         }
         boolean getRoof = Boolean.parseBoolean(request.getParameter("chosenroof"));
-        
-        System.out.println(getRoof);
-        
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         boolean checkShed = request.getParameter("shedwidth").contains("Choose") || request.getParameter("shedlength").contains("Choose");
