@@ -16,7 +16,7 @@
     <body>
         
         <%
-            Carport carport = (Carport) request.getAttribute("carport");
+            Carport carport = (Carport) request.getSession().getAttribute("carport");
             int width = carport.getWidth();
             int length = carport.getLength();
         %>

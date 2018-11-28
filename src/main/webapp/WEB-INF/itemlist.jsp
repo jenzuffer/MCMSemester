@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 
 <%
-    Carport carport = (Carport) request.getAttribute("carport");
+    Carport carport = (Carport) request.getSession().getAttribute("carport");
     Collection<List<Materiale>> listOfListsOfMaterials = carport.getListOfLists().values();
     HTMLGenerator html = new HTMLGenerator();
 

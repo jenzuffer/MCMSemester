@@ -25,6 +25,10 @@ public class CreateUser extends Command {
             throw new LoginSampleException("Passwords does not match");
         }
         User user = new User(email, password1);
+        user.setName(name);
+        user.setAddress(address);
+        user.setCity(city);
+        user.setPhonenumber(phone);
         request.getSession().setAttribute("user", user);
         LogicFacade.createUser(user);
         return "navigator";

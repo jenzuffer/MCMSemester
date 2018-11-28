@@ -14,17 +14,20 @@
     </head>
     <body>
         <div class='container-fluid'>
-
             <div class="row" >
-                <div class="col-md-8">
+                <div class="header">
                     <form action="FrontController" method="POST">
                         <input type="hidden" name="command" value="heightandlength"> 
                         <input type="submit" value="Go to calculator">
                     </form>
+                </div>
+                <div class="header">
                     <form action="FrontController" method="POST">
                         <input type="hidden" name="command" value="gotocreateuser"> 
                         <input type="submit" value="Sign up">
                     </form>
+                </div>
+                <div class="header">
                     <form action="FrontController" method="POST">
                         <input type="hidden" name="command" value="updatedatabase"> 
                         <input type="submit" value="Edit products">

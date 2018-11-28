@@ -52,6 +52,26 @@ public class User {
         this.password = password;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     
     
     public String getName() {

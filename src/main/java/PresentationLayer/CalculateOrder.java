@@ -37,14 +37,18 @@ public class CalculateOrder extends Command {
         } catch(NullPointerException e) {
             
         }
+        boolean getRoof = Boolean.parseBoolean(request.getParameter("chosenroof"));
+        
+        System.out.println(getRoof);
+        
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length")) == null ? 0 : Integer.valueOf(request.getParameter("length"));
         boolean checkShed = request.getParameter("shedwidth").contains("Choose") || request.getParameter("shedlength").contains("Choose");
         int shedWidth = request.getParameter("shedwidth").contains("Choose") ? 0 : Integer.valueOf(request.getParameter("shedwidth"));
         int shedLength = request.getParameter("shedlength").contains("Choose") ? 0 : Integer.valueOf(request.getParameter("shedlength"));
-        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, true));
-        
-        request.setAttribute("carport", carport);
+        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, getRoof));
+        // Send carport til DB som ordrer
+        request.getSession().setAttribute("carport", carport);
         // session.setAttribute("ordermaterials", OrderMaterials);
         //return "customerconfirmation";
         return "itemlist";

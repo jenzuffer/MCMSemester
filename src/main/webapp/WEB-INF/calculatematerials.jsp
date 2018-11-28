@@ -52,6 +52,22 @@
                             <%= html.getDropdownFromList(length, " cm")%>
                         </select>
                         <hr>
+                        <h5 class="second-header">Valg af tag</h5>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type='radio' name="chosenroof" value="False"> Fladt tag
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type='radio' name="chosenroof" value="True"> Højrest tag
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-md-6">
                                 <h5 class="second-header">Shed</h5>
@@ -125,7 +141,6 @@
 
                 $("#toggle-shed-btn").click(function () {
                     $(".shed-form").slideToggle();
-                    console.log("fsadkmsf")
                 });
             });
         </script>

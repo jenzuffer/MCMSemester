@@ -23,7 +23,6 @@ public class Carport {
     private boolean roofChosen;
     private List<Materiale> materials;
     private HashMap<String, List<Materiale>> listOfLists;
-
     public HashMap<String, List<Materiale>> getListOfLists() {
         return listOfLists;
     }
@@ -39,8 +38,6 @@ public class Carport {
         this.shedWidth = shedWidth;
         this.shedChosen = shedChosen;
         this.roofChosen = roofChosen;
-        materials = new ArrayList<>();
-        materials.add(new Materiale("hest", "hej", "miav", 5));
     }
 
     public Carport(int length, int width, List<Materiale> materials) {
