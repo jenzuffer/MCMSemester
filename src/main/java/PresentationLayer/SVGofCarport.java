@@ -27,18 +27,22 @@ public class SVGofCarport {
                 } else {
                     if (j + 1 == x) {
                         sb.append(placePoles(100 + (j * (carport.getLength() / (x - 1) - 100 / (x - 1))), i, carport.getWidth()));
-
                     }
-
                     sb.append(placePoles(100 + (j * (carport.getLength() / (x - 1) - 100 / (x - 1))), i, carport.getWidth()));
                 }
-
             }
         }
         // sb.append(placeRafters(carport));
-        sb.append(LinesVertical(carport.getLength(), carport.getWidth()));
-        sb.append(CrossLinesAndShed(carport.getLength(), carport.getWidth(), carport.isShedChosen(), carport.getShedLength(), carport.getShedWidth()));
+        if (!carport.isRoofChosen()) {
+            sb.append(LinesVertical(carport.getLength(), carport.getWidth()));
+        } else {
+            sb.append(LinesVerticalRoof(carport.getLength(), carport.getWidth()));
+        }
+        sb.append(CrossLinesAndShed(carport.getLength(), carport.getWidth(), carport.isShedChosen(), carport.getShedLength(), carport.getShedWidth(), carport.isRoofChosen()));
         sb.append(placeStraps(carport.getLength(), carport.getWidth()));
+        if (carport.isRoofChosen()) {
+            sb.append(placeRoof(carport.getLength(), carport.getWidth()));
+        }
         return sb.toString();
     }
 
@@ -83,12 +87,12 @@ public class SVGofCarport {
         return str.toString();
     }
 
-    public static String CrossLinesAndShed(int length, int width, boolean isshedchoosen, int shedlength, int shedwidth) {
+    public static String CrossLinesAndShed(int length, int width, boolean isshedchoosen, int shedlength, int shedwidth, boolean roof) {
         StringBuilder str = new StringBuilder();
         int linesDistanceInitial = 100;
         int shedmove = 0;
         if (isshedchoosen) {
-            shedmove = length - (shedlength + 15); // 15 afstand fra slutning
+            shedmove = length - (shedlength - 30); // røkkes tættere på slutning af alle tilfælde
         } else {
             if (length > 300 && length <= 600) {
                 shedmove = length - (int) (length * 0.30);
@@ -98,17 +102,19 @@ public class SVGofCarport {
                 shedmove = length - (int) ((length * 0.25));
             }
         }
-        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='").append(width + 25).append(""
-                + "' y2='80' stroke='black'/>");
-        str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='80' y2='").append(width + 25).append("' stroke='black'/>");
+        if (!roof) {
+            str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='").append(width + 25).append(""
+                    + "' y2='80' stroke='black'/>");
+            str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(shedmove).append("' y1='80' y2='").append(width + 25).append("' stroke='black'/>");
+        }
         if (isshedchoosen) {
             str.append("<line x1='").append(shedmove).append("' x2='").append(shedmove).append("' y1='").append(shedwidth + 25).append(""
-                    + "' y2='80' stroke='black'/>");
+                    + "' y2='80' stroke-width='3' stroke='black'/>");
             str.append("<line x1='").append((shedmove + shedlength)).append("' x2='").append((shedlength + shedmove)).append("' y1='").append(shedwidth + 25).append(""
-                    + "' y2='80' stroke='black'/>");
+                    + "' y2='80' stroke-width='3' stroke='black'/>");
             str.append("<line x1='").append(shedmove).append("' x2='").append((shedlength + shedmove)).append("' y1='").append(shedwidth + 25).append(""
-                    + "' y2='").append(shedwidth + 25).append("' stroke='black'/>");
-            str.append("<line x1='").append(shedmove).append("' x2='").append((shedlength + shedmove)).append("' y1='80' y2='80' stroke='black'/>");
+                    + "' y2='").append(shedwidth + 25).append("' stroke-width='3' stroke='black'/>");
+            str.append("<line x1='").append(shedmove).append("' stroke-width='3' x2='").append((shedlength + shedmove)).append("' y1='80' y2='80' stroke='black'/>");
         }
         return str.toString();
     }
@@ -122,6 +128,35 @@ public class SVGofCarport {
         SVGofCarport test = new SVGofCarport();
         String f = test.carport(new Carport(600, 300));
         System.out.println(f);
+    }
+
+    private static String placeRoof(int length, int width) {
+        StringBuilder str = new StringBuilder();
+        int linesDistanceInitial = 50;
+        int savewidth = width;
+        //int savewidth2 = width;
+        savewidth /= 6;
+        for (int i = 0; i < 6; i++) {
+            str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(length + 55).append("' y1='").append((savewidth * i) + 100).append(""
+                    + "' y2='").append((savewidth * i) + 100).append("' stroke-width='3' stroke='black'/>");
+            str.append("<line x1='").append(linesDistanceInitial).append("' x2='").append(length + 55).append("' y1='").append((savewidth * i) + 50).append(""
+                    + "' y2='").append((savewidth * i) + 50).append("' stroke-width='2' outline='white' stroke='black'/>");
+        }
+        return str.toString();
+    }
+
+    private static String LinesVerticalRoof(int length, int width) {
+        StringBuilder str = new StringBuilder();
+        int distance = 89;
+        int initialDistance = 50;
+        int savelegnth = length;
+        int index = 0;
+        while (savelegnth > distance) {
+            str.append("<line x1='").append(initialDistance + (distance * index)).append("' x2='").append(initialDistance + (distance * index)).append("' y1='80' y2='").append(width).append("' stroke-width='2' stroke='black'/>");
+            savelegnth -= distance;
+            index++;
+        }
+        return str.toString();
     }
 
 }
