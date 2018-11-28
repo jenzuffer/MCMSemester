@@ -152,10 +152,10 @@ public class SVGofCarport {
         int savelegnth = length;
         int index = 0;
         while (savelegnth > distance) {
-            str.append("<line x1='").append(initialDistance + (distance * index)).append("' x2='").append(initialDistance + (distance * index)).append("' y1='80' y2='").append(width).append("' stroke-width='2' stroke='black'/>");
+            str.append("<line x1='").append(initialDistance + (distance * index)).append("' x2='").append(initialDistance + (distance * index)).append("' y1='50' y2='").append(width + 50).append("' stroke-width='2' stroke='black'/>");
             savelegnth -= distance;
             index++;
-        }
+        } 
         return str.toString();
     }
 
