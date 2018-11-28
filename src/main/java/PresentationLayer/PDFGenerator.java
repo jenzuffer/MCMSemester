@@ -48,7 +48,7 @@ public class PDFGenerator {
         this.document = new PDDocument();
         setFrontPage();
         drawTable(carport.getListOfLists());
-        //setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
+        setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
         pdf = new File(TEMP_PATH);
         System.out.println(pdf.getAbsolutePath());
         System.out.println(pdf.getPath());
