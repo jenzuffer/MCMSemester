@@ -22,12 +22,11 @@ public class PDFRenderer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
-        System.out.println(carport.getMaterials().size());
-//        try {
-//            PDFGenerator pdf = new PDFGenerator(carport);
-//        } catch (IOException ex) {
-//            System.out.println("Failed");
-//        }
+        try {
+            PDFGenerator pdf = new PDFGenerator(carport);
+        } catch (IOException ex) {
+            System.out.println("Failed");
+        }
         return "renderpdf";
     }
 
