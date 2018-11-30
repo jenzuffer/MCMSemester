@@ -7,7 +7,10 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,12 +27,15 @@ public class GoToEmployeePage extends Command {
         boolean authenticated = LogicFacade.isAdmin(Email, Pw);
         request.getSession().setAttribute("admin", authenticated);
         if (authenticated) {
-            List<Order> orderlist = LogicFacade.getOrderlist();
-            request.setAttribute("OrderList", Pw);
+            List<Order> orderlist = new ArrayList();
+            try {
+                orderlist = LogicFacade.getOrderlist();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GoToEmployeePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.setAttribute("OrderList", orderlist);
             return "employeepage";
-        }
-        else
-        {
+        } else {
             return "login";
         }
     }

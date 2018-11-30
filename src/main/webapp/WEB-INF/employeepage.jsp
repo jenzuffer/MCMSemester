@@ -4,8 +4,15 @@
     Author     : Christian
 --%>
 
+<%@page import="PresentationLayer.HTMLGenerator"%>
+<%@page import="PresentationLayer.Order"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    List<Order> list = (List<Order>) request.getAttribute("OrderList");
+    HTMLGenerator html = new HTMLGenerator();
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,6 +26,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     </head>
     <body>
-        
+        <jsp:include page="navigator.jsp" />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <table class="table" id="database-table">
+                        <%= html.getOrders(list)%>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="Ressources/Script.js"></script>
     </body>
 </html>

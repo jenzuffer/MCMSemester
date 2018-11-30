@@ -99,4 +99,28 @@ public class HTMLGenerator {
 
         return sb.toString();
     }
+     public String getOrders(List<Order> tableData) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("  <thead>\n"
+                + "    <tr>\n"
+                + "      <th scope=\"col\">orderID</th>\n"
+                + "      <th scope=\"col\">customerID</th>\n"
+                + "      <th scope=\"col\">carportID</th>\n"
+                + "    </tr>\n"
+                + "  </thead>\n"
+                + "  <tbody>");
+
+        for (Order materiale : tableData) {
+            sb.append("<tr><td>")
+                    .append(materiale.getOrderID())
+                    .append("</td><td>")
+                    .append(materiale.getCustomerID())
+                    .append("</td><td>")
+                    .append(materiale.getCarportID())
+                    .append("</td><td>");
+        }
+        sb.append("</tbody>");
+
+        return sb.toString();
+     }
 }

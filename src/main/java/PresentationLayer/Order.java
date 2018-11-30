@@ -10,14 +10,30 @@ package PresentationLayer;
  * @author Christian
  */
 public class Order {
-    private int carportID;
-    private int width;
-    private int length;
 
-    public Order(int carportID, int width, int length) {
+    private int orderID;
+    private int customerID;
+    private int carportID;
+
+    public Order(int orderID, int customerID, int carportID) {
+        this.orderID = orderID;
+        this.customerID = customerID;
         this.carportID = carportID;
-        this.width = width;
-        this.length = length;
+    }
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public int getCarportID() {
@@ -28,20 +44,4 @@ public class Order {
         this.carportID = carportID;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-    
 }

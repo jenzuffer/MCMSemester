@@ -36,17 +36,17 @@ public class OrderMapper {
             throw new LoginSampleException("Could not insert pdf " + ex.getMessage());
         }
     }
-    
+
     public static List<Order> getOrderList() throws LoginSampleException, ClassNotFoundException {
         List<Order> orderlist = new ArrayList();
-        String SQL = "";
+        String SQL = "SELECT * FROM `Order`";
         try {
-
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(SQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(SQL);
             while (l_rsSearch.next()) {
-                //Order order = new Order();
+                Order order = new Order(l_rsSearch.getInt(1), l_rsSearch.getInt(2), l_rsSearch.getInt(3));
+                orderlist.add(order);
             }
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException("Could not insert pdf" + ex.getMessage());
