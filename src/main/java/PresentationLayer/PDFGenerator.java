@@ -9,11 +9,11 @@ import FunctionLayer.Carport;
 import FunctionLayer.Materiale;
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,15 +31,13 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
  */
 public class PDFGenerator {
 
-    private final String TEMP_PATH = "src/main/webapp/Ressources/template.pdf";
-    private final String TEMP_IMG_PATH = "src/main/webapp/Ressources/logo.png";
-
     private Carport carport;
-    private final String[] HEADERS = {"Name", "Length", "Amount", "Unit", "Description"};
-
+    
     private PDDocument document;
     private File pdf;
+    private byte[] pdfBytes;
 
+    private final String[] HEADERS = {"Name", "Length", "Amount", "Unit", "Description"};
     private final PDFont FONT_NORMAL = PDType1Font.HELVETICA;
     private final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
 
@@ -48,10 +46,8 @@ public class PDFGenerator {
         this.document = new PDDocument();
         setFrontPage();
         drawTable(carport.getListOfLists());
-        setImageOnFrontPage(TEMP_IMG_PATH, -75, 617);
-        pdf = new File(TEMP_PATH);
-        System.out.println(pdf.getAbsolutePath());
-        System.out.println(pdf.getPath());
+        this.pdf = new File("template.pdf");
+        convertPdfToByteArray(pdf);
         document.save(pdf);
         document.close();
     }
@@ -89,14 +85,13 @@ public class PDFGenerator {
         List<List> data = new ArrayList();
         data.add(new ArrayList<>(Arrays.asList(HEADERS)));
 
-        
         for (List<Materiale> list : map.values()) {
             for (Materiale m : list) {
                 data.add(new ArrayList<>(
                         Arrays.asList(m.getName(), m.getLength(), m.getAmount(), m.getUnit(), m.getDescription())));
             }
         }
-               
+
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, document, page, true, true);
         DataTable t = new DataTable(dataTable, page);
         t.addListToTable(data, DataTable.HASHEADER);
@@ -120,19 +115,15 @@ public class PDFGenerator {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("Start");
-        Carport carport = new Carport(400, 214, 250, 200, true, false);
-        HashMap<String, List<Materiale>> hm = new HashMap();
-        List<Materiale> list = new ArrayList();
-        
-        list.add(new Materiale("test", "hest", "knap", 2));
-        list.add(new Materiale("test", "hest", "knap", 2));
-        list.add(new Materiale("test", "hest", "knap", 2));
-        list.add(new Materiale("test", "hest", "knap", 2));
-        hm.put("test", list);
-        carport.setListOfLists(hm);
-        new PDFGenerator(carport);
-        System.out.println("Finish");
+    private void convertPdfToByteArray(File pdfFile) throws FileNotFoundException, IOException {
+        FileInputStream fis = new FileInputStream(pdfFile);
+        pdfBytes = new byte[(int) pdfFile.length()];
+        fis.read(pdfBytes);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        this.pdfBytes = bos.toByteArray();
+    }
+
+    public byte[] getPdfBytes() {
+        return pdfBytes;
     }
 }
