@@ -24,7 +24,7 @@ public class OrderMapper {
     public static void insertPdf(int orderId, byte[] pdf) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "UPDATE Order SET pdf = ? WHERE OrderID = (?);";
+            String SQL = "UPDATE `Order` SET `pdf` = ? WHERE (`OrderID` = ?);";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setBytes(1, pdf);
             ps.setInt(2, orderId);
@@ -32,6 +32,5 @@ public class OrderMapper {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException("Could not insert pdf " + ex.getMessage());
         }
-
     }
 }
