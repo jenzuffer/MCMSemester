@@ -24,13 +24,13 @@ public class OrderMapper {
     public static void insertPdf(int orderId, byte[] pdf) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO `fog`.`Order` (`pdf`) VALUES ('?') WHERE `OrderID` = ?;";
+            String SQL = "UPDATE Order SET pdf = ? WHERE OrderID = (?);";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setInt(1, orderId);
-            ps.setBlob(2, pdf);
+            ps.setBytes(1, pdf);
+            ps.setInt(2, orderId);
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not insert pdf" + ex.getMessage());
+            throw new LoginSampleException("Could not insert pdf " + ex.getMessage());
         }
 
     }
