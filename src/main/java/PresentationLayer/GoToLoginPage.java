@@ -5,29 +5,25 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
-import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mwn
+ * @author Christian
  */
-public class PDFRenderer extends Command {
+public class GoToLoginPage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        Carport carport = (Carport) request.getSession().getAttribute("carport");
-        PDFGenerator pdf = new PDFGenerator(carport);
-        try {
-            LogicFacade.inserPdf(1, pdf.generatePdf());
-        } catch (IOException ex) {
-            System.out.println("Failed");
+        if (request.getSession().getAttribute("admin") != null) {
+            boolean admin = (boolean) request.getSession().getAttribute("admin");
+            if (admin) {
+                return "employeepage";
+            }
         }
-        return "renderpdf";
+        return "login";
     }
 
 }

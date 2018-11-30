@@ -33,6 +33,12 @@
                         <input type="submit" value="Edit products">
                     </form>
                 </div>
+                 <div class="header">
+                    <form action="FrontController" method="POST">
+                        <input type="hidden" name="command" value="login"> 
+                        <input type="submit" value="Administrator login">
+                    </form>
+                </div>
             </div>
         </div>
     </body>

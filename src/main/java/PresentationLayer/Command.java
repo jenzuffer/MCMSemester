@@ -29,6 +29,8 @@ abstract class Command {
         commands.put("createuser", new CreateUser());
         commands.put("pdf", new PDFRenderer());
         commands.put("gotocreateuser", new GoToCreateUser());
+        commands.put("login", new GoToLoginPage());
+         commands.put("employeepage", new GoToEmployeePage());
         //add methods here for the controller
     }
     

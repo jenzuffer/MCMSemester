@@ -61,4 +61,25 @@ public class UserMapper {
         }
     }
 
+    public static String getLoginRole(String Email, String Pw) throws LoginSampleException {
+        String role = "";
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT role FROM Customer "
+                    + "WHERE email=? AND password=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, Email);
+            ps.setString(2, Pw);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                role = rs.getString("role");
+            } else {
+                throw new LoginSampleException("Could not validate user");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return role;
+    }
+
 }

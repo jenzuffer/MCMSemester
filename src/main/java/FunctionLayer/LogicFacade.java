@@ -8,6 +8,7 @@ package FunctionLayer;
 import DBAccess.DataMapper;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
+import PresentationLayer.Order;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +82,22 @@ public class LogicFacade {
     public static void createUser(User user) throws LoginSampleException {
         UserMapper.createUser(user);
     }
-    
+
     public static void inserPdf(int OrderId, byte[] pdf) throws LoginSampleException {
         OrderMapper.insertPdf(OrderId, pdf);
     }
-    
+
+    public static boolean isAdmin(String Email, String Pw) throws LoginSampleException {
+        String Role = UserMapper.getLoginRole(Email, Pw);
+        if (Role.equals("admin")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static List<Order> getOrderlist() throws LoginSampleException, ClassNotFoundException {
+        List<Order> orderlist = OrderMapper.getOrderList();
+        return orderlist;
+    }
+
 }

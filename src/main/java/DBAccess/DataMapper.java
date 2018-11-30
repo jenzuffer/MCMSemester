@@ -8,6 +8,7 @@ package DBAccess;
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Materiale;
+import PresentationLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,8 +66,8 @@ public class DataMapper {
         }
         return values;
     }
-    
-        public static List<Integer> getShedWidth() throws LoginSampleException {
+
+    public static List<Integer> getShedWidth() throws LoginSampleException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();

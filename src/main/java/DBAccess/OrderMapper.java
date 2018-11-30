@@ -7,6 +7,7 @@ package DBAccess;
 
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
+import PresentationLayer.Order;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -14,6 +15,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -32,5 +35,22 @@ public class OrderMapper {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new LoginSampleException("Could not insert pdf " + ex.getMessage());
         }
+    }
+    
+    public static List<Order> getOrderList() throws LoginSampleException, ClassNotFoundException {
+        List<Order> orderlist = new ArrayList();
+        String SQL = "";
+        try {
+
+            Connection l_cCon = Connector.connection();
+            Statement l_pStatement = l_cCon.prepareStatement(SQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery(SQL);
+            while (l_rsSearch.next()) {
+                //Order order = new Order();
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException("Could not insert pdf" + ex.getMessage());
+        }
+        return orderlist;
     }
 }
