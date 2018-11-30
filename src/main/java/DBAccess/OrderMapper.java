@@ -21,8 +21,7 @@ import java.sql.Statement;
  */
 public class OrderMapper {
 
-    public static void insertPdf(int orderId, InputStream pdf) throws LoginSampleException {
-        Blob blob = null;
+    public static void insertPdf(int orderId, byte[] pdf) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO `fog`.`Order` (`pdf`) VALUES ('?') WHERE `OrderID` = ?;";

@@ -13,9 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PDF</title>
-        <% String path = (String) request.getAttribute("path");%>
     </head>
     <body>
-        <embed src="<%= path %>" width="100%" height="2600"/>
     </body>
 </html>

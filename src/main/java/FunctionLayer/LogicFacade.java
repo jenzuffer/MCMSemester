@@ -83,7 +83,7 @@ public class LogicFacade {
     }
     
     public static void inserPdf(int OrderId, byte[] pdf) throws LoginSampleException {
-        OrderMapper.insertPdf(OrderId, new ByteArrayInputStream(pdf));
+        OrderMapper.insertPdf(OrderId, pdf);
     }
     
 }

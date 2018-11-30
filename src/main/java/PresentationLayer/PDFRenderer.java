@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
+import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -22,10 +23,11 @@ public class PDFRenderer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
+        PDFGenerator pdf = new PDFGenerator(carport);
         try {
-            PDFGenerator pdf = new PDFGenerator(carport);
+            LogicFacade.inserPdf(1, pdf.generatePdf());
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Failed");
         }
         return "renderpdf";
     }

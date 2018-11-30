@@ -32,41 +32,41 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 public class PDFGenerator {
 
     private Carport carport;
-    
-    private PDDocument document;
-    private File pdf;
-    private byte[] pdfBytes;
 
     private final String[] HEADERS = {"Name", "Length", "Amount", "Unit", "Description"};
     private final PDFont FONT_NORMAL = PDType1Font.HELVETICA;
     private final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
 
-    public PDFGenerator(Carport carport) throws IOException {
+    public PDFGenerator(Carport carport) {
         this.carport = carport;
-        this.document = new PDDocument();
-        setFrontPage();
-        drawTable(carport.getListOfLists());
-        this.pdf = new File("template.pdf");
-        convertPdfToByteArray(pdf);
-        document.save(pdf);
-        document.close();
     }
 
-    private void setFrontPage() throws IOException {
+    public byte[] generatePdf() throws IOException {
+        ByteArrayOutputStream out;
+        try (PDDocument document = new PDDocument()) {
+            out = new ByteArrayOutputStream();
+            setFrontPage(document);
+            drawTable(document, carport.getListOfLists());
+            document.save(out);
+        }
+        return out.toByteArray();
+    }
+
+    private void setFrontPage(PDDocument document) throws IOException {
         PDPage frontPage = new PDPage();
-        setTextCenter("Fog", 30, 24, FONT_BOLD, frontPage);
+        setTextCenter("Fog", 30, 24, FONT_BOLD, frontPage, document);
         if (carport.isShedChosen()) {
-            setTextCenter("Carport med skur", 70, 20, FONT_NORMAL, frontPage);
-            setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage);
-            setTextCenter("Skur " + carport.getShedLength() + " X " + carport.getShedWidth() + " cm.", 160, 16, FONT_NORMAL, frontPage);
+            setTextCenter("Carport med skur", 70, 20, FONT_NORMAL, frontPage, document);
+            setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage, document);
+            setTextCenter("Skur " + carport.getShedLength() + " X " + carport.getShedWidth() + " cm.", 160, 16, FONT_NORMAL, frontPage, document);
         } else {
-            setTextCenter("Carport", 70, 20, FONT_NORMAL, frontPage);
-            setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage);
+            setTextCenter("Carport", 70, 20, FONT_NORMAL, frontPage, document);
+            setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage, document);
         }
         document.addPage(frontPage);
     }
 
-    private void setImageOnFrontPage(String imagePath, int x, int y) throws IOException {
+    private void setImageOnFrontPage(String imagePath, int x, int y, PDDocument document) throws IOException {
         PDPage frontPage = document.getPage(0);
         PDPageContentStream cs = new PDPageContentStream(document, frontPage, PDPageContentStream.AppendMode.APPEND, false);
         PDImageXObject pdImage = PDImageXObject.createFromFile(imagePath, document);
@@ -74,7 +74,7 @@ public class PDFGenerator {
         cs.close();
     }
 
-    private void drawTable(HashMap<String, List<Materiale>> map) throws IOException {
+    private void drawTable(PDDocument document, HashMap<String, List<Materiale>> map) throws IOException {
         PDPage page = new PDPage();
         document.addPage(page);
         float margin = 20;
@@ -98,7 +98,7 @@ public class PDFGenerator {
         dataTable.draw();
     }
 
-    private void setTextCenter(String text, int marginTop, int fontSize, PDFont font, PDPage page) throws IOException {
+    private void setTextCenter(String text, int marginTop, int fontSize, PDFont font, PDPage page, PDDocument document) throws IOException {
         try (PDPageContentStream cs = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
             float titleWidth = font.getStringWidth(text) / 1000 * fontSize;
             float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * fontSize;
@@ -113,17 +113,5 @@ public class PDFGenerator {
             cs.endText();
             cs.close();
         }
-    }
-
-    private void convertPdfToByteArray(File pdfFile) throws FileNotFoundException, IOException {
-        FileInputStream fis = new FileInputStream(pdfFile);
-        pdfBytes = new byte[(int) pdfFile.length()];
-        fis.read(pdfBytes);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        this.pdfBytes = bos.toByteArray();
-    }
-
-    public byte[] getPdfBytes() {
-        return pdfBytes;
     }
 }
