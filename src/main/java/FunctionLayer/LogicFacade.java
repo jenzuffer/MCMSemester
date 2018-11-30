@@ -6,7 +6,9 @@
 package FunctionLayer;
 
 import DBAccess.DataMapper;
+import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,10 @@ public class LogicFacade {
 
     public static void createUser(User user) throws LoginSampleException {
         UserMapper.createUser(user);
+    }
+    
+    public static void inserPdf(int OrderId, byte[] pdf) throws LoginSampleException {
+        OrderMapper.insertPdf(OrderId, new ByteArrayInputStream(pdf));
     }
     
 }
