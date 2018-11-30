@@ -36,11 +36,10 @@ public class HTMLGenerator {
                 + "    </tr>\n"
                 + "  </thead>\n"
                 + "  <tbody>");
-        
+
         HashMap<String, List<Materiale>> HM = new HashMap();
         Collection<List<Materiale>> materialeilist = HM.values();
-        
-        
+
         for (List<Materiale> list : tableData) {
             for (Materiale materiale : list) {
                 sb.append("<tr><td>")
@@ -99,28 +98,65 @@ public class HTMLGenerator {
 
         return sb.toString();
     }
-     public String getOrders(List<Order> tableData) {
+
+    public String getOrders(List<Order> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
                 + "    <tr>\n"
                 + "      <th scope=\"col\">orderID</th>\n"
                 + "      <th scope=\"col\">customerID</th>\n"
                 + "      <th scope=\"col\">carportID</th>\n"
+                + "      <th scope=\"col\">Name</th>\n"
+                + "      <th scope=\"col\">Adress</th>\n"
+                + "      <th scope=\"col\">City</th>\n"
+                + "      <th scope=\"col\">Phonenumber</th>\n"
+                + "      <th scope=\"col\">Email</th>\n"
+                + "      <th scope=\"col\">Role</th>\n"
+                + "      <th scope=\"col\">Width</th>\n"
+                + "      <th scope=\"col\">Length</th>\n"
+                + "      <th scope=\"col\">ShedWidth</th>\n"
+                + "      <th scope=\"col\">ShedLength</th>\n"
+                + "      <th scope=\"col\">Roof</th>\n"
+                + "      <th scope=\"col\">Shed</th>\n"
                 + "    </tr>\n"
                 + "  </thead>\n"
                 + "  <tbody>");
 
-        for (Order materiale : tableData) {
+        for (Order order : tableData) {
             sb.append("<tr><td>")
-                    .append(materiale.getOrderID())
+                    .append(order.getOrderID())
                     .append("</td><td>")
-                    .append(materiale.getCustomerID())
+                    .append(order.getCustomerID())
                     .append("</td><td>")
-                    .append(materiale.getCarportID())
+                    .append(order.getCarportID())
+                    .append("</td><td>")
+                    .append(order.getName())
+                    .append("</td><td>")
+                    .append(order.getAddress())
+                    .append("</td><td>")
+                    .append(order.getCity())
+                    .append("</td><td>")
+                    .append(order.getPhoneNumber())
+                    .append("</td><td>")
+                    .append(order.getEmail())
+                    .append("</td><td>")
+                    .append(order.getRole())
+                    .append("</td><td>")
+                    .append(order.getWidth())
+                    .append("</td><td>")
+                    .append(order.getLength())
+                    .append("</td><td>")
+                    .append(order.getShedWidth())
+                    .append("</td><td>")
+                    .append(order.getShedLength())
+                    .append("</td><td>")
+                    .append(order.isRoof())
+                    .append("</td><td>")
+                    .append(order.isShed())
                     .append("</td><td>");
         }
         sb.append("</tbody>");
 
         return sb.toString();
-     }
+    }
 }

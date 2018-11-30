@@ -39,13 +39,18 @@ public class OrderMapper {
 
     public static List<Order> getOrderList() throws LoginSampleException, ClassNotFoundException {
         List<Order> orderlist = new ArrayList();
-        String SQL = "SELECT * FROM `Order`";
+        String SQL = "SELECT Name, Adress, City, Phonenumber, Email, Role, OrderID,"
+                + " customerID, c1.idCarport, Width, Length, ShedWidth, ShedLength, Roof, Shed FROM `Customer` m1,"
+                + " `Carport` c1, `Order` o1 WHERE m1.ID = o1.customerID AND c1.idCarport = o1.idCarport";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(SQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(SQL);
             while (l_rsSearch.next()) {
-                Order order = new Order(l_rsSearch.getInt(1), l_rsSearch.getInt(2), l_rsSearch.getInt(3));
+                Order order = new Order(l_rsSearch.getInt("OrderID"), l_rsSearch.getInt("customerID"), l_rsSearch.getInt("idCarport"),
+                        l_rsSearch.getString("Name"), l_rsSearch.getString("Adress"), l_rsSearch.getString("City"), l_rsSearch.getString("Phonenumber"),
+                        l_rsSearch.getString("Email"), l_rsSearch.getString("Role"), l_rsSearch.getInt("Width"), l_rsSearch.getInt("Length"), l_rsSearch.getInt("ShedWidth"),
+                        l_rsSearch.getInt("ShedLength"), l_rsSearch.getBoolean("Roof"), l_rsSearch.getBoolean("Shed"));
                 orderlist.add(order);
             }
         } catch (SQLException | ClassNotFoundException ex) {
