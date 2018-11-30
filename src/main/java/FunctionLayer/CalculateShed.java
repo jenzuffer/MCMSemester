@@ -18,9 +18,18 @@ public class CalculateShed {
 
     
     
-    public List<Materiale> calculatePoles(int shedLength, int shedWidth, int width) throws LoginSampleException {
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
+    public List<Materiale> calculatePoles(List<Materiale> materials ,int shedLength, int shedWidth, int width) throws LoginSampleException {
         List<Materiale> returnList = new ArrayList();
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
+        /*
+        for (Materiale material : materials) {
+            if ("stolpe".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+        */
+        
+        
         int numberOfPoles = 0;
 
         int newCarportWidth = width - 30;
@@ -43,10 +52,16 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Materiale> calculateCladding(int shedLength, int shedWidth) throws LoginSampleException {
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
+    public List<Materiale> calculateCladding(List<Materiale> materials, int shedLength, int shedWidth) throws LoginSampleException {
         List<Materiale> returnList = new ArrayList();
-        
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
+        /*
+        for (Materiale material : materials) {
+            if ("beklædning".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+        */
         int circumference = shedLength * 2 + shedWidth * 2;
         int amount = 0;
         while (circumference > 0) {
@@ -60,9 +75,16 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Materiale> calculateWoodForCladding(int shedLength, int shedWidth) throws LoginSampleException {
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");
+    public List<Materiale> calculateWoodForCladding(List<Materiale> materials, int shedLength, int shedWidth) throws LoginSampleException {
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");;
         List<Materiale> returnList = new ArrayList();
+        /*
+        for (Materiale material : materials) {
+            if ("løsholter".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+        */
         int numberWidth = 4;
         int numberLength = 4;
         int poles = 2;

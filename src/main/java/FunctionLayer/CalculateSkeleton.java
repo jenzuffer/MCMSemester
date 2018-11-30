@@ -5,16 +5,20 @@ import java.util.List;
 
 public class CalculateSkeleton {
 
-    
-    public List<Materiale> calculatePoles(int length, int width) throws LoginSampleException {
+    public List<Materiale> calculatePoles(List<Materiale> materials, int length, int width) throws LoginSampleException {
         List<Materiale> returnList = new ArrayList();
         int saveLength = length - 100;
         int saveWidth = width;
 
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
-        // poles er ikke afhængig af length eller width men af typen af carport (fladt tag eller skråtag)
-
-        int x = 1; 
+/*
+        for (Materiale material : materials) {
+            if ("stolpe".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+*/
+        int x = 1;
 //        int y = 1;
 
         while (saveLength > 70) {
@@ -27,19 +31,24 @@ public class CalculateSkeleton {
 //        }
 //
 //        int poles = x * y - (x * (y - 2));
-        
-        
+
         Materiale lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
         lastPole.addToAmount(x * 2);
         returnList.add(lastPole);
         return returnList;
     }
 
-    public List<Materiale> calculateStraps(int length) throws LoginSampleException {
+    public List<Materiale> calculateStraps(List<Materiale> materials, int length) throws LoginSampleException {
         List<Materiale> returnList = new ArrayList();
         List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         int totalLength = length * 2;
-
+/*
+        for (Materiale material : materials) {
+            if ("spærtræ".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+*/
         for (Materiale Material : listOfMaterials) {
 
             if (totalLength / Material.getLength() > 0) {
@@ -62,8 +71,16 @@ public class CalculateSkeleton {
 
     }
 
-    public List<Materiale> calculateRafters(int length, int width) throws LoginSampleException {
+    public List<Materiale> calculateRafters(List<Materiale> materials, int length, int width) throws LoginSampleException {
         List<Materiale> returnList = new ArrayList();
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
+        /*
+        for (Materiale material : materials) {
+            if ("spærtræ".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+        */
         int iWidth = width;
         double coverPiece = length / 55;
         int amountOfPieces = 0;
@@ -73,7 +90,6 @@ public class CalculateSkeleton {
             amountOfPieces = length / 55;
         }
 
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         for (Materiale materiale : listOfMaterials) {
             if (iWidth >= materiale.getLength()) {
                 materiale.addToAmount(amountOfPieces);

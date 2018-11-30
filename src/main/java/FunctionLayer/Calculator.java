@@ -27,24 +27,24 @@ public class Calculator {
     private boolean tag;
     private Carport carport;
     
-    public Calculator(Carport carport) throws LoginSampleException {
+    public Calculator(Carport carport, List<Materiale> materials) throws LoginSampleException {
         this.carport = carport;
         length = carport.getLength();
         width = carport.getWidth();
         shedLength = carport.getShedLength();
         shedWidth = carport.getShedWidth();
         tag = carport.isRoofChosen();
-        listOfRoofMaterials = new CalculateRoof().CalculateRoofPlates(length, width, tag);
-        listOfScrewsMaterials = new CalculateScrews().calculateScrewsClass(length, width, tag, listOfRoofMaterials);
-        listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(length, width, tag);
-        listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(length, width); 
-        listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(length);
+        listOfRoofMaterials = new CalculateRoof().CalculateRoofPlates(materials, length, width, tag);
+        listOfScrewsMaterials = new CalculateScrews().calculateScrewsClass(materials, length, width, tag, listOfRoofMaterials);
+        listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(materials,length, width, tag);
+        listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(materials,length, width); 
+        listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(materials,length);
         if (carport.isShedChosen()) {
-            listOfShedPoleMaterials = new CalculateShed().calculatePoles(shedLength, shedWidth, width);
-            listOfShedCladdingMaterials = new CalculateShed().calculateCladding(shedLength, shedWidth);
-            listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(shedLength, shedWidth);
+            listOfShedPoleMaterials = new CalculateShed().calculatePoles(materials,shedLength, shedWidth, width);
+            listOfShedCladdingMaterials = new CalculateShed().calculateCladding(materials,shedLength, shedWidth);
+            listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(materials,shedLength, shedWidth);
         }
-        listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(length, width);
+        listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(materials,length, width);
     }
 
     public List<Materiale> getListOfRoofMaterials() {

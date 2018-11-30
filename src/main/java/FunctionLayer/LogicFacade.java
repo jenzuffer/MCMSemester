@@ -57,9 +57,15 @@ public class LogicFacade {
     }
 
     public static Carport calculateCarportList(Carport carport) throws LoginSampleException {
-        Calculator calculator = new Calculator(carport);
+        Calculator calculator = new Calculator(carport, getAllMaterials());
         return calculator.getCalculatedCarport();
     }
+    
+    public static List<Materiale> getAllMaterials() throws LoginSampleException {
+        List<Materiale> getAllMaterials = DataMapper.getAllMaterials();
+        return getAllMaterials;
+    }
+    
 
     public static List<Materiale> listOfMaterialsByType(String string) throws LoginSampleException {
         return DataMapper.getAllMaterialsByType(string);

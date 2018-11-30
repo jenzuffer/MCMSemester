@@ -15,10 +15,17 @@ import java.util.List;
 public class CalculateRoof {
 
         
-    public List<Materiale> CalculateRoofPlates(int length, int width, boolean tag) throws LoginSampleException {
-        List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
+    public List<Materiale> CalculateRoofPlates(List<Materiale> materials, int length, int width, boolean tag) throws LoginSampleException {
         List<Materiale> returnlist = new ArrayList();
-        int RaftersAmount = calculateRaftersAmount(length, width);
+        List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
+        /*
+        for (Materiale material : materials) {
+            if ("tagplader".equals(material.getType())) {
+                listofRoofPlates.add(material);
+            }
+        }
+        */
+        int RaftersAmount = calculateRaftersAmount(materials, length, width);
         if (tag) {
             RaftersAmount *= 1.5;
         }
@@ -51,7 +58,7 @@ public class CalculateRoof {
         return returnlist;
     }
 
-    public int calculateRaftersAmount(int length, int width) throws LoginSampleException {
+    public int calculateRaftersAmount(List<Materiale> materials ,int length, int width) throws LoginSampleException {
         int countReturn = 0;
         int iWidth = width;
         double coverPiece = length / 55;
@@ -61,7 +68,14 @@ public class CalculateRoof {
         } else {
             amountOfPieces = length / 55;
         }
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
+        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");;
+        /*
+        for (Materiale material : materials) {
+            if ("spærtræ".equals(material.getType())) {
+                listOfMaterials.add(material);
+            }
+        }
+        */
         for (Materiale materiale : listOfMaterials) {
             if (iWidth >= materiale.getLength()) {
                 materiale.addToAmount(amountOfPieces);

@@ -14,15 +14,24 @@ import java.util.List;
  */
 public class CalculateScrews {
 
-    public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
+    //public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
+    List<Materiale> calculateScrewsClass(List<Materiale> materials, int length, int width, boolean tag, List<Materiale> listOfRoofMaterials) throws LoginSampleException {
         List<Materiale> returnlist = new ArrayList();
+        
+        List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
+        /*
+        for (Materiale material : materials) {
+            if ("bundskruer".equals(material.getType())) {
+                listofScrews.add(material);
+            }
+        }
+        */
         int amount = 0;
         List<Materiale> roofMaterialsForScrews;
-        roofMaterialsForScrews = roof;
+        roofMaterialsForScrews = listOfRoofMaterials;
         for (int i = 0; i < roofMaterialsForScrews.size(); i++) {
             amount += roofMaterialsForScrews.get(i).getAmount();
         }
-        List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
         for (Materiale screwMaterials : listofScrews) {
             screwMaterials.addToAmount(amount / 2);
             returnlist.add(screwMaterials);
@@ -30,15 +39,25 @@ public class CalculateScrews {
         return returnlist;
     }
 
-    public List<Materiale> calculateStainlessSteel(int length, int width, boolean tag) throws LoginSampleException {
+    public List<Materiale> calculateStainlessSteel(List<Materiale> materials, int length, int width, boolean tag) throws LoginSampleException {
         List<Materiale> returnlist = new ArrayList();
+        List<Materiale> listofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
+        
+        /*
+        for (Materiale material : materials) {
+            if ("hulbånd".equals(material.getType())) {
+                listofStainlessSteal.add(material);
+            }
+        }
+        */
+        
         if (tag) {
-            List<Materiale> ListofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
-            for (Materiale screwMaterials : ListofStainlessSteal) {
+            for (Materiale screwMaterials : listofStainlessSteal) {
                 screwMaterials.addToAmount(2);
                 returnlist.add(screwMaterials);
             }
         }
         return returnlist;
     }
+
 }
