@@ -11,7 +11,9 @@ package FunctionLayer;
  */
 public class LoginSampleException extends Exception {
 
-    public LoginSampleException(String msg) {
+    //måske Exception som parameter
+    public LoginSampleException(String msg /*, Exception ex */) {
+        //this.ex = ex;
         super(msg);
     }
 }

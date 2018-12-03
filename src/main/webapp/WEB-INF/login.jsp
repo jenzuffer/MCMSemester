@@ -44,7 +44,6 @@
                         <button class="btn btn-primary" onclick="update()" >Login</button>
                     </div>
                     <div class="col-md-8"> 
-
                     </div>
                 </div>
             </div>
