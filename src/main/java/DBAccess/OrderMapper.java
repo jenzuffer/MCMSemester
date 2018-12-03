@@ -54,8 +54,47 @@ public class OrderMapper {
                 orderlist.add(order);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not insert pdf" + ex.getMessage());
+            throw new LoginSampleException("Failed retrieving orderlist" + ex.getMessage());
         }
         return orderlist;
+    }
+
+    public static void deleteOrder(int OrderID) throws LoginSampleException {
+        String SQL = "delete from `Order` WHERE `OrderID`=" + OrderID;
+        try {
+            Connection l_cCon = Connector.connection();
+            Statement l_pStatement = l_cCon.prepareStatement(SQL);
+            l_pStatement.executeUpdate(SQL);
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException("Could not delete order" + ex.getMessage());
+        }
+    }
+
+    public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws LoginSampleException {
+        try {
+            Connection l_cCon = Connector.connection();
+            String SQL = "UPDATE `Customer` SET `Name` = ?, `Adress`= ?, `City`= ?,`Phonenumber`= ?, `Email`= ?, `Role`= ? WHERE `ID` = ?";
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(SQL);
+            l_pStatement.setString(1, name);
+            l_pStatement.setString(2, adress);
+            l_pStatement.setString(3, city);
+            l_pStatement.setString(4, phone);
+            l_pStatement.setString(5, email);
+            l_pStatement.setString(6, role);
+            l_pStatement.setInt(7, customerID);
+            l_pStatement.executeUpdate();
+            SQL = "UPDATE `Carport` SET `Width`= ?,`Length`= ?,`ShedWidth`= ?,`ShedLength`= ?,`Roof`= ?,`Shed`= ? WHERE `idCarport`= ?";
+            l_pStatement = l_cCon.prepareStatement(SQL);
+            l_pStatement.setInt(1, width);
+            l_pStatement.setInt(2, length);
+            l_pStatement.setInt(3, shedwidth);
+            l_pStatement.setInt(4, shedlength);
+            l_pStatement.setBoolean(5, roof);
+            l_pStatement.setBoolean(6, shed);
+            l_pStatement.setInt(7, carportID);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException("Could not edit order: " + ex.getMessage());
+        }
     }
 }

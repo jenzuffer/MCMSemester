@@ -59,7 +59,7 @@ public class Order {
         this.name = name;
     }
 
-    public String getAddress() {
+    public String getAdress() {
         return address;
     }
 

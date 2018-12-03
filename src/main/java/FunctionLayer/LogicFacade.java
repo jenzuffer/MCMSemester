@@ -60,12 +60,11 @@ public class LogicFacade {
         Calculator calculator = new Calculator(carport, getAllMaterials());
         return calculator.getCalculatedCarport();
     }
-    
+
     public static List<Materiale> getAllMaterials() throws LoginSampleException {
         List<Materiale> getAllMaterials = DataMapper.getAllMaterials();
         return getAllMaterials;
     }
-    
 
     public static List<Materiale> listOfMaterialsByType(String string) throws LoginSampleException {
         return DataMapper.getAllMaterialsByType(string);
@@ -77,7 +76,6 @@ public class LogicFacade {
     }
 
     public static void updateProductOrAdd(int ID, String name, Double price, String description, Integer length, String unit, String type) throws LoginSampleException {
-        //throw new LoginSampleException("ID: " + ID + " name: " + name);
         DataMapper.UpdateProductOrAdd(ID, name, price, description, length, unit, type);
     }
 
@@ -106,4 +104,11 @@ public class LogicFacade {
         return orderlist;
     }
 
+    public static void deleteOrder(int OrderID) throws LoginSampleException {
+        OrderMapper.deleteOrder(OrderID);
+    }
+
+    public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws LoginSampleException {
+        OrderMapper.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
+    }
 }

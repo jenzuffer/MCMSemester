@@ -121,42 +121,53 @@ public class HTMLGenerator {
                 + "    </tr>\n"
                 + "  </thead>\n"
                 + "  <tbody>");
-
+        sb.append("<form action=\"FrontController\" method=\"post\">"
+                + "<div class=\"form-group\">\n");
         for (Order order : tableData) {
-            sb.append("<tr><td>")
-                    .append(order.getOrderID())
-                    .append("</td><td>")
-                    .append(order.getCustomerID())
-                    .append("</td><td>")
-                    .append(order.getCarportID())
-                    .append("</td><td>")
-                    .append(order.getName())
-                    .append("</td><td>")
-                    .append(order.getAddress())
-                    .append("</td><td>")
-                    .append(order.getCity())
-                    .append("</td><td>")
-                    .append(order.getPhoneNumber())
-                    .append("</td><td>")
-                    .append(order.getEmail())
-                    .append("</td><td>")
-                    .append(order.getRole())
-                    .append("</td><td>")
-                    .append(order.getWidth())
-                    .append("</td><td>")
-                    .append(order.getLength())
-                    .append("</td><td>")
-                    .append(order.getShedWidth())
-                    .append("</td><td>")
-                    .append(order.getShedLength())
-                    .append("</td><td>")
-                    .append(order.isRoof())
-                    .append("</td><td>")
-                    .append(order.isShed())
+            sb.append("<div>");
+            sb.append("<tr><td>").append("").append(order.getOrderID())
+                    .append("</td><td>").append("").append(order.getCustomerID())
+                    .append("</td><td>").append("").append(order.getCarportID())
+                    .append("</td><td>").append("<input type=\"text\" name=\"name\" value=\"").append(order.getName())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"adress\" value=\"").append(order.getAdress())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"city\" value=\"").append(order.getCity())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"phone\" value=\"").append(order.getPhoneNumber())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"email\" value=\"").append(order.getEmail())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"role\" value=\"").append(order.getRole())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"width\" value=\"").append(order.getWidth())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"length\" value=\"").append(order.getLength())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"shedwidth\" value=\"").append(order.getShedWidth())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"shedlength\" value=\"").append(order.getShedLength())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"roof\" value=\"").append(order.isRoof())
+                    .append("\">")
+                    .append("</td><td>").append("<input type=\"text\" name=\"shed\" value=\"").append(order.isShed())
+                    .append("\">")
                     .append("</td><td>");
+            sb.append("</div>");
+            sb.append("<div>")
+                    .append("                            \n"
+                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Edit Order\">\n"
+                            + "                          \n"
+                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"View Order content\">\n"
+                            + "                          \n"
+                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Delete Order\">");
+            sb.append(" <input type=\"hidden\" name=\"OrderID\" value=").append(order.getOrderID()).append(">");
+            sb.append(" <input type=\"hidden\" name=\"customerid\" value=").append(order.getCustomerID()).append(">");
+            sb.append(" <input type=\"hidden\" name=\"carportid\" value=").append(order.getCarportID()).append(">");
+            sb.append("</div>\n");
         }
+        sb.append("<input type=\"hidden\" name=\"command\" value=\"UpdateOrder\">\n  </form>");
         sb.append("</tbody>");
-
         return sb.toString();
     }
 }
