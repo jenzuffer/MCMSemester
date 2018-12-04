@@ -17,7 +17,7 @@ public class GoToLoginPage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        if (request.getSession().getAttribute("admin") != null) {
+        if (request.getSession().getAttribute("admin") != null && request.getSession().getAttribute("OrderList") != null) {
             boolean admin = (boolean) request.getSession().getAttribute("admin");
             if (admin) {
                 return "employeepage";

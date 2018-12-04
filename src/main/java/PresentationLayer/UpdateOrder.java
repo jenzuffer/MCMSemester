@@ -9,11 +9,8 @@ import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Carport;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,18 +48,19 @@ public class UpdateOrder extends Command {
                                 && !request.getParameter("shedlength").isEmpty() && !request.getParameter("roof").isEmpty() && !request.getParameter("shed").isEmpty()) {
                             LogicFacade.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
                             orderlist = LogicFacade.getOrderlist();
-                            request.setAttribute("OrderList", orderlist);
+                            request.getSession().setAttribute("OrderList", orderlist);
                             break;
                         }
                     }
                     case "Delete Order": {
                         LogicFacade.deleteOrder(OrderID);
                         orderlist = LogicFacade.getOrderlist();
-                        request.setAttribute("OrderList", orderlist);
+                        request.getSession().setAttribute("OrderList", orderlist);
                         break;
                     }
-                    case "View Order": {
-                        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, !shed, roof));
+                    case "View Order content": {
+                        
+                        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
                         request.getSession().setAttribute("carport", carport);
                         return "itemlist";
                     }

@@ -7,7 +7,7 @@
 <%@page import="java.util.Collection"%>
 <%@page import="FunctionLayer.Carport"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
-<%@page import="FunctionLayer.Materiale"%>
+<%@page import="FunctionLayer.Material"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -15,7 +15,7 @@
 
 <%
     Carport carport = (Carport) request.getSession().getAttribute("carport");
-    Collection<List<Materiale>> listOfListsOfMaterials = carport.getListOfLists().values();
+    Collection<List<Material>> listOfListsOfMaterials = carport.getListOfLists().values();
     HTMLGenerator html = new HTMLGenerator();
 
 %>

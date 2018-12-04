@@ -121,9 +121,9 @@ public class HTMLGenerator {
                 + "    </tr>\n"
                 + "  </thead>\n"
                 + "  <tbody>");
-        sb.append("<form action=\"FrontController\" method=\"post\">"
-                + "<div class=\"form-group\">\n");
         for (Order order : tableData) {
+            sb.append("<form action=\"FrontController\" method=\"post\">"
+                    + "<div class=\"form-group\">\n");
             sb.append("<div>");
             sb.append("<tr><td>").append("").append(order.getOrderID())
                     .append("</td><td>").append("").append(order.getCustomerID())
@@ -153,20 +153,19 @@ public class HTMLGenerator {
                     .append("</td><td>").append("<input type=\"text\" name=\"shed\" value=\"").append(order.isShed())
                     .append("\">")
                     .append("</td><td>");
-            sb.append("</div>");
-            sb.append("<div>")
-                    .append("                            \n"
-                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Edit Order\">\n"
-                            + "                          \n"
-                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"View Order content\">\n"
-                            + "                          \n"
-                            + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Delete Order\">");
+            sb.append("                            \n"
+                    + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Edit Order\">\n"
+                    + "                          \n"
+                    + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"View Order content\">\n"
+                    + "                          \n"
+                    + "                          <input type=\"submit\" name =\"submit\" class=\"btn btn-primary\" value=\"Delete Order\">");
             sb.append(" <input type=\"hidden\" name=\"OrderID\" value=").append(order.getOrderID()).append(">");
             sb.append(" <input type=\"hidden\" name=\"customerid\" value=").append(order.getCustomerID()).append(">");
             sb.append(" <input type=\"hidden\" name=\"carportid\" value=").append(order.getCarportID()).append(">");
-            sb.append("</div>\n");
+            sb.append("</div>");
+            sb.append("<input type=\"hidden\" name=\"command\" value=\"UpdateOrder\">\n  </form>");
         }
-        sb.append("<input type=\"hidden\" name=\"command\" value=\"UpdateOrder\">\n  </form>");
+        
         sb.append("</tbody>");
         return sb.toString();
     }
