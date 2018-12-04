@@ -28,6 +28,12 @@ public class UpdateOrder extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         String x = request.getParameter("submit");
         int OrderID = Integer.valueOf(request.getParameter("OrderID"));
+        int width = Integer.valueOf(request.getParameter("width"));
+        int length = Integer.valueOf(request.getParameter("length"));
+        int shedwidth = Integer.valueOf(request.getParameter("shedwidth"));
+        int shedlength = Integer.valueOf(request.getParameter("shedlength"));
+        boolean roof = Boolean.valueOf(request.getParameter("roof"));
+        boolean shed = Boolean.valueOf(request.getParameter("shed"));
         try {
             List<Order> orderlist;
             if (x != null) {
@@ -43,12 +49,6 @@ public class UpdateOrder extends Command {
                         String role = request.getParameter("role");
                         if (!request.getParameter("width").isEmpty() && !request.getParameter("length").isEmpty() && !request.getParameter("shedwidth").isEmpty()
                                 && !request.getParameter("shedlength").isEmpty() && !request.getParameter("roof").isEmpty() && !request.getParameter("shed").isEmpty()) {
-                            int width = Integer.valueOf(request.getParameter("width"));
-                            int length = Integer.valueOf(request.getParameter("length"));
-                            int shedwidth = Integer.valueOf(request.getParameter("shedwidth"));
-                            int shedlength = Integer.valueOf(request.getParameter("shedlength"));
-                            boolean roof = Boolean.valueOf(request.getParameter("roof"));
-                            boolean shed = Boolean.valueOf(request.getParameter("shed"));
                             LogicFacade.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
                             orderlist = LogicFacade.getOrderlist();
                             request.setAttribute("OrderList", orderlist);
@@ -62,11 +62,9 @@ public class UpdateOrder extends Command {
                         break;
                     }
                     case "View Order": {
-                        /*
-                        //Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, getRoof));
+                        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, !shed, roof));
                         request.getSession().setAttribute("carport", carport);
                         return "itemlist";
-                        */
                     }
                 }
             }
