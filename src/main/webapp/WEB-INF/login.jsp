@@ -34,12 +34,12 @@
                     <div class='col-md-8'>
                         <div class="form-group"> 
                             <label>*Email</label>
-                            <input type='email' name='email' class="form-control" placeholder='Enter your email..'>
+                            <input type='email' name='email' class="form-control" placeholder='Enter your email..' value="someemail@nowhere.com">
                         </div>
                         <div class="form-group"> 
                             <label>*Enter a password</label>
                             <input pattern=".{8,}" type='password' name='firstpassword' class="form-control" placeholder='Enter an password..'
-                                   required title="Password has to be atleast 8 characters long">
+                                   required title="Password has to be atleast 8 characters long" value="4353453453" >
                         </div>
                         <button class="btn btn-primary" onclick="update()" >Login</button>
                     </div>

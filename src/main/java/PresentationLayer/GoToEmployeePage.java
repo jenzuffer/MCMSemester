@@ -33,7 +33,7 @@ public class GoToEmployeePage extends Command {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GoToEmployeePage.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.setAttribute("OrderList", orderlist);
+            request.getSession().setAttribute("OrderList", orderlist);
             return "employeepage";
         } else {
             return "login";

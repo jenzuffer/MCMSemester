@@ -62,8 +62,11 @@ public class UpdateOrder extends Command {
                         break;
                     }
                     case "View Order": {
-                        
-                        break;
+                        /*
+                        //Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, getRoof));
+                        request.getSession().setAttribute("carport", carport);
+                        return "itemlist";
+                        */
                     }
                 }
             }

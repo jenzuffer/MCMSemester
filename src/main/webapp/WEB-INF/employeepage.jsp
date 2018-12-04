@@ -10,7 +10,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    List<Order> list = (List<Order>) request.getAttribute("OrderList");
+    List<Order> list = (List<Order>) request.getSession().getAttribute("OrderList");
     HTMLGenerator html = new HTMLGenerator();
 %>
 <html>
@@ -27,15 +27,11 @@
     </head>
     <body>
         <jsp:include page="navigator.jsp" />
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <table class="table" id="database-table">
-                        <%= html.getOrders(list)%>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <table class="table" id="database-table">
+            <%= html.getOrders(list)%>
+        </table>
+        
+
         <script src="Ressources/Script.js"></script>
     </body>
 </html>
