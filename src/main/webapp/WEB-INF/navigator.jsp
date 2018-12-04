@@ -36,7 +36,7 @@
                  <div class="header">
                     <form action="FrontController" method="POST">
                         <input type="hidden" name="command" value="login"> 
-                        <input type="submit" value="Administrator login">
+                        <input type="submit" value="login">
                     </form>
                 </div>
             </div>

@@ -7,7 +7,7 @@ package DBAccess;
 
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.Materiale;
+import FunctionLayer.Material;
 import PresentationLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,8 +23,8 @@ import java.util.List;
  */
 public class DataMapper {
 
-    public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
-        List<Materiale> materials = new ArrayList();
+    public static List<Material> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
+        List<Material> materials = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
             String l_sSQL = "SELECT * FROM `Materiale` WHERE id = " + indexID;
@@ -223,16 +223,16 @@ public class DataMapper {
         }
     }
 
-    public static List<Materiale> getAllMaterialsByType(String type) throws LoginSampleException {
-        List<Materiale> allMaterials = new ArrayList();
-        Materiale materiale;
+    public static List<Material> getAllMaterialsByType(String type) throws LoginSampleException {
+        List<Material> allMaterials = new ArrayList();
+        Material materiale;
         String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = \"" + type + "\" ORDER BY Længde DESC;";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
-                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getInt(4));
+                materiale = new Material(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getInt(4));
                 materiale.setType(type);
                 allMaterials.add(materiale);
             }
@@ -242,16 +242,16 @@ public class DataMapper {
         return allMaterials;
     }
 
-    public static List<Materiale> getAllMaterials() throws LoginSampleException {
-        List<Materiale> allMaterials = new ArrayList();
-        Materiale materiale;
+    public static List<Material> getAllMaterials() throws LoginSampleException {
+        List<Material> allMaterials = new ArrayList();
+        Material materiale;
         String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Type, Længde, Id, Pris FROM `Produkter`";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
-                materiale = new Materiale(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6), l_rsSearch.getInt(7));
+                materiale = new Material(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6), l_rsSearch.getInt(7));
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {

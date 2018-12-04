@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
-import FunctionLayer.Materiale;
+import FunctionLayer.Material;
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
 import java.io.ByteArrayOutputStream;
@@ -71,7 +71,7 @@ public class PDFGenerator {
         cs.close();
     }
 
-    private void drawTable(PDDocument document, HashMap<String, List<Materiale>> map) throws IOException {
+    private void drawTable(PDDocument document, HashMap<String, List<Material>> map) throws IOException {
         PDPage page = new PDPage();
         document.addPage(page);
         float margin = 20;
@@ -82,8 +82,8 @@ public class PDFGenerator {
         List<List> data = new ArrayList();
         data.add(new ArrayList<>(Arrays.asList(HEADERS)));
 
-        for (List<Materiale> list : map.values()) {
-            for (Materiale m : list) {
+        for (List<Material> list : map.values()) {
+            for (Material m : list) {
                 data.add(new ArrayList<>(
                         Arrays.asList(m.getName(), m.getLength(), m.getAmount(), m.getUnit(), m.getDescription())));
             }

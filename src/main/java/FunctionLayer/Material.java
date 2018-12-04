@@ -1,11 +1,11 @@
 package FunctionLayer;
 
-public class Materiale {
+public class Material {
     private String name, description, unit, type;
     private int amount, length, id;
     private double price;
 
-    public Materiale(String name, String description, String unit, String type, int length, int id, double price) {
+    public Material(String name, String description, String unit, String type, int length, int id, double price) {
         this.name = name;
         this.description = description;
         this.unit = unit;
@@ -18,14 +18,14 @@ public class Materiale {
     
     
     
-    public Materiale(String name, String description, String unit, int length) {
+    public Material(String name, String description, String unit, int length) {
         this.name = name;
         this.description = description;
         this.unit = unit;
         this.length = length;
     }
     
-    public Materiale(String name, String description, String unit, int amount, int length) {
+    public Material(String name, String description, String unit, int amount, int length) {
         this.name = name;
         this.description = description;
         this.unit = unit;

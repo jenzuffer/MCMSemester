@@ -15,10 +15,10 @@ import java.util.List;
 public class CalculateScrews {
 
     //public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
-    List<Materiale> calculateScrewsClass(List<Materiale> materials, int length, int width, boolean tag, List<Materiale> listOfRoofMaterials) throws LoginSampleException {
-        List<Materiale> returnlist = new ArrayList();
+    List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws LoginSampleException {
+        List<Material> returnlist = new ArrayList();
         
-        List<Materiale> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
+        List<Material> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
         /*
         for (Materiale material : materials) {
             if ("bundskruer".equals(material.getType())) {
@@ -27,21 +27,21 @@ public class CalculateScrews {
         }
         */
         int amount = 0;
-        List<Materiale> roofMaterialsForScrews;
+        List<Material> roofMaterialsForScrews;
         roofMaterialsForScrews = listOfRoofMaterials;
         for (int i = 0; i < roofMaterialsForScrews.size(); i++) {
             amount += roofMaterialsForScrews.get(i).getAmount();
         }
-        for (Materiale screwMaterials : listofScrews) {
+        for (Material screwMaterials : listofScrews) {
             screwMaterials.addToAmount(amount / 2);
             returnlist.add(screwMaterials);
         }
         return returnlist;
     }
 
-    public List<Materiale> calculateStainlessSteel(List<Materiale> materials, int length, int width, boolean tag) throws LoginSampleException {
-        List<Materiale> returnlist = new ArrayList();
-        List<Materiale> listofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
+    public List<Material> calculateStainlessSteel(List<Material> materials, int length, int width, boolean tag) throws LoginSampleException {
+        List<Material> returnlist = new ArrayList();
+        List<Material> listofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
         
         /*
         for (Materiale material : materials) {
@@ -52,7 +52,7 @@ public class CalculateScrews {
         */
         
         if (tag) {
-            for (Materiale screwMaterials : listofStainlessSteal) {
+            for (Material screwMaterials : listofStainlessSteal) {
                 screwMaterials.addToAmount(2);
                 returnlist.add(screwMaterials);
             }

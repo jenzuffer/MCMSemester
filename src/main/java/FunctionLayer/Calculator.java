@@ -10,16 +10,16 @@ import java.util.List;
  * @author Mark
  */
 public class Calculator {
-    private List<Materiale> listOfRoofMaterials;
-    private List<Materiale> listOfScrewsMaterials;
-    private List<Materiale> listOfScrew2Materials;
-    private List<Materiale> listOfShedPoleMaterials;
-    private List<Materiale> listOfShedCladdingMaterials;
-    private List<Materiale> listOfShedWoodCladdingMaterials;
-    private List<Materiale> listOfCarportPoleMaterials;
-    private List<Materiale> listOfCarportStrapsMaterials;
-    private List<Materiale> listOfCarportRaftersMaterials;
-    private LinkedHashMap<String,List<Materiale>> HMOfAllLists = new LinkedHashMap();
+    private List<Material> listOfRoofMaterials;
+    private List<Material> listOfScrewsMaterials;
+    private List<Material> listOfScrew2Materials;
+    private List<Material> listOfShedPoleMaterials;
+    private List<Material> listOfShedCladdingMaterials;
+    private List<Material> listOfShedWoodCladdingMaterials;
+    private List<Material> listOfCarportPoleMaterials;
+    private List<Material> listOfCarportStrapsMaterials;
+    private List<Material> listOfCarportRaftersMaterials;
+    private LinkedHashMap<String,List<Material>> HMOfAllLists = new LinkedHashMap();
     private int length;
     private int width;
     private int shedWidth;
@@ -27,7 +27,7 @@ public class Calculator {
     private boolean tag;
     private Carport carport;
     
-    public Calculator(Carport carport, List<Materiale> materials) throws LoginSampleException {
+    public Calculator(Carport carport, List<Material> materials) throws LoginSampleException {
         this.carport = carport;
         length = carport.getLength();
         width = carport.getWidth();
@@ -47,43 +47,43 @@ public class Calculator {
         listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(materials,length, width);
     }
 
-    public List<Materiale> getListOfRoofMaterials() {
+    public List<Material> getListOfRoofMaterials() {
         return listOfRoofMaterials;
     }
 
-    public List<Materiale> getListOfScrewsMaterials() {
+    public List<Material> getListOfScrewsMaterials() {
         return listOfScrewsMaterials;
     }
 
-    public List<Materiale> getListOfScrew2Materials() {
+    public List<Material> getListOfScrew2Materials() {
         return listOfScrew2Materials;
     }
 
-    public List<Materiale> getListOfShedPoleMaterials() {
+    public List<Material> getListOfShedPoleMaterials() {
         return listOfShedPoleMaterials;
     }
 
-    public List<Materiale> getListOfShedCladdingMaterials() {
+    public List<Material> getListOfShedCladdingMaterials() {
         return listOfShedCladdingMaterials;
     }
 
-    public List<Materiale> getListOfShedWoodCladdingMaterials() {
+    public List<Material> getListOfShedWoodCladdingMaterials() {
         return listOfShedWoodCladdingMaterials;
     }
 
-    public List<Materiale> getListOfCarportPoleMaterials() {
+    public List<Material> getListOfCarportPoleMaterials() {
         return listOfCarportPoleMaterials;
     }
 
-    public List<Materiale> getListOfCarportStrapsMaterials() {
+    public List<Material> getListOfCarportStrapsMaterials() {
         return listOfCarportStrapsMaterials;
     }
 
-    public List<Materiale> getListOfCarportRaftersMaterials() {
+    public List<Material> getListOfCarportRaftersMaterials() {
         return listOfCarportRaftersMaterials;
     }
 
-    public HashMap<String, List<Materiale>> getHMOfAllLists() {
+    public HashMap<String, List<Material>> getHMOfAllLists() {
         return HMOfAllLists;
     }
 

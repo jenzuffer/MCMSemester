@@ -15,9 +15,9 @@ import java.util.List;
 public class CalculateRoof {
 
         
-    public List<Materiale> CalculateRoofPlates(List<Materiale> materials, int length, int width, boolean tag) throws LoginSampleException {
-        List<Materiale> returnlist = new ArrayList();
-        List<Materiale> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
+    public List<Material> CalculateRoofPlates(List<Material> materials, int length, int width, boolean tag) throws LoginSampleException {
+        List<Material> returnlist = new ArrayList();
+        List<Material> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
         /*
         for (Materiale material : materials) {
             if ("tagplader".equals(material.getType())) {
@@ -58,7 +58,7 @@ public class CalculateRoof {
         return returnlist;
     }
 
-    public int calculateRaftersAmount(List<Materiale> materials ,int length, int width) throws LoginSampleException {
+    public int calculateRaftersAmount(List<Material> materials ,int length, int width) throws LoginSampleException {
         int countReturn = 0;
         int iWidth = width;
         double coverPiece = length / 55;
@@ -68,7 +68,7 @@ public class CalculateRoof {
         } else {
             amountOfPieces = length / 55;
         }
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");;
+        List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");;
         /*
         for (Materiale material : materials) {
             if ("spærtræ".equals(material.getType())) {
@@ -76,7 +76,7 @@ public class CalculateRoof {
             }
         }
         */
-        for (Materiale materiale : listOfMaterials) {
+        for (Material materiale : listOfMaterials) {
             if (iWidth >= materiale.getLength()) {
                 materiale.addToAmount(amountOfPieces);
                 iWidth = iWidth - materiale.getLength();
@@ -97,7 +97,7 @@ public class CalculateRoof {
                 break;
             }
             if (iWidth * amountOfPieces < listOfMaterials.get(listOfMaterials.size() - 1).getLength()) {
-                Materiale lastMateriale = listOfMaterials.get(listOfMaterials.size() - 1);
+                Material lastMateriale = listOfMaterials.get(listOfMaterials.size() - 1);
                 lastMateriale.addToAmount(1);
                 if (materiale != listOfMaterials.get(listOfMaterials.size() - 1)) {
                     countReturn += lastMateriale.getAmount();

@@ -72,7 +72,7 @@ public class LogicFacadeTest {
         // this test shows when given the boolean: false for shed, 
         // that it doesnt add anything related to shed
 
-        List<Materiale> expRes = null;
+        List<Material> expRes = null;
         for (String str : carport.getListOfLists().keySet()) {
             if (str.contains("shed")) {
                 expRes = carport.getListOfLists().get(str);

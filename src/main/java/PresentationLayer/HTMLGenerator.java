@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.Materiale;
+import FunctionLayer.Material;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public String getTableFromList(Collection<List<Materiale>> tableData) {
+    public String getTableFromList(Collection<List<Material>> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
                 + "    <tr>\n"
@@ -37,11 +37,11 @@ public class HTMLGenerator {
                 + "  </thead>\n"
                 + "  <tbody>");
 
-        HashMap<String, List<Materiale>> HM = new HashMap();
-        Collection<List<Materiale>> materialeilist = HM.values();
+        HashMap<String, List<Material>> HM = new HashMap();
+        Collection<List<Material>> materialeilist = HM.values();
 
-        for (List<Materiale> list : tableData) {
-            for (Materiale materiale : list) {
+        for (List<Material> list : tableData) {
+            for (Material materiale : list) {
                 sb.append("<tr><td>")
                         .append(materiale.getName())
                         .append("</td><td>")
@@ -61,7 +61,7 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
-    public String getDatabase(List<Materiale> tableData) {
+    public String getDatabase(List<Material> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
                 + "    <tr>\n"
@@ -76,7 +76,7 @@ public class HTMLGenerator {
                 + "  </thead>\n"
                 + "  <tbody>");
 
-        for (Materiale materiale : tableData) {
+        for (Material materiale : tableData) {
             sb.append("<tr><td>")
                     .append(materiale.getId())
                     .append("</td><td>")

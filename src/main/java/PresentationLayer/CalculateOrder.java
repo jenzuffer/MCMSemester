@@ -8,7 +8,7 @@ package PresentationLayer;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.Materiale;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -21,10 +21,10 @@ import javax.servlet.http.HttpSession;
  */
 public class CalculateOrder extends Command {
 
-    @Override
+    @Override 
 
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        List<Materiale> OrderMaterials;
+        List<Material> OrderMaterials;
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String city = request.getParameter("city");

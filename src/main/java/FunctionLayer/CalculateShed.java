@@ -18,9 +18,9 @@ public class CalculateShed {
 
     
     
-    public List<Materiale> calculatePoles(List<Materiale> materials ,int shedLength, int shedWidth, int width) throws LoginSampleException {
-        List<Materiale> returnList = new ArrayList();
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
+    public List<Material> calculatePoles(List<Material> materials ,int shedLength, int shedWidth, int width) throws LoginSampleException {
+        List<Material> returnList = new ArrayList();
+        List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         /*
         for (Materiale material : materials) {
             if ("stolpe".equals(material.getType())) {
@@ -45,16 +45,16 @@ public class CalculateShed {
         }
 
         
-        Materiale lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
+        Material lastPole = listOfMaterials.get(listOfMaterials.size() - 1);
         lastPole.addToAmount(numberOfPoles);
         numOfPoles = numberOfPoles;
         returnList.add(lastPole);
         return returnList;
     }
 
-    public List<Materiale> calculateCladding(List<Materiale> materials, int shedLength, int shedWidth) throws LoginSampleException {
-        List<Materiale> returnList = new ArrayList();
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
+    public List<Material> calculateCladding(List<Material> materials, int shedLength, int shedWidth) throws LoginSampleException {
+        List<Material> returnList = new ArrayList();
+        List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
         /*
         for (Materiale material : materials) {
             if ("beklædning".equals(material.getType())) {
@@ -69,15 +69,15 @@ public class CalculateShed {
             circumference -= 16;
         }
         //System.out.println("Cladding: " + amount);
-        Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
+        Material material = listOfMaterials.get(listOfMaterials.size() - 1);
         material.addToAmount(amount);
         returnList.add(material);
         return returnList;
     }
 
-    public List<Materiale> calculateWoodForCladding(List<Materiale> materials, int shedLength, int shedWidth) throws LoginSampleException {
-        List<Materiale> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");;
-        List<Materiale> returnList = new ArrayList();
+    public List<Material> calculateWoodForCladding(List<Material> materials, int shedLength, int shedWidth) throws LoginSampleException {
+        List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");;
+        List<Material> returnList = new ArrayList();
         /*
         for (Materiale material : materials) {
             if ("løsholter".equals(material.getType())) {
@@ -98,7 +98,7 @@ public class CalculateShed {
             poles += 2;
         }
         
-        Materiale material = listOfMaterials.get(listOfMaterials.size() - 1);
+        Material material = listOfMaterials.get(listOfMaterials.size() - 1);
         material.setDescription("Løsholter i skur gavle og sider");
         material.addToAmount(numberWidth + numberLength);
         returnList.add(material);

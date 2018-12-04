@@ -25,8 +25,8 @@ public class LogicFacade {
         return TotalMaterials;
     }
 
-    public static List<Materiale> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
-        List<Materiale> materials = DataMapper.calculateOrder(dimension, indexID);
+    public static List<Material> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
+        List<Material> materials = DataMapper.calculateOrder(dimension, indexID);
 
         return materials;
     }
@@ -61,16 +61,16 @@ public class LogicFacade {
         return calculator.getCalculatedCarport();
     }
 
-    public static List<Materiale> getAllMaterials() throws LoginSampleException {
-        List<Materiale> getAllMaterials = DataMapper.getAllMaterials();
+    public static List<Material> getAllMaterials() throws LoginSampleException {
+        List<Material> getAllMaterials = DataMapper.getAllMaterials();
         return getAllMaterials;
     }
 
-    public static List<Materiale> listOfMaterialsByType(String string) throws LoginSampleException {
+    public static List<Material> listOfMaterialsByType(String string) throws LoginSampleException {
         return DataMapper.getAllMaterialsByType(string);
     }
 
-    public static List<Materiale> listOfAllMaterials() throws LoginSampleException {
+    public static List<Material> listOfAllMaterials() throws LoginSampleException {
 
         return DataMapper.getAllMaterials();
     }
