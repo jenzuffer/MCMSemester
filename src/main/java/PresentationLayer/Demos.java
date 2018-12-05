@@ -17,7 +17,7 @@ public class Demos extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        return "createuser";
+        return "login";
     }
 
 }

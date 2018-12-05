@@ -4,6 +4,7 @@
     Author     : mwn
 --%>
 
+<%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,22 +14,30 @@
         <link rel="stylesheet" href="Ressources/Style.css">
     </head>
     <body>
+        <%
+            User user = (User) request.getSession().getAttribute("user");
+        %>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
-            
-            <img src="Img/logo.png" alt="test"width="64" height="64">
+
+                <img src="Img/logo.png" alt="test"width="64" height="64">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="FrontController?command=gotocreateuser">Sign up<span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
+                    <%if (user == null) {%>
                     <a class="nav-item nav-link" href="FrontController?command=login">Login</a>
+                    <a class="nav-item nav-link" href="FrontController?command=gotocreateuser">Sign up<span class="sr-only">(current)</span></a>
+                    <%}%>
+                    <%if (user != null) {%>
+                    <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
                     <a class="nav-item nav-link" href="FrontController?command=updatedatabase">Edit products</a>
-                    <a class="nav-item nav-link" href="#">See orders</a>
+                    <a class="nav-item nav-link" href="#">See orders (WIP)</a>
+                    <a class="nav-item nav-link" href="#">Logout (WIP)</a>
+                    <%}%>
                 </div>
             </div>
         </nav>
