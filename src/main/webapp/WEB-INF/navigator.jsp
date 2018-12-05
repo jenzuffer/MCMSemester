@@ -13,34 +13,24 @@
         <link rel="stylesheet" href="Ressources/Style.css">
     </head>
     <body>
-        
-        <div class='container-fluid'>
-            <div class="row" >
-                <div class="header">
-                    <form action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="heightandlength"> 
-                        <input type="submit" value="Go to calculator">
-                    </form>
-                </div>
-                <div class="header">
-                    <form action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="gotocreateuser"> 
-                        <input type="submit" value="Sign up">
-                    </form>
-                </div>
-                <div class="header">
-                    <form action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="updatedatabase"> 
-                        <input type="submit" value="Edit products">
-                    </form>
-                </div>
-                 <div class="header">
-                    <form action="FrontController" method="POST">
-                        <input type="hidden" name="command" value="login"> 
-                        <input type="submit" value="login">
-                    </form>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <a class="navbar-brand" href="#">
+            
+            <img src="Img/logo.png" alt="test"width="64" height="64">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="FrontController?command=gotocreateuser">Sign up<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
+                    <a class="nav-item nav-link" href="FrontController?command=login">Login</a>
+                    <a class="nav-item nav-link" href="FrontController?command=updatedatabase">Edit products</a>
+                    <a class="nav-item nav-link" href="#">See orders</a>
                 </div>
             </div>
-        </div>
+        </nav>
     </body>
 </html>
