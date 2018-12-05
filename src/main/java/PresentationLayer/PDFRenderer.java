@@ -9,12 +9,15 @@ import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.commons.mail.EmailException;
 
 /**
@@ -26,7 +29,10 @@ public class PDFRenderer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
-        PDFGenerator pdfGen = new PDFGenerator(carport);
+        PDFGenerator pdfGen = new PDFGenerator(carport, "<svg width=\"400\" height=\"110\">\n"
+                + "  <rect width=\"300\" height=\"100\" style=\"fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)\" />\n"
+                + "  Sorry, your browser does not support inline SVG.  \n"
+                + "</svg>");
         try {
             byte[] pdf = pdfGen.generatePdf();
             LogicFacade.inserPdf(1, pdf);
@@ -34,11 +40,14 @@ public class PDFRenderer extends Command {
             request.getRequestDispatcher("/PDF").forward(request, response);
             new Mail(new User("Mads", null, null, null, "cph-mn492@cphbusiness.dk"), pdf).sendEmailWithAttachtment();
         } catch (IOException ex) {
-            System.out.println("Failed");
+            System.out.println("Failed: " + ex.getMessage());
+            
         } catch (ServletException ex) {
             System.out.println("Servlet exception");
         } catch (EmailException ex) {
             System.out.println("Email failed");
+        } catch (TranscoderException ex) {
+            System.out.println("Transcoder failed");
         }
         return "itemlist";
     }

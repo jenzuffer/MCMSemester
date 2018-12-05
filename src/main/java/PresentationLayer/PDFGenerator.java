@@ -9,18 +9,38 @@ import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import org.apache.batik.transcoder.TranscoderException;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import org.apache.pdfbox.pdmodel.graphics.image.JPEGFactory;
 
 /**
  *
@@ -33,12 +53,14 @@ public class PDFGenerator {
     private final String[] HEADERS = {"Name", "Length", "Amount", "Unit", "Description"};
     private final PDFont FONT_NORMAL = PDType1Font.HELVETICA;
     private final PDFont FONT_BOLD = PDType1Font.HELVETICA_BOLD;
+    private String svg;
 
-    public PDFGenerator(Carport carport) {
+    public PDFGenerator(Carport carport, String svg) {
         this.carport = carport;
+        this.svg = svg;
     }
 
-    public byte[] generatePdf() throws IOException {
+    public byte[] generatePdf() throws IOException, UnsupportedEncodingException, FileNotFoundException, TranscoderException {
         ByteArrayOutputStream out;
         try (PDDocument document = new PDDocument()) {
             out = new ByteArrayOutputStream();
@@ -49,7 +71,7 @@ public class PDFGenerator {
         return out.toByteArray();
     }
 
-    private void setFrontPage(PDDocument document) throws IOException {
+    private void setFrontPage(PDDocument document) throws IOException, UnsupportedEncodingException, FileNotFoundException, TranscoderException {
         PDPage frontPage = new PDPage();
         setTextCenter("Fog", 30, 24, FONT_BOLD, frontPage, document);
         if (carport.isShedChosen()) {
@@ -60,15 +82,8 @@ public class PDFGenerator {
             setTextCenter("Carport", 70, 20, FONT_NORMAL, frontPage, document);
             setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage, document);
         }
+        setSVGImage(document, this.svg);
         document.addPage(frontPage);
-    }
-
-    private void setImageOnFrontPage(String imagePath, int x, int y, PDDocument document) throws IOException {
-        PDPage frontPage = document.getPage(0);
-        PDPageContentStream cs = new PDPageContentStream(document, frontPage, PDPageContentStream.AppendMode.APPEND, false);
-        PDImageXObject pdImage = PDImageXObject.createFromFile(imagePath, document);
-        cs.drawImage(pdImage, x, y);
-        cs.close();
     }
 
     private void drawTable(PDDocument document, HashMap<String, List<Material>> map) throws IOException {
@@ -110,5 +125,18 @@ public class PDFGenerator {
             cs.endText();
             cs.close();
         }
+    }
+
+    private void setSVGImage(PDDocument document, String svg) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
+        PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
+        PDPage page = document.getPage(0);
+        try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
+            contents.drawImage(img, 200, 200);
+            contents.close();
+        }
+    }
+
+    private byte[] svgConversion(String svg) {
+        
     }
 }
