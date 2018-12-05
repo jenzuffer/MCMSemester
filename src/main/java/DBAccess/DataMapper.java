@@ -117,17 +117,6 @@ public class DataMapper {
         }
     }
 
-    public static void createCarport(int Heigth, int Width, int Length) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Height`,`Width`,`Length`) VALUES (NULL, " + Heigth + ", " + Width + ", " + Length + ")";
-        try {
-            Connection l_cCon = Connector.connection();
-            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
-            l_pStatement.executeUpdate();
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
-        }
-    }
-
     public static void createOrder(int CustomerID, int CarportID) throws LoginSampleException {
         String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + CustomerID + ", " + CarportID + ")";
         try {
@@ -234,10 +223,10 @@ public class DataMapper {
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
                 materiale = new Material(
-                        l_rsSearch.getString(1), 
-                        l_rsSearch.getString(2), 
-                        l_rsSearch.getString(3), 
-                        l_rsSearch.getInt(4), 
+                        l_rsSearch.getString(1),
+                        l_rsSearch.getString(2),
+                        l_rsSearch.getString(3),
+                        l_rsSearch.getInt(4),
                         l_rsSearch.getInt(5));
                 materiale.setType(type);
                 allMaterials.add(materiale);
@@ -271,5 +260,30 @@ public class DataMapper {
             throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
         }
         return allMaterials;
+    }
+
+    public static int addCarport(Carport carport) throws LoginSampleException {
+        String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Width`,`Length`,`ShedWidth`,`ShedLength`,`Roof`,`Shed`) VALUES (NULL,?, ?, ?, ?, ?, ?)";
+        int carportID = 1;
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            l_pStatement.setInt(1, carport.getWidth());
+            l_pStatement.setInt(2, carport.getLength());
+            l_pStatement.setInt(3, carport.getShedWidth());
+            l_pStatement.setInt(4, carport.getShedLength());
+            l_pStatement.setBoolean(5, carport.isRoofChosen());
+            l_pStatement.setBoolean(6, carport.isShedChosen());
+            l_pStatement.executeUpdate();
+            l_sSQL = "SELECT idCarport FROM `Carport` WHERE idCarport=(SELECT MAX(idCarport) FROM `Carport`);";
+            l_pStatement = l_cCon.prepareStatement(l_sSQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
+            if (l_rsSearch.next()) {
+                carportID = l_rsSearch.getInt(1);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+        }
+        return carportID;
     }
 }

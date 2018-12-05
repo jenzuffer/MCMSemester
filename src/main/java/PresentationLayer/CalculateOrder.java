@@ -9,7 +9,7 @@ import FunctionLayer.LoginSampleException;
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Material;
-import java.util.ArrayList;
+import FunctionLayer.User;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 public class CalculateOrder extends Command {
 
-    @Override 
+    @Override
 
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         List<Material> OrderMaterials;
@@ -34,8 +34,8 @@ public class CalculateOrder extends Command {
             if (!name.isEmpty() && !address.isEmpty() && !city.isEmpty() && !number.isEmpty() && !email.isEmpty()) {
                 LogicFacade.createCustomer(name, address, city, number, email);
             }
-        } catch(NullPointerException e) {
-            
+        } catch (NullPointerException e) {
+
         }
         boolean getRoof = Boolean.parseBoolean(request.getParameter("chosenroof"));
         int width = Integer.valueOf(request.getParameter("width")) == null ? 0 : Integer.valueOf(request.getParameter("width"));
@@ -45,9 +45,9 @@ public class CalculateOrder extends Command {
         int shedLength = request.getParameter("shedlength").contains("Choose") ? 0 : Integer.valueOf(request.getParameter("shedlength"));
         Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, getRoof));
         // Send carport til DB som ordrer
+        User user = (User) request.getSession().getAttribute("user");
+        LogicFacade.addOrderCompletely(user, carport);
         request.getSession().setAttribute("carport", carport);
-        // session.setAttribute("ordermaterials", OrderMaterials);
-        //return "customerconfirmation";
         return "itemlist";
     }
 
