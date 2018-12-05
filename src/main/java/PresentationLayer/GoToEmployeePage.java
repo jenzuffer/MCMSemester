@@ -23,9 +23,18 @@ public class GoToEmployeePage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        String Email = request.getParameter("email");
-        String Pw = request.getParameter("firstpassword");
+        if (request.getParameter("email") != null && request.getParameter("firstpassword") != null) {
+            String Email = request.getParameter("email");
+            String Pw = request.getParameter("firstpassword");
+            request.getSession().setAttribute("email", Email);
+            request.getSession().setAttribute("pw", Pw);
+        }
+        String Email = (String) request.getSession().getAttribute("email");
+        String Pw = (String) request.getSession().getAttribute("pw");
         User user = LogicFacade.isUser(Email, Pw);
+        if (user == null) {
+            return "login";
+        }
         request.getSession().setAttribute("user", user);
         boolean authenticated = LogicFacade.isAdmin(Email, Pw);
         request.getSession().setAttribute("admin", authenticated);
@@ -39,7 +48,6 @@ public class GoToEmployeePage extends Command {
             request.getSession().setAttribute("OrderList", orderlist);
             return "employeepage";
         } else {
-            //kræver at være valideret her, ellers komme loginsampleexception om forkert bruger
             return "navigator";
         }
     }
