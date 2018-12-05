@@ -9,6 +9,18 @@ import FunctionLayer.LoginSampleException;
  */
 public class SVGofCarport {
 
+    public String getCarportSVGString() {
+        return carportSVGString;
+    }
+
+    
+    
+    private String carportSVGString = "<svg width=\"400\" height=\"110\">\n"
+                + "  <rect width=\"300\" height=\"100\" style=\"fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)\" />\n"
+                + "  Sorry, your browser does not support inline SVG.  \n"
+                + "</svg>";
+    
+    
     public static String carport(Carport carport) throws LoginSampleException {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");

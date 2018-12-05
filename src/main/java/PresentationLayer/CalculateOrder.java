@@ -46,6 +46,7 @@ public class CalculateOrder extends Command {
         Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedLength, shedWidth, !checkShed, getRoof));
         // Send carport til DB som ordrer
         request.getSession().setAttribute("carport", carport);
+        request.getSession().setAttribute("svg", SVGofCarport.carport(carport));
         // session.setAttribute("ordermaterials", OrderMaterials);
         //return "customerconfirmation";
         return "itemlist";

@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class PDFGenerator {
             setTextCenter("Carport", 70, 20, FONT_NORMAL, frontPage, document);
             setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage, document);
         }
-        //setSVGImage(document, this.svg);
+        setSVGImage(document, this.svg, frontPage);
         document.addPage(frontPage);
     }
 
@@ -127,17 +128,40 @@ public class PDFGenerator {
         }
     }
 
-/*
-    private void setSVGImage(PDDocument document, String svg) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
+    private void setSVGImage(PDDocument document, String svg, PDPage page) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
         PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
-        PDPage page = document.getPage(0);
         try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
             contents.drawImage(img, 200, 200);
             contents.close();
         }
     }
-    private byte[] svgConversion(String svg) {
+    
+    private byte[] svgConversion(String svg) throws TranscoderException, IOException {
         
+            // Create a JPEG transcoder
+        JPEGTranscoder t = new JPEGTranscoder();
+
+        // Set the transcoding hints.
+        t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
+                   new Float(.8));
+
+        
+        // Create the transcoder input.
+        TranscoderInput input = new TranscoderInput(new ByteArrayInputStream(svg.getBytes()));
+        
+        // Create the transcoder output.
+        ByteArrayOutputStream ostream = new ByteArrayOutputStream();
+        TranscoderOutput output = new TranscoderOutput(ostream);
+
+        // Save the image.
+        t.transcode(input, output);
+
+        // Flush and close the stream.
+        ostream.flush();
+        ostream.close();
+        return ostream.toByteArray();
     }
+    
+/*
 */
 }

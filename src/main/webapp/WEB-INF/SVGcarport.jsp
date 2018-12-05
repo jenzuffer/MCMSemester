@@ -17,6 +17,7 @@
         
         <%
             Carport carport = (Carport) request.getSession().getAttribute("carport");
+            //SVGofCarport svg = (SVGofCarport) request.getSession().getAttribute("carport");
             int width = carport.getWidth();
             int length = carport.getLength();
         %>

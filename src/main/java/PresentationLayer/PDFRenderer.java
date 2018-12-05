@@ -29,10 +29,9 @@ public class PDFRenderer extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
-        PDFGenerator pdfGen = new PDFGenerator(carport, "<svg width=\"400\" height=\"110\">\n"
-                + "  <rect width=\"300\" height=\"100\" style=\"fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)\" />\n"
-                + "  Sorry, your browser does not support inline SVG.  \n"
-                + "</svg>");
+        
+        SVGofCarport sdfsd = new SVGofCarport();
+        PDFGenerator pdfGen = new PDFGenerator(carport, sdfsd.getCarportSVGString());
         try {
             byte[] pdf = pdfGen.generatePdf();
             LogicFacade.inserPdf(1, pdf);
