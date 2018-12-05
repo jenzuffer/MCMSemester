@@ -7,6 +7,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +25,8 @@ public class GoToEmployeePage extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         String Email = request.getParameter("email");
         String Pw = request.getParameter("firstpassword");
+        User user = LogicFacade.isUser(Email, Pw);
+        request.getSession().setAttribute("user", user);
         boolean authenticated = LogicFacade.isAdmin(Email, Pw);
         request.getSession().setAttribute("admin", authenticated);
         if (authenticated) {
@@ -36,7 +39,8 @@ public class GoToEmployeePage extends Command {
             request.getSession().setAttribute("OrderList", orderlist);
             return "employeepage";
         } else {
-            return "login";
+            //kræver at være valideret her, ellers komme loginsampleexception om forkert bruger
+            return "navigator";
         }
     }
 

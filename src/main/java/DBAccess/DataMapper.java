@@ -8,6 +8,7 @@ package DBAccess;
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Material;
+import FunctionLayer.User;
 import PresentationLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

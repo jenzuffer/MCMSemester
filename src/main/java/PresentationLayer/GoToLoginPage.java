@@ -6,6 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,16 +15,18 @@ import javax.servlet.http.HttpServletResponse;
  * @author Christian
  */
 public class GoToLoginPage extends Command {
-
+    
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        if (request.getSession().getAttribute("admin") != null && request.getSession().getAttribute("OrderList") != null) {
-            boolean admin = (boolean) request.getSession().getAttribute("admin");
-            if (admin) {
+        if (request.getSession().getAttribute("user") != null && request.getSession().getAttribute("OrderList") != null) {
+            User user = (User) request.getSession().getAttribute("user");
+            if (user.getRole().equals("admin")) {
                 return "employeepage";
+            } else if (user.getRole().equals("customer")) {
+                return "navigator";
             }
         }
         return "login";
     }
-
+    
 }

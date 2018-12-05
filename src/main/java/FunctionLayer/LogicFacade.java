@@ -111,4 +111,9 @@ public class LogicFacade {
     public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws LoginSampleException {
         OrderMapper.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
     }
+
+    public static User isUser(String Email, String Pw) throws LoginSampleException {
+        User user = UserMapper.login(Email, Pw);
+        return user;
+    }
 }

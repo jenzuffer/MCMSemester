@@ -16,7 +16,7 @@ public class User {
     private int id;
     
     public User(String Name, String Address, String city, String phonenumber, String email) {
-        this.name = name;
+        this.name = Name;
         this.address = Address;
         this.city = city;
         this.phonenumber = phonenumber;
