@@ -20,7 +20,6 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
-
                 <img src="Img/logo.png" alt="test"width="64" height="64">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +31,7 @@
                     <a class="nav-item nav-link" href="FrontController?command=login">Login</a>
                     <a class="nav-item nav-link" href="FrontController?command=gotocreateuser">Sign up<span class="sr-only">(current)</span></a>
                     <%}%>
-                    <%if (user != null) {%>
+                    <%if (user != null) {%>x
                     <%if (user.getRole().equals("admin")) {%>
                     <a class="nav-item nav-link" href="FrontController?command=updatedatabase">Edit products</a>
                     <a class="nav-item nav-link" href="FrontController?command=employeepage">See orders (WIP)</a>
@@ -40,7 +39,7 @@
                     <%if (user.getRole().equals("customer")) {%>
                     <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
                     <%}%>
-                    <a class="nav-item nav-link" href="FrontController?command=logout">Logout</a>
+                    <a id="logout" class="nav-item nav-link " href="FrontController?command=logout">Logout</a>
                     <%}%>
                 </div>
             </div>

@@ -82,7 +82,7 @@ public class PDFGenerator {
             setTextCenter("Carport", 70, 20, FONT_NORMAL, frontPage, document);
             setTextCenter("Carport " + carport.getLength() + " X " + carport.getWidth() + " cm.", 130, 16, FONT_NORMAL, frontPage, document);
         }
-        setSVGImage(document, this.svg);
+        //setSVGImage(document, this.svg);
         document.addPage(frontPage);
     }
 
@@ -127,6 +127,7 @@ public class PDFGenerator {
         }
     }
 
+/*
     private void setSVGImage(PDDocument document, String svg) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
         PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
         PDPage page = document.getPage(0);
@@ -135,8 +136,8 @@ public class PDFGenerator {
             contents.close();
         }
     }
-
     private byte[] svgConversion(String svg) {
         
     }
+*/
 }
