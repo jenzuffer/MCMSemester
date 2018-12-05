@@ -226,13 +226,18 @@ public class DataMapper {
     public static List<Material> getAllMaterialsByType(String type) throws LoginSampleException {
         List<Material> allMaterials = new ArrayList();
         Material materiale;
-        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde FROM `Produkter` WHERE Type = \"" + type + "\" ORDER BY Længde DESC;";
+        String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde, Pris FROM `Produkter` WHERE Type = \"" + type + "\" ORDER BY Længde DESC;";
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
-                materiale = new Material(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getInt(4));
+                materiale = new Material(
+                        l_rsSearch.getString(1), 
+                        l_rsSearch.getString(2), 
+                        l_rsSearch.getString(3), 
+                        l_rsSearch.getInt(4), 
+                        l_rsSearch.getInt(5));
                 materiale.setType(type);
                 allMaterials.add(materiale);
             }
@@ -251,7 +256,14 @@ public class DataMapper {
             Statement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             ResultSet l_rsSearch = l_pStatement.executeQuery(l_sSQL);
             while (l_rsSearch.next()) {
-                materiale = new Material(l_rsSearch.getString(1), l_rsSearch.getString(2), l_rsSearch.getString(3), l_rsSearch.getString(4), l_rsSearch.getInt(5), l_rsSearch.getInt(6), l_rsSearch.getInt(7));
+                materiale = new Material(
+                        l_rsSearch.getString(1), // navn
+                        l_rsSearch.getString(2), // beskrivelse
+                        l_rsSearch.getString(3), // enhed
+                        l_rsSearch.getString(4), // type
+                        l_rsSearch.getInt(5), // længde
+                        l_rsSearch.getInt(6), // id
+                        l_rsSearch.getInt(7)); // pris
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {

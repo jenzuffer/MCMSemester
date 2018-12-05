@@ -3,9 +3,9 @@ package FunctionLayer;
 public class Material {
     private String name, description, unit, type;
     private int amount, length, id;
-    private double price;
+    private int price;
 
-    public Material(String name, String description, String unit, String type, int length, int id, double price) {
+    public Material(String name, String description, String unit, String type, int length, int id, int price) {
         this.name = name;
         this.description = description;
         this.unit = unit;
@@ -24,14 +24,16 @@ public class Material {
         this.unit = unit;
         this.length = length;
     }
-    
-    public Material(String name, String description, String unit, int amount, int length) {
+
+    public Material(String name, String description, String unit, int length, int price) {
         this.name = name;
         this.description = description;
         this.unit = unit;
-        this.amount = amount;
         this.length = length;
+        this.price = price;
     }
+    
+    
 
     public String getName() {
         return name;
@@ -81,7 +83,7 @@ public class Material {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(String type) {  
         this.type = type;
     }
 
@@ -93,13 +95,14 @@ public class Material {
         this.id = id;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
+
 
 
 }

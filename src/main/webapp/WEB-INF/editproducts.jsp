@@ -5,13 +5,13 @@
 --%>
 
 <%@page import="FunctionLayer.LogicFacade"%>
-<%@page import="FunctionLayer.Materiale"%>
+<%@page import="FunctionLayer.Material"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    List<Materiale> list = (List<Materiale>) request.getAttribute("allproducts");
+    List<Material> list = (List<Material>) request.getAttribute("allproducts");
     HTMLGenerator html = new HTMLGenerator();
 %>
 <!DOCTYPE html>
