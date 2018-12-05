@@ -30,7 +30,8 @@ abstract class Command {
         commands.put("pdf", new PDFRenderer());
         commands.put("gotocreateuser", new GoToCreateUser());
         commands.put("login", new GoToLoginPage());
-         commands.put("employeepage", new GoToEmployeePage());
+        commands.put("employeepage", new GoToEmployeePage());
+        commands.put("logout", new LogOut());
         //add methods here for the controller
     }
     

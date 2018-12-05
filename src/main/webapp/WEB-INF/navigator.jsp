@@ -33,10 +33,14 @@
                     <a class="nav-item nav-link" href="FrontController?command=gotocreateuser">Sign up<span class="sr-only">(current)</span></a>
                     <%}%>
                     <%if (user != null) {%>
-                    <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
+                    <%if (user.getRole().equals("admin")) {%>
                     <a class="nav-item nav-link" href="FrontController?command=updatedatabase">Edit products</a>
-                    <a class="nav-item nav-link" href="#">See orders (WIP)</a>
-                    <a class="nav-item nav-link" href="#">Logout (WIP)</a>
+                    <a class="nav-item nav-link" href="FrontController?command=employeepage">See orders (WIP)</a>
+                    <%}%>
+                    <%if (user.getRole().equals("customer")) {%>
+                    <a class="nav-item nav-link" href="FrontController?command=heightandlength">Send a query</a>
+                    <%}%>
+                    <a class="nav-item nav-link" href="FrontController?command=logout">Logout</a>
                     <%}%>
                 </div>
             </div>
