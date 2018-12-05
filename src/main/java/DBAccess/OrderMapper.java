@@ -97,4 +97,17 @@ public class OrderMapper {
             throw new LoginSampleException("Could not edit order: " + ex.getMessage());
         }
     }
+
+    public static void addOrder(User user, int carportID) throws LoginSampleException {
+        String SQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`,`pdf`) VALUES (NULL, ?, ?, \"\")";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(SQL);
+            l_pStatement.setInt(1, user.getId());
+            l_pStatement.setInt(2, carportID);
+            l_pStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new LoginSampleException("Could not add order: " + ex.getMessage() + " sql: " + SQL);
+        }
+    }
 }

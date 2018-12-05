@@ -116,4 +116,9 @@ public class LogicFacade {
         User user = UserMapper.login(Email, Pw);
         return user;
     }
+
+    public static void addOrderCompletely(User user, Carport carport) throws LoginSampleException {
+        int carportID = DataMapper.addCarport(carport);
+        OrderMapper.addOrder(user, carportID);
+    }
 }
