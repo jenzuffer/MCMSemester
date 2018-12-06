@@ -18,8 +18,8 @@ public class UserMapper {
     /**
      * Creates a user in the database
      *
-     * @param User object representing the user to be inserted
-     * @throws UserException
+     * @param user object representing the user to be inserted
+     * @throws UserException if creating user fails
      */
     public static void createUser(User user) throws UserException {
         try {
@@ -47,8 +47,8 @@ public class UserMapper {
     /**
      * Login
      *
-     * @param email
-     * @param password
+     * @param email string for email
+     * @param password string for password
      * @return User trying to login
      * @throws UserException if user not exists
      */
@@ -79,8 +79,8 @@ public class UserMapper {
     /**
      * Login
      *
-     * @param email
-     * @param password
+     * @param email String for email
+     * @param password String for password
      * @return String representing the role of the user
      * @throws UserException if user not exists
      */

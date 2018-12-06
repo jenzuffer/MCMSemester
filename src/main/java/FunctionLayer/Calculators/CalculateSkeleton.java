@@ -14,11 +14,11 @@ public class CalculateSkeleton {
      *
      * This method calculates the number of poles
      *
-     * @param materials
-     * @param length
-     * @param width
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
      * @return List of poles
-     * @throws DataException
+     * @throws DataException from LogicFacade
      */
     public List<Material> calculatePoles(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();
@@ -59,10 +59,10 @@ public class CalculateSkeleton {
      *
      * This method calculates the number of straps
      *
-     * @param materials
-     * @param length
+     * @param materials list of object
+     * @param length int length
      * @return List of straps
-     * @throws DataException
+     * @throws DataException from LogicFacade
      */
     public List<Material> calculateStraps(List<Material> materials, int length) throws DataException {
         List<Material> returnList = new ArrayList();
@@ -103,11 +103,11 @@ public class CalculateSkeleton {
      *
      * This method calculates the number of rafters
      *
-     * @param materials
-     * @param length
-     * @param width
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
      * @return List of rafters
-     * @throws DataException
+     * @throws DataException from LogicFacade
      */
     public List<Material> calculateRafters(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();

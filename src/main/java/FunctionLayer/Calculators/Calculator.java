@@ -31,16 +31,7 @@ public class Calculator {
     private boolean tag;
     private Carport carport;
 
-    /**
-     * Contructs a calculator object, with lists of material used to build the
-     * carport
-     *
-     *
-     * @param carport
-     * @param materials
-     * @return Calculator object
-     * @throws DataException
-     */
+    
     public Calculator(Carport carport, List<Material> materials) throws DataException {
         this.carport = carport;
         length = carport.getLength();

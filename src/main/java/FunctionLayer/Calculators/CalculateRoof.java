@@ -20,11 +20,11 @@ public class CalculateRoof {
     /**
      * returns a list of materials required for roof plates
      *
-     * @param materials
-     * @param length
-     * @param width
-     * @param tag
-     * @throws DataException
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @param tag boolean for roof
+     * @throws DataException for method of logicFacade
      * @return a list of materials required for roof plates
      */
     public List<Material> CalculateRoofPlates(List<Material> materials, int length, int width, boolean tag) throws DataException {
@@ -73,10 +73,10 @@ public class CalculateRoof {
     /**
      * returns integer amount of Rafters required
      *
-     * @param materials
-     * @param length
-     * @param width
-     * @throws DataException
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @throws DataException through logicfacade method
      * @return  integer amount of Rafters required
      */
     public int calculateRaftersAmount(List<Material> materials, int length, int width) throws DataException {

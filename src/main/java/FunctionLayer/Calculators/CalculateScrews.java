@@ -23,13 +23,13 @@ public class CalculateScrews {
      *
      * This method calculates the number of screws
      *
-     * @param materials
-     * @param length
-     * @param width
-     * @param tag
-     * @param listOfRoofMaterials
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @param tag boolean related to roof
+     * @param listOfRoofMaterials list of objects related to roof
      * @return List of screws
-     * @throws DataException
+     * @throws DataException through LogicFacade
      */
     public List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws DataException {
         List<Material> returnlist = new ArrayList();
@@ -61,12 +61,12 @@ public class CalculateScrews {
      *
      * This method calculates the number of steel
      *
-     * @param materials
-     * @param length
-     * @param width
-     * @param tag
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @param tag boolean tag
      * @return List of steel
-     * @throws DataException
+     * @throws DataException from LogicFacade
      */
     public List<Material> calculateStainlessSteel(List<Material> materials, int length, int width, boolean tag) throws DataException {
         List<Material> returnlist = new ArrayList();

@@ -31,7 +31,7 @@ public class DataMapper {
      *
      * @param indexID the id of a certain material
      * @return the List of materials
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Material> calculateOrder(int indexID) throws DataException {
         List<Material> materials = new ArrayList();
@@ -47,9 +47,9 @@ public class DataMapper {
     /**
      * Returns a list of integers. This method returns the possible widths of a
      * carport object
-     *
+     * @throws DataException if query failed
      * @return the List of integers
-     * @throws DataException
+     * 
      */
     public static List<Integer> getWidth() throws DataException {
         List<Integer> values = new ArrayList();
@@ -73,7 +73,7 @@ public class DataMapper {
      * carport object
      *
      * @return List of integers
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Integer> getLength() throws DataException {
         List<Integer> values = new ArrayList();
@@ -96,7 +96,7 @@ public class DataMapper {
      * shed
      *
      * @return the List of integers
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Integer> getShedWidth() throws DataException {
         List<Integer> values = new ArrayList();
@@ -120,7 +120,7 @@ public class DataMapper {
      * shed
      *
      * @return the List of integers
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Integer> getShedLength() throws DataException {
         List<Integer> values = new ArrayList();
@@ -141,12 +141,12 @@ public class DataMapper {
     /**
      * Update the database with a new customer.
      *
-     * @param name
-     * @param adress
-     * @param city
-     * @param phoneNumber
-     * @param email
-     * @throws DataException
+     * @param name name of customer 
+     * @param adress adress of customer
+     * @param city city of customer
+     * @param phoneNumber customers phonenumber
+     * @param email email of customer
+     * @throws DataException if query fails
      */
     public static void createCustomer(String name, String adress, String city, String phoneNumber, String email) throws DataException {
         String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, ?, ?, ?, ?, ?)";
@@ -169,9 +169,9 @@ public class DataMapper {
      *
      * Method for merging a customer with a carport
      *
-     * @param customerID
-     * @param carportID
-     * @throws OrderException
+     * @param customerID customerID related to Order being created
+     * @param carportID carportID related to Order being created
+     * @throws OrderException if query fails
      */
     public static void createOrder(int customerID, int carportID) throws OrderException {
         String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + customerID + ", " + carportID + ")";
@@ -188,9 +188,9 @@ public class DataMapper {
      * Returns a customers id based on a unique phonenumber.
      *
      *
-     * @param phoneNumber
+     * @param phoneNumber finds a customer based on their phone number
      * @return an int representing a customers id
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static int getCustomerIDByPhoneNumber(String phoneNumber) throws DataException {
         String l_sSQL = "SELECT ID FROM `Customer` WHERE Phonenumber = " + phoneNumber;
@@ -212,9 +212,9 @@ public class DataMapper {
      * Returns a carport id based on a customers id.
      *
      *
-     * @param customerID
+     * @param customerID retrieves a carportID by a customerID related to it
      * @return an int representing a carports id
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static int getCarportIDByCustomerID(int customerID) throws DataException {
         int CarportID = 0;
@@ -235,12 +235,12 @@ public class DataMapper {
     /**
      * Creates a new product in the database.
      *
-     * @param name
-     * @param price
-     * @param description
-     * @param length
-     * @param unit
-     * @throws DataException
+     * @param name name of product
+     * @param price price of product
+     * @param description description of product
+     * @param length length of product
+     * @param unit units of product
+     * @throws DataException if query fails
      */
     public static void createProduct(String name, int price, String description, int length, int unit) throws DataException {
         String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`) VALUES (NULL," + name + ", " + price + ", " + description + ", " + length
@@ -257,14 +257,14 @@ public class DataMapper {
     /**
      * Updates a product if exist or creates a new product if not
      *
-     * @param productID
-     * @param name
-     * @param price
-     * @param description
-     * @param length
-     * @param unit
-     * @param type
-     * @throws DataException
+     * @param productID integer ID
+     * @param name String name
+     * @param price int price
+     * @param description string description
+     * @param length int length
+     * @param unit int unit
+     * @param type string type
+     * @throws DataException if query fails
      */
     public static void updateProductOrAdd(int productID, String name, double price, String description, int length, String unit, String type) throws DataException {
         String l_sSQL = "";
@@ -299,9 +299,9 @@ public class DataMapper {
     /**
      * Returns a list of material based on their type
      *
-     * @param type
+     * @param type string materials
      * @return A list of materials
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Material> getAllMaterialsByType(String type) throws DataException {
         List<Material> allMaterials = new ArrayList();
@@ -331,7 +331,7 @@ public class DataMapper {
      * Returns a list of all materials
      *
      * @return A list of materials
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static List<Material> getAllMaterials() throws DataException {
         List<Material> allMaterials = new ArrayList();
@@ -361,9 +361,9 @@ public class DataMapper {
     /**
      * Creates a new carport and returns a integer representing the last carport added
      *
-     * @param carport
+     * @param carport carport object to use
      * @return CarportId
-     * @throws DataException
+     * @throws DataException if query fails
      */
     public static int addCarport(Carport carport) throws DataException {
         String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Width`,`Length`,`ShedWidth`,`ShedLength`,`Roof`,`Shed`) VALUES (NULL,?, ?, ?, ?, ?, ?)";
