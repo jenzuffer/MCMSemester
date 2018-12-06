@@ -9,27 +9,16 @@ import FunctionLayer.Carport;
 import FunctionLayer.Material;
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
+import java.awt.Dimension;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -37,7 +26,6 @@ import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
@@ -131,24 +119,25 @@ public class PDFGenerator {
     private void setSVGImage(PDDocument document, String svg, PDPage page) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
         PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
         try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
-            contents.drawImage(img, 100, 100);
+            img.setHeight(img.getHeight() / 2);
+            img.setWidth(img.getWidth() / 2);
+            contents.drawImage(img, 400, 400);
+            contents.drawXObject(img, 200, 200, 200, 200);
             contents.close();
         }
     }
-    
+
     private byte[] svgConversion(String svg) throws TranscoderException, IOException {
-        
-            // Create a JPEG transcoder
+
+        // Create a JPEG transcoder
         JPEGTranscoder t = new JPEGTranscoder();
 
         // Set the transcoding hints.
         t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
-                   new Float(.8));
+                new Float(.8));
 
-        
         // Create the transcoder input.
         TranscoderInput input = new TranscoderInput(new ByteArrayInputStream(svg.getBytes()));
-        System.out.println(svg.getBytes().length);
         // Create the transcoder output.
         ByteArrayOutputStream ostream = new ByteArrayOutputStream();
         TranscoderOutput output = new TranscoderOutput(ostream);
@@ -161,7 +150,7 @@ public class PDFGenerator {
         ostream.close();
         return ostream.toByteArray();
     }
-    
-/*
-*/
+
+    /*
+     */
 }
