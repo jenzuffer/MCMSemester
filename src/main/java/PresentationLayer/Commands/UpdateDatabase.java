@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
+import PresentationLayer.Commands.Command;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Exceptions.DataException;
 import javax.servlet.http.HttpServletRequest;

@@ -1,5 +1,6 @@
-package PresentationLayer;
+package PresentationLayer.Commands;
 
+import PresentationLayer.Commands.Command;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.UserException;

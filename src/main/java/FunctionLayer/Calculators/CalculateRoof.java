@@ -17,7 +17,16 @@ import java.util.List;
  */
 public class CalculateRoof {
 
-        
+    /**
+     * returns a list of materials required for roof plates
+     *
+     * @param materials
+     * @param length
+     * @param width
+     * @param tag
+     * @throws DataException
+     * @return a list of materials required for roof plates
+     */
     public List<Material> CalculateRoofPlates(List<Material> materials, int length, int width, boolean tag) throws DataException {
         List<Material> returnlist = new ArrayList();
         List<Material> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
@@ -27,7 +36,7 @@ public class CalculateRoof {
                 listofRoofPlates.add(material);
             }
         }
-        */
+         */
         int RaftersAmount = calculateRaftersAmount(materials, length, width);
         if (tag) {
             RaftersAmount *= 1.5;
@@ -61,7 +70,16 @@ public class CalculateRoof {
         return returnlist;
     }
 
-    public int calculateRaftersAmount(List<Material> materials ,int length, int width) throws DataException {
+    /**
+     * returns integer amount of Rafters required
+     *
+     * @param materials
+     * @param length
+     * @param width
+     * @throws DataException
+     * @return  integer amount of Rafters required
+     */
+    public int calculateRaftersAmount(List<Material> materials, int length, int width) throws DataException {
         int countReturn = 0;
         int iWidth = width;
         double coverPiece = length / 55;
@@ -78,7 +96,7 @@ public class CalculateRoof {
                 listOfMaterials.add(material);
             }
         }
-        */
+         */
         for (Material materiale : listOfMaterials) {
             if (iWidth >= materiale.getLength()) {
                 materiale.addToAmount(amountOfPieces);

@@ -18,9 +18,15 @@ import java.util.List;
 public class CalculateShed {
 
     private static int numOfPoles;
-
-    
-    
+    /**
+     * returns a list with poles required
+     *
+     * @param materials
+     * @param shedLength
+     * @param shedWidth
+     * @param width
+     * @throws DataException
+     */
     public List<Material> calculatePoles(List<Material> materials ,int shedLength, int shedWidth, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
@@ -55,6 +61,15 @@ public class CalculateShed {
         return returnList;
     }
 
+    /**
+     * returns a list of materials required for cladding
+     *
+     * @param materials
+     * @param shedLength
+     * @param shedWidth
+     * @throws DataException
+     * @return a list of materials required for cladding
+     */
     public List<Material> calculateCladding(List<Material> materials, int shedLength, int shedWidth) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
@@ -78,6 +93,14 @@ public class CalculateShed {
         return returnList;
     }
 
+     /**
+     *
+     * @param materials
+     * @param shedLength
+     * @param shedWidth
+     * @throws DataException
+     * @return list of materials consisten of wood for cladding
+     */
     public List<Material> calculateWoodForCladding(List<Material> materials, int shedLength, int shedWidth) throws DataException {
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");;
         List<Material> returnList = new ArrayList();

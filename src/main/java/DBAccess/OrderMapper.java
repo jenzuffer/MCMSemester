@@ -25,6 +25,13 @@ import java.util.List;
  */
 public class OrderMapper {
 
+     /**
+     * Inserts a PDF based on DB OrderID
+     *
+     * @param orderId
+     * @param pdf
+     * @throws OrderException
+     */
     public static void insertPdf(int orderId, byte[] pdf) throws OrderException {
         try {
             Connection con = Connector.connection();
@@ -38,6 +45,12 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * returns a list with Orders
+     *
+     * @return a list of Order
+     * @throws OrderException
+     */
     public static List<Order> getOrderList() throws OrderException {
         List<Order> orderlist = new ArrayList();
         String SQL = "SELECT Name, Adress, City, Phonenumber, Email, Role, OrderID,"
@@ -60,6 +73,12 @@ public class OrderMapper {
         return orderlist;
     }
 
+     /**
+     * Deletes an Order from the DB
+     *
+     * @param OrderID
+     * @throws OrderException
+     */
     public static void deleteOrder(int OrderID) throws OrderException {
         String SQL = "delete from `Order` WHERE `OrderID`=" + OrderID;
         try {
@@ -71,6 +90,25 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * Edites an Order from the DB
+     *
+     * @param OrderID
+     * @param customerID
+     * @param carportID
+     * @param name
+     * @param city
+     * @param phone
+     * @param email
+     * @param role
+     * @param width
+     * @param length
+     * @param shedwidth
+     * @param shedlength
+     * @param roof
+     * @param shed
+     * @throws OrderException
+     */
     public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws OrderException {
         try {
             Connection l_cCon = Connector.connection();
@@ -99,6 +137,13 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * Adds an Order to the DB
+     *
+     * @param user
+     * @param carportID
+     * @throws OrderException
+     */
     public static void addOrder(User user, int carportID) throws OrderException {
         String SQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`,`pdf`) VALUES (NULL, ?, ?, \"\")";
         try {
