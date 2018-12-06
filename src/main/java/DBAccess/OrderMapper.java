@@ -5,12 +5,9 @@
  */
 package DBAccess;
 
-import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.User;
 import PresentationLayer.Order;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +22,13 @@ import java.util.List;
  */
 public class OrderMapper {
 
+     /**
+     * Inserts a PDF based on DB OrderID
+     *
+     * @param orderId int to find order to insert pdf
+     * @param pdf byte array containing pdf
+     * @throws OrderException if query fails
+     */
     public static void insertPdf(int orderId, byte[] pdf) throws OrderException {
         try {
             Connection con = Connector.connection();
@@ -38,6 +42,12 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * returns a list with Orders
+     *
+     * @return a list of Order
+     * @throws OrderException if query fails
+     */
     public static List<Order> getOrderList() throws OrderException {
         List<Order> orderlist = new ArrayList();
         String SQL = "SELECT Name, Adress, City, Phonenumber, Email, Role, OrderID,"
@@ -60,6 +70,12 @@ public class OrderMapper {
         return orderlist;
     }
 
+     /**
+     * Deletes an Order from the DB
+     *
+     * @param OrderID int ID to delete Order with
+     * @throws OrderException if query fails deleting
+     */
     public static void deleteOrder(int OrderID) throws OrderException {
         String SQL = "delete from `Order` WHERE `OrderID`=" + OrderID;
         try {
@@ -71,6 +87,26 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * Edites an Order from the DB
+     *
+     * @param OrderID int ID of Order
+     * @param customerID int ID of customer
+     * @param carportID int ID of Carport
+     * @param name String name
+     * @param adress String adress
+     * @param city String city
+     * @param phone String phone
+     * @param email String email
+     * @param role string role
+     * @param width int width
+     * @param length int length
+     * @param shedwidth int shedwidth
+     * @param shedlength int shedlength
+     * @param roof boolean roof
+     * @param shed boolean shed
+     * @throws OrderException if query fails editing order
+     */
     public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws OrderException {
         try {
             Connection l_cCon = Connector.connection();
@@ -99,6 +135,13 @@ public class OrderMapper {
         }
     }
 
+    /**
+     * Adds an Order to the DB
+     *
+     * @param user the customer related to an order
+     * @param carportID the ID to specify what carport is related
+     * @throws OrderException if query fails adding order
+     */
     public static void addOrder(User user, int carportID) throws OrderException {
         String SQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`,`pdf`) VALUES (NULL, ?, ?, \"\")";
         try {

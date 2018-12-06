@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PresentationLayer;
+package PresentationLayer.Commands;
 
+import PresentationLayer.Commands.Command;
 import FunctionLayer.Exceptions.DataException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Mark
+ * @author Christian
  */
-public class Demos extends Command {
+public class ChangeOrder extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DataException {
-        return "login";
+        
+        return "changeorder";
     }
 
+   
+    
 }

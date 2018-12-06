@@ -17,10 +17,23 @@ import java.util.List;
  */
 public class CalculateScrews {
 
-    //public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
-    List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws DataException {
+    /**
+     * Returns a list of material object representing the number of screws used
+     * for the carport
+     *
+     * This method calculates the number of screws
+     *
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @param tag boolean related to roof
+     * @param listOfRoofMaterials list of objects related to roof
+     * @return List of screws
+     * @throws DataException through LogicFacade
+     */
+    public List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws DataException {
         List<Material> returnlist = new ArrayList();
-        
+
         List<Material> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
         /*
         for (Materiale material : materials) {
@@ -28,7 +41,7 @@ public class CalculateScrews {
                 listofScrews.add(material);
             }
         }
-        */
+         */
         int amount = 0;
         List<Material> roofMaterialsForScrews;
         roofMaterialsForScrews = listOfRoofMaterials;
@@ -42,18 +55,30 @@ public class CalculateScrews {
         return returnlist;
     }
 
+    /**
+     * Returns a list of material object representing the number of steel used
+     * for the carport
+     *
+     * This method calculates the number of steel
+     *
+     * @param materials list of object
+     * @param length int length
+     * @param width int width
+     * @param tag boolean tag
+     * @return List of steel
+     * @throws DataException from LogicFacade
+     */
     public List<Material> calculateStainlessSteel(List<Material> materials, int length, int width, boolean tag) throws DataException {
         List<Material> returnlist = new ArrayList();
         List<Material> listofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
-        
+
         /*
         for (Materiale material : materials) {
             if ("hulbånd".equals(material.getType())) {
                 listofStainlessSteal.add(material);
             }
         }
-        */
-        
+         */
         if (tag) {
             for (Material screwMaterials : listofStainlessSteal) {
                 screwMaterials.addToAmount(2);

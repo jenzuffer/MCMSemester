@@ -15,6 +15,12 @@ import java.sql.Statement;
  */
 public class UserMapper {
 
+    /**
+     * Creates a user in the database
+     *
+     * @param user object representing the user to be inserted
+     * @throws UserException if creating user fails
+     */
     public static void createUser(User user) throws UserException {
         try {
             Connection con = Connector.connection();
@@ -35,9 +41,15 @@ public class UserMapper {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new UserException("Email already in use or failure to create user " + ex.getMessage());
         }
-
     }
-
+    /**
+     * Login
+     *
+     * @param email string for email
+     * @param password string for password
+     * @return User trying to login
+     * @throws UserException if user not exists
+     */
     public static User login(String email, String password) throws UserException {
         try {
             Connection con = Connector.connection();
@@ -56,21 +68,30 @@ public class UserMapper {
                 return user;
             } else {
                 return null;
+                
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new UserException(ex.getMessage());
         }
     }
 
-    public static String getLoginRole(String Email, String Pw) throws UserException {
+    /**
+     * Login
+     *
+     * @param email String for email
+     * @param password String for password
+     * @return String representing the role of the user
+     * @throws UserException if user not exists
+     */
+    public static String getLoginRole(String email, String password) throws UserException {
         String role = "";
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT role FROM Customer "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, Email);
-            ps.setString(2, Pw);
+            ps.setString(1, email);
+            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 role = rs.getString("role");
