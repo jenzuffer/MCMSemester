@@ -131,7 +131,7 @@ public class PDFGenerator {
     private void setSVGImage(PDDocument document, String svg, PDPage page) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
         PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
         try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
-            contents.drawImage(img, 200, 200);
+            contents.drawImage(img, 100, 100);
             contents.close();
         }
     }
@@ -148,7 +148,7 @@ public class PDFGenerator {
         
         // Create the transcoder input.
         TranscoderInput input = new TranscoderInput(new ByteArrayInputStream(svg.getBytes()));
-        
+        System.out.println(svg.getBytes().length);
         // Create the transcoder output.
         ByteArrayOutputStream ostream = new ByteArrayOutputStream();
         TranscoderOutput output = new TranscoderOutput(ostream);
