@@ -41,9 +41,7 @@ public class UserMapper {
         } catch (SQLException | ClassNotFoundException ex) {
             throw new UserException("Email already in use or failure to create user " + ex.getMessage());
         }
-
     }
-
     /**
      * Login
      *
@@ -70,6 +68,7 @@ public class UserMapper {
                 return user;
             } else {
                 return null;
+                
             }
         } catch (ClassNotFoundException | SQLException ex) {
             throw new UserException(ex.getMessage());

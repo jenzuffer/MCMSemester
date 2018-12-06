@@ -27,7 +27,7 @@ public class DataMapper {
 
     /**
      * Returns a list of material objects. This method returns one or more
-     * objects of a certain material
+     * objects of a certain material, DEPRECATED
      *
      * @param indexID the id of a certain material
      * @return the List of materials
