@@ -13,6 +13,7 @@ import java.util.List;
  * @author Mark
  */
 public class Calculator {
+
     private List<Material> listOfRoofMaterials;
     private List<Material> listOfScrewsMaterials;
     private List<Material> listOfScrew2Materials;
@@ -22,14 +23,24 @@ public class Calculator {
     private List<Material> listOfCarportPoleMaterials;
     private List<Material> listOfCarportStrapsMaterials;
     private List<Material> listOfCarportRaftersMaterials;
-    private LinkedHashMap<String,List<Material>> HMOfAllLists = new LinkedHashMap();
+    private LinkedHashMap<String, List<Material>> HMOfAllLists = new LinkedHashMap();
     private int length;
     private int width;
     private int shedWidth;
     private int shedLength;
     private boolean tag;
     private Carport carport;
-    
+
+    /**
+     * Contructs a calculator object, with lists of material used to build the
+     * carport
+     *
+     *
+     * @param carport
+     * @param materials
+     * @return Calculator object
+     * @throws DataException
+     */
     public Calculator(Carport carport, List<Material> materials) throws DataException {
         this.carport = carport;
         length = carport.getLength();
@@ -39,15 +50,15 @@ public class Calculator {
         tag = carport.isRoofChosen();
         listOfRoofMaterials = new CalculateRoof().CalculateRoofPlates(materials, length, width, tag);
         listOfScrewsMaterials = new CalculateScrews().calculateScrewsClass(materials, length, width, tag, listOfRoofMaterials);
-        listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(materials,length, width, tag);
-        listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(materials,length, width); 
-        listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(materials,length);
+        listOfScrew2Materials = new CalculateScrews().calculateStainlessSteel(materials, length, width, tag);
+        listOfCarportPoleMaterials = new CalculateSkeleton().calculatePoles(materials, length, width);
+        listOfCarportStrapsMaterials = new CalculateSkeleton().calculateStraps(materials, length);
         if (carport.isShedChosen()) {
-            listOfShedPoleMaterials = new CalculateShed().calculatePoles(materials,shedLength, shedWidth, width);
-            listOfShedCladdingMaterials = new CalculateShed().calculateCladding(materials,shedLength, shedWidth);
-            listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(materials,shedLength, shedWidth);
+            listOfShedPoleMaterials = new CalculateShed().calculatePoles(materials, shedLength, shedWidth, width);
+            listOfShedCladdingMaterials = new CalculateShed().calculateCladding(materials, shedLength, shedWidth);
+            listOfShedWoodCladdingMaterials = new CalculateShed().calculateWoodForCladding(materials, shedLength, shedWidth);
         }
-        listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(materials,length, width);
+        listOfCarportRaftersMaterials = new CalculateSkeleton().calculateRafters(materials, length, width);
     }
 
     public List<Material> getListOfRoofMaterials() {
@@ -90,7 +101,10 @@ public class Calculator {
         return HMOfAllLists;
     }
 
-    
+    /**
+     * Combines all the lists representing each material and constructs a HashMap
+     *
+     */
     public void combineLists() {
         HMOfAllLists.put("carportpoles", listOfCarportPoleMaterials);
         HMOfAllLists.put("caportrafters", listOfCarportRaftersMaterials);
@@ -102,19 +116,20 @@ public class Calculator {
             HMOfAllLists.put("shedcladding", listOfShedCladdingMaterials);
             HMOfAllLists.put("shedpole", listOfShedPoleMaterials);
             HMOfAllLists.put("shedwoodcladding", listOfShedWoodCladdingMaterials);
-            
+
         }
     }
     
-    
+    /**
+     * Returns a list a constructed carport object, containing all materials and measurements
+     *
+     *
+     * @return Carport
+     */
     public Carport getCalculatedCarport() {
-        combineLists(); 
+        combineLists();
         carport.setListOfLists(HMOfAllLists);
         return carport;
     }
-    
+
 }
-
-
-
-

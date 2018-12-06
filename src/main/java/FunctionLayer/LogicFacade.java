@@ -13,7 +13,6 @@ import DBAccess.UserMapper;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Exceptions.UserException;
 import PresentationLayer.Order;
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +23,9 @@ import java.util.List;
 public class LogicFacade {
 
     public static List<Carport> getMaterials() {
-        List<Carport> TotalMaterials = new ArrayList();
+        List<Carport> totalMaterials = new ArrayList();
 
-        return TotalMaterials;
+        return totalMaterials;
     }
 
     public static List<Material> calculateOrder(int indexID) throws DataException {
@@ -105,7 +104,7 @@ public class LogicFacade {
         return orderlist;
     }
 
-    public static void deleteOrder(int OrderID) throws  OrderException {
+    public static void deleteOrder(int OrderID) throws OrderException {
         OrderMapper.deleteOrder(OrderID);
     }
 

@@ -8,19 +8,31 @@ import java.util.List;
 
 public class CalculateSkeleton {
 
+    /**
+     * Returns a list of material object representing the number of poles used
+     * for the carport
+     *
+     * This method calculates the number of poles
+     *
+     * @param materials
+     * @param length
+     * @param width
+     * @return List of poles
+     * @throws DataException
+     */
     public List<Material> calculatePoles(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         int saveLength = length - 100;
         int saveWidth = width;
 
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
-/*
+        /*
         for (Materiale material : materials) {
             if ("stolpe".equals(material.getType())) {
                 listOfMaterials.add(material);
             }
         }
-*/
+         */
         int x = 1;
 //        int y = 1;
 
@@ -41,17 +53,28 @@ public class CalculateSkeleton {
         return returnList;
     }
 
+    /**
+     * Returns a list of material object representing the number of straps used
+     * for the carport
+     *
+     * This method calculates the number of straps
+     *
+     * @param materials
+     * @param length
+     * @return List of straps
+     * @throws DataException
+     */
     public List<Material> calculateStraps(List<Material> materials, int length) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         int totalLength = length * 2;
-/*
+        /*
         for (Materiale material : materials) {
             if ("spærtræ".equals(material.getType())) {
                 listOfMaterials.add(material);
             }
         }
-*/
+         */
         for (Material Material : listOfMaterials) {
 
             if (totalLength / Material.getLength() > 0) {
@@ -74,6 +97,18 @@ public class CalculateSkeleton {
 
     }
 
+    /**
+     * Returns a list of material object representing the number of rafters used
+     * for the carport
+     *
+     * This method calculates the number of rafters
+     *
+     * @param materials
+     * @param length
+     * @param width
+     * @return List of rafters
+     * @throws DataException
+     */
     public List<Material> calculateRafters(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
@@ -83,7 +118,7 @@ public class CalculateSkeleton {
                 listOfMaterials.add(material);
             }
         }
-        */
+         */
         int iWidth = width;
         double coverPiece = length / 55;
         int amountOfPieces = 0;
@@ -130,9 +165,4 @@ public class CalculateSkeleton {
         }
         return returnList;
     }
-
-    public void fixMaterialsInList() throws DataException {
-
-    }
-
 }
