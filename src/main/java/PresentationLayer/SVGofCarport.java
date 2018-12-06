@@ -1,7 +1,7 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 
 /**
  *
@@ -21,7 +21,7 @@ public class SVGofCarport {
                 + "</svg>";
     
     
-    public static String carport(Carport carport) throws LoginSampleException {
+    public static String carport(Carport carport) throws DataException {
         StringBuilder sb = new StringBuilder();
         sb.append("<rect x='0' y='0' width='100%' height='100%' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x='50' y='50' width='").append(carport.getLength()).append("' height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
@@ -136,7 +136,7 @@ public class SVGofCarport {
         return "";
     }
      */
-    public static void main(String[] args) throws LoginSampleException {
+    public static void main(String[] args) throws DataException {
         SVGofCarport test = new SVGofCarport();
         String f = test.carport(new Carport(600, 300));
         System.out.println(f);

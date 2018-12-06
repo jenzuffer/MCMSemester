@@ -1,7 +1,8 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.UserException;
 import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CreateUser extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, UserException {
         String email = request.getParameter("email");
         String password1 = request.getParameter("firstpassword");
         String password2 = request.getParameter("secondpassword");
@@ -22,7 +23,7 @@ public class CreateUser extends Command {
         String city = request.getParameter("city");
         String phone = request.getParameter("phone");
         if (!password1.equals(password2)) {
-            throw new LoginSampleException("Passwords does not match");
+            throw new DataException("Passwords does not match");
         }
         User user = new User(email, password1);
         user.setName(name);

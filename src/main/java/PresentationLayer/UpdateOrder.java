@@ -6,8 +6,9 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Carport;
+import FunctionLayer.Exceptions.OrderException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public class UpdateOrder extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException {
         String x = request.getParameter("submit");
         int OrderID = Integer.valueOf(request.getParameter("OrderID"));
         int width = Integer.valueOf(request.getParameter("width"));
@@ -31,43 +32,39 @@ public class UpdateOrder extends Command {
         int shedlength = Integer.valueOf(request.getParameter("shedlength"));
         boolean roof = Boolean.valueOf(request.getParameter("roof"));
         boolean shed = Boolean.valueOf(request.getParameter("shed"));
-        try {
-            List<Order> orderlist;
-            if (x != null) {
-                switch (x) {
-                    case "Edit Order": {
-                        int customerID = Integer.valueOf(request.getParameter("customerid"));
-                        int carportID = Integer.valueOf(request.getParameter("carportid"));
-                        String name = request.getParameter("name");
-                        String adress = request.getParameter("adress");
-                        String city = request.getParameter("city");
-                        String phone = request.getParameter("phone");
-                        String email = request.getParameter("email");
-                        String role = request.getParameter("role");
-                        if (!request.getParameter("width").isEmpty() && !request.getParameter("length").isEmpty() && !request.getParameter("shedwidth").isEmpty()
-                                && !request.getParameter("shedlength").isEmpty() && !request.getParameter("roof").isEmpty() && !request.getParameter("shed").isEmpty()) {
-                            LogicFacade.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
-                            orderlist = LogicFacade.getOrderlist();
-                            request.getSession().setAttribute("OrderList", orderlist);
-                            break;
-                        }
-                    }
-                    case "Delete Order": {
-                        LogicFacade.deleteOrder(OrderID);
+        List<Order> orderlist;
+        if (x != null) {
+            switch (x) {
+                case "Edit Order": {
+                    int customerID = Integer.valueOf(request.getParameter("customerid"));
+                    int carportID = Integer.valueOf(request.getParameter("carportid"));
+                    String name = request.getParameter("name");
+                    String adress = request.getParameter("adress");
+                    String city = request.getParameter("city");
+                    String phone = request.getParameter("phone");
+                    String email = request.getParameter("email");
+                    String role = request.getParameter("role");
+                    if (!request.getParameter("width").isEmpty() && !request.getParameter("length").isEmpty() && !request.getParameter("shedwidth").isEmpty()
+                            && !request.getParameter("shedlength").isEmpty() && !request.getParameter("roof").isEmpty() && !request.getParameter("shed").isEmpty()) {
+                        LogicFacade.editOrder(OrderID, customerID, carportID, name, adress, city, phone, email, role, width, length, shedwidth, shedlength, roof, shed);
                         orderlist = LogicFacade.getOrderlist();
                         request.getSession().setAttribute("OrderList", orderlist);
                         break;
                     }
-                    case "View Order content": {
-                        
-                        Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
-                        request.getSession().setAttribute("carport", carport);
-                        return "itemlist";
-                    }
+                }
+                case "Delete Order": {
+                    LogicFacade.deleteOrder(OrderID);
+                    orderlist = LogicFacade.getOrderlist();
+                    request.getSession().setAttribute("OrderList", orderlist);
+                    break;
+                }
+                case "View Order content": {
+                    
+                    Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
+                    request.getSession().setAttribute("carport", carport);
+                    return "itemlist";
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            throw new LoginSampleException("Failed Handling Order: " + ex.getMessage());
         }
         return "employeepage";
     }

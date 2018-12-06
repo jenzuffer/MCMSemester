@@ -1,5 +1,8 @@
-package FunctionLayer;
+package FunctionLayer.Calculators;
 
+import FunctionLayer.Carport;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -27,7 +30,7 @@ public class Calculator {
     private boolean tag;
     private Carport carport;
     
-    public Calculator(Carport carport, List<Material> materials) throws LoginSampleException {
+    public Calculator(Carport carport, List<Material> materials) throws DataException {
         this.carport = carport;
         length = carport.getLength();
         width = carport.getWidth();

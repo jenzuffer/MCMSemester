@@ -5,7 +5,8 @@
  */
 package DBAccess;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.User;
 import PresentationLayer.Order;
 import java.io.InputStream;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 public class OrderMapper {
 
-    public static void insertPdf(int orderId, byte[] pdf) throws LoginSampleException {
+    public static void insertPdf(int orderId, byte[] pdf) throws OrderException {
         try {
             Connection con = Connector.connection();
             String SQL = "UPDATE `Order` SET `pdf` = ? WHERE (`OrderID` = ?);";
@@ -33,11 +34,11 @@ public class OrderMapper {
             ps.setInt(2, orderId);
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not insert pdf " + ex.getMessage());
+            throw new OrderException("Could not insert pdf " + ex.getMessage());
         }
     }
 
-    public static List<Order> getOrderList() throws LoginSampleException, ClassNotFoundException {
+    public static List<Order> getOrderList() throws OrderException {
         List<Order> orderlist = new ArrayList();
         String SQL = "SELECT Name, Adress, City, Phonenumber, Email, Role, OrderID,"
                 + " customerID, c1.idCarport, Width, Length, ShedWidth, ShedLength, Roof, Shed FROM `Customer` m1,"
@@ -54,23 +55,23 @@ public class OrderMapper {
                 orderlist.add(order);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Failed retrieving orderlist" + ex.getMessage());
+            throw new OrderException("Failed retrieving orderlist" + ex.getMessage());
         }
         return orderlist;
     }
 
-    public static void deleteOrder(int OrderID) throws LoginSampleException {
+    public static void deleteOrder(int OrderID) throws OrderException {
         String SQL = "delete from `Order` WHERE `OrderID`=" + OrderID;
         try {
             Connection l_cCon = Connector.connection();
             Statement l_pStatement = l_cCon.prepareStatement(SQL);
             l_pStatement.executeUpdate(SQL);
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not delete order" + ex.getMessage());
+            throw new OrderException("Could not delete order" + ex.getMessage());
         }
     }
 
-    public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws LoginSampleException {
+    public static void editOrder(int OrderID, int customerID, int carportID, String name, String adress, String city, String phone, String email, String role, int width, int length, int shedwidth, int shedlength, boolean roof, boolean shed) throws OrderException {
         try {
             Connection l_cCon = Connector.connection();
             String SQL = "UPDATE `Customer` SET `Name` = ?, `Adress`= ?, `City`= ?,`Phonenumber`= ?, `Email`= ?, `Role`= ? WHERE `ID` = ?";
@@ -94,11 +95,11 @@ public class OrderMapper {
             l_pStatement.setInt(7, carportID);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not edit order: " + ex.getMessage());
+            throw new OrderException("Could not edit order: " + ex.getMessage());
         }
     }
 
-    public static void addOrder(User user, int carportID) throws LoginSampleException {
+    public static void addOrder(User user, int carportID) throws OrderException {
         String SQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`,`pdf`) VALUES (NULL, ?, ?, \"\")";
         try {
             Connection l_cCon = Connector.connection();
@@ -107,7 +108,7 @@ public class OrderMapper {
             l_pStatement.setInt(2, carportID);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Could not add order: " + ex.getMessage() + " sql: " + SQL);
+            throw new OrderException("Could not add order: " + ex.getMessage() + " sql: " + SQL);
         }
     }
 }

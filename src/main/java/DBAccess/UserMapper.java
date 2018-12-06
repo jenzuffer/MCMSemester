@@ -1,6 +1,7 @@
 package DBAccess;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.UserException;
 import FunctionLayer.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.sql.Statement;
  */
 public class UserMapper {
 
-    public static void createUser(User user) throws LoginSampleException {
+    public static void createUser(User user) throws UserException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO Customer (Name, Adress, City, Phonenumber, Email, Password, Role) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -32,12 +33,12 @@ public class UserMapper {
             int id = ids.getInt(1);
             user.setId(id);
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException("Email already in use or failure to create user " + ex.getMessage());
+            throw new UserException("Email already in use or failure to create user " + ex.getMessage());
         }
 
     }
 
-    public static User login(String email, String password) throws LoginSampleException {
+    public static User login(String email, String password) throws UserException {
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT id, role FROM Customer "
@@ -57,11 +58,11 @@ public class UserMapper {
                 return null;
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new UserException(ex.getMessage());
         }
     }
 
-    public static String getLoginRole(String Email, String Pw) throws LoginSampleException {
+    public static String getLoginRole(String Email, String Pw) throws UserException {
         String role = "";
         try {
             Connection con = Connector.connection();
@@ -74,10 +75,10 @@ public class UserMapper {
             if (rs.next()) {
                 role = rs.getString("role");
             } else {
-                throw new LoginSampleException("Could not validate user");
+                throw new UserException("Could not validate user");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new UserException(ex.getMessage());
         }
         return role;
     }

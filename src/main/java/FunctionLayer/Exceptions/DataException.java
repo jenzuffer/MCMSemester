@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Exceptions;
 
 /**
  *
  * @author Christian
  */
-public class LoginSampleException extends Exception {
+public class DataException extends Exception {
 
     //måske Exception som parameter
-    public LoginSampleException(String msg /*, Exception ex */) {
+    public DataException(String msg /*, Exception ex */) {
         //this.ex = ex;
         super(msg);
     }

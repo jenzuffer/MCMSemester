@@ -5,8 +5,9 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Carport;
+import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.Material;
 import FunctionLayer.User;
@@ -23,7 +24,7 @@ public class CalculateOrder extends Command {
 
     @Override
 
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException {
         List<Material> OrderMaterials;
         String name = request.getParameter("name");
         String address = request.getParameter("address");

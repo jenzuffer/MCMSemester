@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class HeightandLengths extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException {
         List<Integer> width = LogicFacade.getWidth();
         List<Integer> length = LogicFacade.getLength();
         List<Integer> shedWidth = LogicFacade.getShedWidth();

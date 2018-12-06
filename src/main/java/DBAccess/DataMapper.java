@@ -6,7 +6,8 @@
 package DBAccess;
 
 import FunctionLayer.Carport;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Material;
 import FunctionLayer.User;
 import PresentationLayer.Order;
@@ -24,18 +25,33 @@ import java.util.List;
  */
 public class DataMapper {
 
-    public static List<Material> calculateOrder(Carport dimension, int indexID) throws LoginSampleException {
+    /**
+     * Returns a list of material objects. This method returns one or more
+     * objects of a certain material
+     *
+     * @param indexID the id of a certain material
+     * @return the List of materials
+     * @throws DataException
+     */
+    public static List<Material> calculateOrder(int indexID) throws DataException {
         List<Material> materials = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
             String l_sSQL = "SELECT * FROM `Materiale` WHERE id = " + indexID;
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new DataException(ex.getMessage());
         }
         return materials;
     }
 
-    public static List<Integer> getWidth() throws LoginSampleException {
+    /**
+     * Returns a list of integers. This method returns the possible widths of a
+     * carport object
+     *
+     * @return the List of integers
+     * @throws DataException
+     */
+    public static List<Integer> getWidth() throws DataException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -47,12 +63,19 @@ public class DataMapper {
                 values.add(l_rsSearch.getInt(1));
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new DataException(ex.getMessage());
         }
         return values;
     }
 
-    public static List<Integer> getLength() throws LoginSampleException {
+    /**
+     * Returns a list of integers. This method returns the possible lengths of a
+     * carport object
+     *
+     * @return List of integers
+     * @throws DataException
+     */
+    public static List<Integer> getLength() throws DataException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -63,12 +86,19 @@ public class DataMapper {
                 values.add(l_rsSearch.getInt(1));
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new DataException(ex.getMessage());
         }
         return values;
     }
 
-    public static List<Integer> getShedWidth() throws LoginSampleException {
+    /**
+     * Returns a list of integers. This method returns the possible widths of a
+     * shed
+     *
+     * @return the List of integers
+     * @throws DataException
+     */
+    public static List<Integer> getShedWidth() throws DataException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -80,12 +110,19 @@ public class DataMapper {
                 values.add(l_rsSearch.getInt(1));
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new DataException(ex.getMessage());
         }
         return values;
     }
 
-    public static List<Integer> getShedLength() throws LoginSampleException {
+    /**
+     * Returns a list of integers. This method returns the possible lengths of a
+     * shed
+     *
+     * @return the List of integers
+     * @throws DataException
+     */
+    public static List<Integer> getShedLength() throws DataException {
         List<Integer> values = new ArrayList();
         try {
             Connection l_cCon = Connector.connection();
@@ -96,40 +133,67 @@ public class DataMapper {
                 values.add(l_rsSearch.getInt(1));
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage());
+            throw new DataException(ex.getMessage());
         }
         return values;
     }
 
-    public static void createCustomer(String name, String Adress, String City, String PhoneNumber, String Email) throws LoginSampleException {
+    /**
+     * Update the database with a new customer.
+     *
+     * @param name
+     * @param adress
+     * @param city
+     * @param phoneNumber
+     * @param email
+     * @throws DataException
+     */
+    public static void createCustomer(String name, String adress, String city, String phoneNumber, String email) throws DataException {
         String l_sSQL = "INSERT INTO `Customer` (`ID`,`Name`,`Adress`,`City`,`Phonenumber`,`Email`) VALUES (NULL, ?, ?, ?, ?, ?)";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             l_pStatement.setString(1, name);
-            l_pStatement.setString(2, Adress);
-            l_pStatement.setString(3, City);
-            l_pStatement.setString(4, PhoneNumber);
-            l_pStatement.setString(5, Email);
+            l_pStatement.setString(2, adress);
+            l_pStatement.setString(3, city);
+            l_pStatement.setString(4, phoneNumber);
+            l_pStatement.setString(5, email);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
     }
 
-    public static void createOrder(int CustomerID, int CarportID) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + CustomerID + ", " + CarportID + ")";
+    /**
+     * Update the database with a new order.
+     *
+     * Method for merging a customer with a carport
+     *
+     * @param customerID
+     * @param carportID
+     * @throws OrderException
+     */
+    public static void createOrder(int customerID, int carportID) throws OrderException {
+        String l_sSQL = "INSERT INTO `Order` (`OrderID`,`customerID`,`idCarport`) VALUES (NULL, " + customerID + ", " + carportID + ")";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new OrderException(ex.getMessage() + " " + l_sSQL);
         }
     }
 
-    public static int getCustomerIDByPhoneNumber(String PhoneNumber) throws LoginSampleException {
-        String l_sSQL = "SELECT ID FROM `Customer` WHERE Phonenumber = " + PhoneNumber;
+    /**
+     * Returns a customers id based on a unique phonenumber.
+     *
+     *
+     * @param phoneNumber
+     * @return an int representing a customers id
+     * @throws DataException
+     */
+    public static int getCustomerIDByPhoneNumber(String phoneNumber) throws DataException {
+        String l_sSQL = "SELECT ID FROM `Customer` WHERE Phonenumber = " + phoneNumber;
         int CustomerID = 0;
         try {
             Connection l_cCon = Connector.connection();
@@ -139,14 +203,22 @@ public class DataMapper {
                 CustomerID = l_rsSearch.getInt(1);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
         return CustomerID;
     }
 
-    public static int getCarportIDByCustomerID(int CustomerID) throws LoginSampleException {
+    /**
+     * Returns a carport id based on a customers id.
+     *
+     *
+     * @param customerID
+     * @return an int representing a carports id
+     * @throws DataException
+     */
+    public static int getCarportIDByCustomerID(int customerID) throws DataException {
         int CarportID = 0;
-        String l_sSQL = "SELECT c1.idCarport FROM `Carport` c1, `Customer` c2, `Order` o1 WHERE c1.idCarport = o1.idCarport AND " + CustomerID + " = o1.customerID";
+        String l_sSQL = "SELECT c1.idCarport FROM `Carport` c1, `Customer` c2, `Order` o1 WHERE c1.idCarport = o1.idCarport AND " + customerID + " = o1.customerID";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
@@ -155,38 +227,49 @@ public class DataMapper {
                 CarportID = l_rsSearch.getInt(1);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
         return CarportID;
     }
 
-    public static void createProduct(String Name, int Price, String Description, int Length, int Unit) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`) VALUES (NULL," + Name + ", " + Price + ", " + Description + ", " + Length
-                + ", " + Unit + ")";
+    /**
+     * Creates a new product in the database.
+     *
+     * @param name
+     * @param price
+     * @param description
+     * @param length
+     * @param unit
+     * @throws DataException
+     */
+    public static void createProduct(String name, int price, String description, int length, int unit) throws DataException {
+        String l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`) VALUES (NULL," + name + ", " + price + ", " + description + ", " + length
+                + ", " + unit + ")";
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
     }
 
-    public static void createMaterial(String MaterialName) throws LoginSampleException {
-        String l_sSQL = "INSERT INTO `Materials` (`ID`,`MaterialeNavn`) VALUES (NULL, " + MaterialName + ")";
-        try {
-            Connection l_cCon = Connector.connection();
-            PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
-            l_pStatement.executeUpdate();
-        } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
-        }
-    }
-
-    public static void UpdateProductOrAdd(int ProductID, String Name, double Price, String Description, int length, String Unit, String Type) throws LoginSampleException {
+    /**
+     * Updates a product if exist or creates a new product if not
+     *
+     * @param productID
+     * @param name
+     * @param price
+     * @param description
+     * @param length
+     * @param unit
+     * @param type
+     * @throws DataException
+     */
+    public static void updateProductOrAdd(int productID, String name, double price, String description, int length, String unit, String type) throws DataException {
         String l_sSQL = "";
-        if (ProductID != 0) {
-            l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + ProductID + ", ?, ?, ?, ?, ?, ?)"
+        if (productID != 0) {
+            l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + productID + ", ?, ?, ?, ?, ?, ?)"
                     + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";
         } else {
             l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (NULL, ?, ?, ?, ?, ?, ?)"
@@ -195,25 +278,32 @@ public class DataMapper {
         try {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(l_sSQL);
-            l_pStatement.setString(1, Name);
-            l_pStatement.setDouble(2, Price);
-            l_pStatement.setString(3, Description);
+            l_pStatement.setString(1, name);
+            l_pStatement.setDouble(2, price);
+            l_pStatement.setString(3, description);
             l_pStatement.setInt(4, length);
-            l_pStatement.setString(5, Unit);
-            l_pStatement.setString(6, Type);
-            l_pStatement.setString(7, Name);
-            l_pStatement.setDouble(8, Price);
-            l_pStatement.setString(9, Description);
+            l_pStatement.setString(5, unit);
+            l_pStatement.setString(6, type);
+            l_pStatement.setString(7, name);
+            l_pStatement.setDouble(8, price);
+            l_pStatement.setString(9, description);
             l_pStatement.setInt(10, length);
-            l_pStatement.setString(11, Unit);
-            l_pStatement.setString(12, Type);
+            l_pStatement.setString(11, unit);
+            l_pStatement.setString(12, type);
             l_pStatement.executeUpdate();
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
     }
 
-    public static List<Material> getAllMaterialsByType(String type) throws LoginSampleException {
+    /**
+     * Returns a list of material based on their type
+     *
+     * @param type
+     * @return A list of materials
+     * @throws DataException
+     */
+    public static List<Material> getAllMaterialsByType(String type) throws DataException {
         List<Material> allMaterials = new ArrayList();
         Material materiale;
         String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Længde, Pris FROM `Produkter` WHERE Type = \"" + type + "\" ORDER BY Længde DESC;";
@@ -232,12 +322,18 @@ public class DataMapper {
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
         return allMaterials;
     }
 
-    public static List<Material> getAllMaterials() throws LoginSampleException {
+    /**
+     * Returns a list of all materials
+     *
+     * @return A list of materials
+     * @throws DataException
+     */
+    public static List<Material> getAllMaterials() throws DataException {
         List<Material> allMaterials = new ArrayList();
         Material materiale;
         String l_sSQL = "SELECT Navn, Beskrivelse, Enhed, Type, Længde, Id, Pris FROM `Produkter`";
@@ -257,12 +353,19 @@ public class DataMapper {
                 allMaterials.add(materiale);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
         return allMaterials;
     }
 
-    public static int addCarport(Carport carport) throws LoginSampleException {
+    /**
+     * Creates a new carport and returns a integer representing the last carport added
+     *
+     * @param carport
+     * @return CarportId
+     * @throws DataException
+     */
+    public static int addCarport(Carport carport) throws DataException {
         String l_sSQL = "INSERT INTO `Carport` (`idCarport`,`Width`,`Length`,`ShedWidth`,`ShedLength`,`Roof`,`Shed`) VALUES (NULL,?, ?, ?, ?, ?, ?)";
         int carportID = 1;
         try {
@@ -282,7 +385,7 @@ public class DataMapper {
                 carportID = l_rsSearch.getInt(1);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            throw new LoginSampleException(ex.getMessage() + " " + l_sSQL);
+            throw new DataException(ex.getMessage() + " " + l_sSQL);
         }
         return carportID;
     }

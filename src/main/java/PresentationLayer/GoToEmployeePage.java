@@ -6,7 +6,9 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.OrderException;
+import FunctionLayer.Exceptions.UserException;
 import FunctionLayer.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GoToEmployeePage extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, UserException, OrderException {
         if (request.getParameter("email") != null && request.getParameter("firstpassword") != null) {
             String Email = request.getParameter("email");
             String Pw = request.getParameter("firstpassword");
@@ -40,11 +42,7 @@ public class GoToEmployeePage extends Command {
         request.getSession().setAttribute("admin", authenticated);
         if (authenticated) {
             List<Order> orderlist = new ArrayList();
-            try {
-                orderlist = LogicFacade.getOrderlist();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GoToEmployeePage.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            orderlist = LogicFacade.getOrderlist();
             request.getSession().setAttribute("OrderList", orderlist);
             return "employeepage";
         } else {

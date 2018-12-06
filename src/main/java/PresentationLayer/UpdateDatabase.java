@@ -6,7 +6,7 @@
 package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateDatabase extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException {
         if (request.getParameter("productid") != null) {
             int index = 0;
             String number = request.getParameter("productid");

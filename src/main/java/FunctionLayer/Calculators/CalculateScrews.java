@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Calculators;
 
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.LogicFacade;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 public class CalculateScrews {
 
     //public List<Materiale> calculateScrewsClass(int length, int width, boolean tag, List<Materiale> roof) throws LoginSampleException {
-    List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws LoginSampleException {
+    List<Material> calculateScrewsClass(List<Material> materials, int length, int width, boolean tag, List<Material> listOfRoofMaterials) throws DataException {
         List<Material> returnlist = new ArrayList();
         
         List<Material> listofScrews = LogicFacade.listOfMaterialsByType("bundskruer");
@@ -39,7 +42,7 @@ public class CalculateScrews {
         return returnlist;
     }
 
-    public List<Material> calculateStainlessSteel(List<Material> materials, int length, int width, boolean tag) throws LoginSampleException {
+    public List<Material> calculateStainlessSteel(List<Material> materials, int length, int width, boolean tag) throws DataException {
         List<Material> returnlist = new ArrayList();
         List<Material> listofStainlessSteal = LogicFacade.listOfMaterialsByType("hulbånd");
         

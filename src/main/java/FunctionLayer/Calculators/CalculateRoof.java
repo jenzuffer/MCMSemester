@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Calculators;
 
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.LogicFacade;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ import java.util.List;
 public class CalculateRoof {
 
         
-    public List<Material> CalculateRoofPlates(List<Material> materials, int length, int width, boolean tag) throws LoginSampleException {
+    public List<Material> CalculateRoofPlates(List<Material> materials, int length, int width, boolean tag) throws DataException {
         List<Material> returnlist = new ArrayList();
         List<Material> listofRoofPlates = LogicFacade.listOfMaterialsByType("tagplader");
         /*
@@ -58,7 +61,7 @@ public class CalculateRoof {
         return returnlist;
     }
 
-    public int calculateRaftersAmount(List<Material> materials ,int length, int width) throws LoginSampleException {
+    public int calculateRaftersAmount(List<Material> materials ,int length, int width) throws DataException {
         int countReturn = 0;
         int iWidth = width;
         double coverPiece = length / 55;

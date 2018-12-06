@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Exceptions;
 
 /**
  *
- * @author Christian
+ * @author mwn
  */
-public class UnauthenticatedException extends Exception {
+public class OrderException extends Exception {
 
-    public UnauthenticatedException(String msg) {
+    public OrderException(String msg /*, Exception ex */) {
+        //this.ex = ex;
         super(msg);
     }
 }

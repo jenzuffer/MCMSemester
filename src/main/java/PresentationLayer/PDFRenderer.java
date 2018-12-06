@@ -7,7 +7,8 @@ package PresentationLayer;
 
 import FunctionLayer.Carport;
 import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.User;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +28,7 @@ import org.apache.commons.mail.EmailException;
 public class PDFRenderer extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
         
         SVGofCarport sdfsd = new SVGofCarport();

@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class UnknownCommand extends Command {
 
     @Override
-    String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
+    String execute( HttpServletRequest request, HttpServletResponse response ) throws DataException {
         String msg = "An error Occuered, contact IT";
-        throw new LoginSampleException( msg );
+        throw new DataException( msg );
     }
 
    

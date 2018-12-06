@@ -5,7 +5,7 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GoToLoginPage extends Command {
     
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException {
         if (request.getSession().getAttribute("user") != null) {
             //request.getSession().getAttribute("OrderList") != null
             User user = (User) request.getSession().getAttribute("user");

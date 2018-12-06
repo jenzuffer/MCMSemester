@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package FunctionLayer;
+package FunctionLayer.Calculators;
 
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.LogicFacade;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class CalculateShed {
 
     
     
-    public List<Material> calculatePoles(List<Material> materials ,int shedLength, int shedWidth, int width) throws LoginSampleException {
+    public List<Material> calculatePoles(List<Material> materials ,int shedLength, int shedWidth, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("stolpe");
         /*
@@ -52,7 +55,7 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Material> calculateCladding(List<Material> materials, int shedLength, int shedWidth) throws LoginSampleException {
+    public List<Material> calculateCladding(List<Material> materials, int shedLength, int shedWidth) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("beklædning");
         /*
@@ -75,7 +78,7 @@ public class CalculateShed {
         return returnList;
     }
 
-    public List<Material> calculateWoodForCladding(List<Material> materials, int shedLength, int shedWidth) throws LoginSampleException {
+    public List<Material> calculateWoodForCladding(List<Material> materials, int shedLength, int shedWidth) throws DataException {
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("løsholter");;
         List<Material> returnList = new ArrayList();
         /*

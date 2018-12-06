@@ -5,7 +5,9 @@
  */
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.Exceptions.OrderException;
+import FunctionLayer.Exceptions.UserException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws LoginSampleException;
+            throws DataException, OrderException, UserException;
 
 }

@@ -1,11 +1,14 @@
-package FunctionLayer;
+package FunctionLayer.Calculators;
 
+import FunctionLayer.Exceptions.DataException;
+import FunctionLayer.LogicFacade;
+import FunctionLayer.Material;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CalculateSkeleton {
 
-    public List<Material> calculatePoles(List<Material> materials, int length, int width) throws LoginSampleException {
+    public List<Material> calculatePoles(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         int saveLength = length - 100;
         int saveWidth = width;
@@ -38,7 +41,7 @@ public class CalculateSkeleton {
         return returnList;
     }
 
-    public List<Material> calculateStraps(List<Material> materials, int length) throws LoginSampleException {
+    public List<Material> calculateStraps(List<Material> materials, int length) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         int totalLength = length * 2;
@@ -71,7 +74,7 @@ public class CalculateSkeleton {
 
     }
 
-    public List<Material> calculateRafters(List<Material> materials, int length, int width) throws LoginSampleException {
+    public List<Material> calculateRafters(List<Material> materials, int length, int width) throws DataException {
         List<Material> returnList = new ArrayList();
         List<Material> listOfMaterials = LogicFacade.listOfMaterialsByType("spærtræ");
         /*
@@ -128,7 +131,7 @@ public class CalculateSkeleton {
         return returnList;
     }
 
-    public void fixMaterialsInList() throws LoginSampleException {
+    public void fixMaterialsInList() throws DataException {
 
     }
 
