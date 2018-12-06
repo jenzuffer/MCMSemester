@@ -61,6 +61,6 @@
                 </div>
             </div>
         </div>
-        <script src="Ressources/Script.js"></script>
+        <script src="Ressources/editProducts.js"></script>
     </body>
 </html>

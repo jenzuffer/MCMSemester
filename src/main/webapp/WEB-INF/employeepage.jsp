@@ -30,8 +30,5 @@
         <table class="table" id="database-table">
             <%= html.getOrders(list)%>
         </table>
-        
-
-        <script src="Ressources/Script.js"></script>
     </body>
 </html>

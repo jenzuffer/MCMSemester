@@ -134,15 +134,6 @@
                 document.getElementById('1111').submit();
             }
         </script>
-        <script>
-            $(document).ready(function () {
-
-                $("#shed-form").hide();
-
-                $("#toggle-shed-btn").click(function () {
-                    $(".shed-form").slideToggle();
-                });
-            });
-        </script>
+        <script src="Ressources/calMaterials.js"></script>
     </body>
 </html>
