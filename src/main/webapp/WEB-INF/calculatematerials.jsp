@@ -39,7 +39,7 @@
         <form id="1111" action="FrontController" method="post">
             <div class="container"> 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <h5 class="second-header">Carport</h5>
                         <h6 class="second-header">Width</h6>
                         <select class="select-option" name="width">
@@ -92,27 +92,30 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control" placeholder="Enter name">
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" name="address" class="form-control" placeholder="Enter address">
-                        </div>
-                        <div class="form-group">
-                            <label>City</label>
-                            <input type="text" name="city" class="form-control" placeholder="Enter city">
-                        </div>
-                        <div class="form-group">
-                            <label>Phonenumber</label>
-                            <input type="tel" name="pnumber" class="form-control" placeholder="Enter phonenumber">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="Enter email">
-                        </div>
+                    <div class="col-md-6">
+                        <!--
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter name">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" name="address" class="form-control" placeholder="Enter address">
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" name="city" class="form-control" placeholder="Enter city">
+                            </div>
+                            <div class="form-group">
+                                <label>Phonenumber</label>
+                                <input type="tel" name="pnumber" class="form-control" placeholder="Enter phonenumber">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Enter email">
+                            </div>
+                        -->
+                        <p>With a specially developed computer program, we can quickly calculate the price and print a sketch drawing on a carport within our standard program, tailored to your specific wishes.</p>
                     </div>
                 </div>
                 <div class="col-md-12" style="padding-top: 20px">
@@ -121,14 +124,16 @@
                 <input type="hidden" name="command" value="calculateorder">
             </div>
         </form>
-        <form action="FrontController" method="post">
+        <!--
+            <form action="FrontController" method="post">
             <input type="hidden" name="width" value="600">
             <input type="hidden" name="length" value="780">
             <input type="hidden" name="shedwidth" value="530">
             <input type="hidden" name="shedlength" value="210">
             <input type="hidden" name="command" value="calculateorder">
             <input type="submit" value="Fog carport">
-        </form>
+            </form>
+        -->
         <script type="text/javascript">
             Function update() {
                 document.getElementById('1111').submit();
