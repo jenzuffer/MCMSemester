@@ -121,4 +121,9 @@ public class LogicFacade {
         int carportID = DataMapper.addCarport(carport);
         OrderMapper.addOrder(user, carportID);
     }
+
+    public static Order getOrderById(int orderId) throws OrderException {
+        
+        return OrderMapper.getOrderById(orderId);
+    }
 }
