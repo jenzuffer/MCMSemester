@@ -37,6 +37,14 @@ public class UpdateOrder extends Command {
         String x = request.getParameter("submit");
         int OrderID = Integer.valueOf(request.getParameter("OrderID"));
         List<Order> orderlist;
+        
+        if (x.equalsIgnoreCase("Delete Order")) {
+            LogicFacade.deleteOrder(OrderID);
+            orderlist = LogicFacade.getOrderlist();
+            request.getSession().setAttribute("OrderList", orderlist);
+            return "employeepage";
+        }
+        
         int width = Integer.valueOf(request.getParameter("width"));
         int length = Integer.valueOf(request.getParameter("length"));
         int shedwidth = Integer.valueOf(request.getParameter("shedwidth"));
@@ -61,12 +69,6 @@ public class UpdateOrder extends Command {
                         request.getSession().setAttribute("OrderList", orderlist);
                         break;
                     }
-                }
-                case "Delete Order": {
-                    LogicFacade.deleteOrder(OrderID);
-                    orderlist = LogicFacade.getOrderlist();
-                    request.getSession().setAttribute("OrderList", orderlist);
-                    break;
                 }
                 case "View Order content": {
                     Carport carport = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
