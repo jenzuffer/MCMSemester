@@ -10,13 +10,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%
-    List<Integer> width = (List<Integer>) request.getAttribute("width");
-    List<Integer> length = (List<Integer>) request.getAttribute("length");
-    List<Integer> shedWidth = (List<Integer>) request.getAttribute("shedwidth");
-    List<Integer> shedLength = (List<Integer>) request.getAttribute("shedlength");
-    HTMLGenerator html = new HTMLGenerator();
-%>
 
 <html>
     <head>
@@ -31,6 +24,14 @@
         <title>Order Modification</title>
     </head>
     <body>
+        <%
+            if (request.getSession().getAttribute("user") != null) {
+                List<Integer> width = (List<Integer>) request.getAttribute("width");
+                List<Integer> length = (List<Integer>) request.getAttribute("length");
+                List<Integer> shedWidth = (List<Integer>) request.getAttribute("shedwidth");
+                List<Integer> shedLength = (List<Integer>) request.getAttribute("shedlength");
+                HTMLGenerator html = new HTMLGenerator();
+        %>
         <jsp:include page="navigator.jsp" />
         <div class="text-center">
             <h3 class="header">Calculate Materials for an Order</h3>
@@ -140,5 +141,14 @@
             }
         </script>
         <script src="Ressources/calMaterials.js"></script>
+        <% } else {
+        %>
+        <form id="1112" name="ChangeOrder" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="demos">
+        </form>
+        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1112').submit();</SCRIPT>
+            <%
+                }
+            %>
     </body>
 </html>

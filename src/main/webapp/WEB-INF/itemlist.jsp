@@ -13,13 +13,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-<%
-    Carport carport = (Carport) request.getSession().getAttribute("carport");
-    Collection<List<Material>> listOfListsOfMaterials = carport.getListOfLists().values();
-    HTMLGenerator html = new HTMLGenerator();
-
-%>
-
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -32,6 +25,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body>
+        <%
+            if (request.getSession().getAttribute("user") != null) {
+                Carport carport = (Carport) request.getSession().getAttribute("carport");
+                Collection<List<Material>> listOfListsOfMaterials = carport.getListOfLists().values();
+                HTMLGenerator html = new HTMLGenerator();
+        %>
         <jsp:include page="navigator.jsp" />
         <div class="container">
             <div class="row">
@@ -53,5 +52,14 @@
                 </div>
             </div>
         </div>
+        <% } else {
+        %>
+        <form id="1112" name="ChangeOrder" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="demos">
+        </form>
+        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1112').submit();</SCRIPT>
+            <%
+                }
+            %>
     </body>
 </html>

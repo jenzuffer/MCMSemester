@@ -43,7 +43,7 @@ public class GoToEmployeePage extends Command {
         boolean authenticated = LogicFacade.isAdmin(Email, Pw);
         request.getSession().setAttribute("admin", authenticated);
         if (authenticated) {
-            List<Order> orderlist = new ArrayList();
+            List<Order> orderlist;
             orderlist = LogicFacade.getOrderlist();
             request.getSession().setAttribute("OrderList", orderlist);
             return "employeepage";
