@@ -14,6 +14,6 @@
         <% Order order = (Order) request.getAttribute("order"); %>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1><%= order.getCity() %></h1>
     </body>
 </html>
