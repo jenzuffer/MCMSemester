@@ -86,7 +86,7 @@ public class OrderMapper {
             Connection l_cCon = Connector.connection();
             PreparedStatement l_pStatement = l_cCon.prepareStatement(SQL);
             l_pStatement.setInt(1, id);
-            ResultSet l_rsSearch = l_pStatement.executeQuery(SQL);
+            ResultSet l_rsSearch = l_pStatement.executeQuery();
             if (l_rsSearch.next()) {
                 order = new Order(l_rsSearch.getInt("OrderID"), l_rsSearch.getInt("customerID"), l_rsSearch.getInt("idCarport"),
                         l_rsSearch.getString("Name"), l_rsSearch.getString("Adress"), l_rsSearch.getString("City"), l_rsSearch.getString("Phonenumber"),
