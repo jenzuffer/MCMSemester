@@ -10,6 +10,7 @@ import FunctionLayer.LogicFacade;
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Carport;
 import FunctionLayer.Exceptions.OrderException;
+import FunctionLayer.Exceptions.PDFException;
 import FunctionLayer.User;
 import PresentationLayer.Mail;
 import PresentationLayer.Order;
@@ -17,6 +18,8 @@ import PresentationLayer.PDFGenerator;
 import PresentationLayer.SVGofCarport;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +36,7 @@ public class UpdateOrder extends Command {
     }
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException, PDFException, EmailException {
         String x = request.getParameter("submit");
         int OrderID = Integer.valueOf(request.getParameter("OrderID"));
         List<Order> orderlist;
@@ -75,28 +78,26 @@ public class UpdateOrder extends Command {
                     request.getSession().setAttribute("carport", carport);
                     return "itemlist";
                 }
+                case "pdfview": {
+                try {
+                    Carport cp = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
+                    PDFGenerator pdfGen = new PDFGenerator(cp, new SVGofCarport().carport(cp, 230, 230));
+                    byte[] pdf = pdfGen.generatePdf();
+                    request.setAttribute("pdf", pdf);
+                    request.getRequestDispatcher("/PDF").forward(request, response);
+                    break;
+                } catch (ServletException | IOException ex) {
+                    Logger.getLogger(UpdateOrder.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }
                 case "Send confirmation": {
                     Carport cp = LogicFacade.calculateCarportList(new Carport(length, width, shedlength, shedwidth, shed, roof));
                     PDFGenerator pdfGen = new PDFGenerator(cp, new SVGofCarport().carport(cp, 230, 230));
-                    try {
+                    
                         byte[] pdf = pdfGen.generatePdf();
                         LogicFacade.inserPdf(OrderID, pdf);
-                        request.setAttribute("pdf", pdf);
-                        request.getRequestDispatcher("/PDF").forward(request, response);
                         new Mail(new User(name, adress, city, phone, email), pdf).sendEmailWithAttachtment();
-//                        new Mail(new User("Mads", null, null, null, "cph-mn492@cphbusiness.dk"), pdf).sendEmailWithAttachtment();
-                    } catch (IOException ex) {
-                        System.out.println("Failed: " + ex.getMessage());
-
-                    } catch (ServletException ex) {
-                        System.out.println("Servlet exception");
-                    } catch (EmailException ex) {
-                        System.out.println("Email failed");
-                    } catch (TranscoderException ex) {
-                        System.out.println("Transcoder failed");
-                    }
-
-                    return "itemlist";
+                    break;
                 }
             }
         }

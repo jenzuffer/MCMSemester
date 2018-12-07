@@ -9,6 +9,8 @@ import FunctionLayer.User;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.mail.ByteArrayDataSource;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
@@ -34,17 +36,21 @@ public class Mail {
         this.pdf = pdf;
     }
 
-    public void sendEmailWithAttachtment() throws EmailException, IOException {
-        MultiPartEmail email = new MultiPartEmail();
-        email.setHostName(HOST_NAME);
-        email.setSmtpPort(SMTP_PORT);
-        email.setAuthenticator(new DefaultAuthenticator(SENDER_EMAIL, SENDER_PASS));
-        email.setSSLOnConnect(true);
-        email.addTo(user.getEmail(), user.getName());
-        email.setFrom(SENDER_EMAIL, "MCM FogSemesterProjekt");
-        email.setSubject("Carport stykliste");
-        email.setMsg("Her er en pdf, hvor du kan se din bestilte carport");
-        email.attach(new ByteArrayDataSource(pdf, "application/pdf"), "stykliste.pdf", "Description of some file");
-        email.send();
+    public void sendEmailWithAttachtment() throws EmailException {
+        try {
+            MultiPartEmail email = new MultiPartEmail();
+            email.setHostName(HOST_NAME);
+            email.setSmtpPort(SMTP_PORT);
+            email.setAuthenticator(new DefaultAuthenticator(SENDER_EMAIL, SENDER_PASS));
+            email.setSSLOnConnect(true);
+            email.addTo(user.getEmail(), user.getName());
+            email.setFrom(SENDER_EMAIL, "MCM FogSemesterProjekt");
+            email.setSubject("Carport stykliste");
+            email.setMsg("Her er en pdf, hvor du kan se din bestilte carport");
+            email.attach(new ByteArrayDataSource(pdf, "application/pdf"), "stykliste.pdf", "Description of some file");
+            email.send();
+        } catch (IOException ex) {
+            throw new EmailException("Failed to send Email: " + ex);
+        }
     }
 }

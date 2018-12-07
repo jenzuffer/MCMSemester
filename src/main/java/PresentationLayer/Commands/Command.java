@@ -7,10 +7,12 @@ package PresentationLayer.Commands;
 
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
+import FunctionLayer.Exceptions.PDFException;
 import FunctionLayer.Exceptions.UserException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.mail.EmailException;
 
 /**
  *
@@ -29,7 +31,6 @@ abstract class Command {
         commands.put("updatedatabase", new UpdateDatabase());
         commands.put("demos", new Demos());
         commands.put("createuser", new CreateUser());
-        commands.put("pdf", new PDFRenderer());
         commands.put("gotocreateuser", new GoToCreateUser());
         commands.put("login", new GoToLoginPage());
         commands.put("employeepage", new GoToEmployeePage());
@@ -48,6 +49,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws DataException, OrderException, UserException;
+            throws DataException, OrderException, UserException, PDFException, EmailException;
 
 }

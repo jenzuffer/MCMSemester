@@ -6,15 +6,13 @@
 package PresentationLayer;
 
 import FunctionLayer.Carport;
+import FunctionLayer.Exceptions.PDFException;
 import FunctionLayer.Material;
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.datatable.DataTable;
-import java.awt.Dimension;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -49,18 +47,20 @@ public class PDFGenerator {
         this.svg = svg;
     }
 
-    public byte[] generatePdf() throws IOException, UnsupportedEncodingException, FileNotFoundException, TranscoderException {
+    public byte[] generatePdf() throws PDFException {
         ByteArrayOutputStream out;
         try (PDDocument document = new PDDocument()) {
             out = new ByteArrayOutputStream();
             setFrontPage(document);
             drawTable(document, carport.getListOfLists());
             document.save(out);
+        } catch (IOException ex) {
+            throw new PDFException("Could not generate PDF: " + ex);
         }
         return out.toByteArray();
     }
 
-    private void setFrontPage(PDDocument document) throws IOException, UnsupportedEncodingException, FileNotFoundException, TranscoderException {
+    private void setFrontPage(PDDocument document) throws PDFException {
         PDPage frontPage = new PDPage();
         setTextCenter("Fog", 30, 24, FONT_BOLD, frontPage, document);
         if (carport.isShedChosen()) {
@@ -99,7 +99,7 @@ public class PDFGenerator {
         dataTable.draw();
     }
 
-    private void setTextCenter(String text, int marginTop, int fontSize, PDFont font, PDPage page, PDDocument document) throws IOException {
+    private void setTextCenter(String text, int marginTop, int fontSize, PDFont font, PDPage page, PDDocument document) throws PDFException {
         try (PDPageContentStream cs = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
             float titleWidth = font.getStringWidth(text) / 1000 * fontSize;
             float titleHeight = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * fontSize;
@@ -113,53 +113,61 @@ public class PDFGenerator {
             cs.showText(text);
             cs.endText();
             cs.close();
+        } catch (IOException ex) {
+            throw new PDFException("Could not edit pdf: " + ex);
         }
     }
 
-    private void setSVGImage(PDDocument document, String svg, PDPage page) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
-        PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
-        try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
-            carport.getLength();
-            carport.getWidth();
-            float x = page.getMediaBox().getUpperRightX();
-            float y = page.getMediaBox().getUpperRightY();
-            float viewboxX = 400;
-            float viewboxY = 400;
-            float centerX = x/2 - viewboxX/2 + ((float) carport.getLength());
-            float centerY = y/4;
-            System.out.println(x + "," + y);
-            System.out.println(x/2 + "," + y/2);
-            System.out.println((x/2 - viewboxX/2)+ "," + (y/2 - viewboxY/2));
-            System.out.println(x/2 - viewboxX/2 + "," + centerY);
-            
-            
-            contents.drawImage(img, x/2 - viewboxX/2 , y/2 - viewboxY/2, 400, 386);
-            contents.close();
+    private void setSVGImage(PDDocument document, String svg, PDPage page) throws PDFException  {
+        try {
+            PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
+            try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
+                float x = page.getMediaBox().getUpperRightX();
+                float y = page.getMediaBox().getUpperRightY();
+                float viewboxX = 400;
+                float viewboxY = 400;
+                float centerX = x/2 - viewboxX/2 + ((float) carport.getLength());
+                float centerY = y/4;
+                System.out.println(x + "," + y);
+                System.out.println(x/2 + "," + y/2);
+                System.out.println((x/2 - viewboxX/2)+ "," + (y/2 - viewboxY/2));
+                System.out.println(x/2 - viewboxX/2 + "," + centerY);
+                
+                
+                contents.drawImage(img, x/2 - viewboxX/2 , y/2 - viewboxY/2, 400, 386);
+                contents.close();
+            }
+        } catch(IOException ex) {
+            throw new PDFException("could not set SVG image: " + ex);
         }
     }
 
-    private byte[] svgConversion(String svg) throws TranscoderException, IOException {
+    private byte[] svgConversion(String svg) throws PDFException {
 
-        // Create a JPEG transcoder
-        JPEGTranscoder t = new JPEGTranscoder();
-
-        // Set the transcoding hints.
-        t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
-                new Float(.8));
-
-        // Create the transcoder input.
-        TranscoderInput input = new TranscoderInput(new ByteArrayInputStream(svg.getBytes()));
-        // Create the transcoder output.
-        ByteArrayOutputStream ostream = new ByteArrayOutputStream();
-        TranscoderOutput output = new TranscoderOutput(ostream);
-
-        // Save the image.
-        t.transcode(input, output);
-
-        // Flush and close the stream.
-        ostream.flush();
-        ostream.close();
-        return ostream.toByteArray();
+        try {
+            // Create a JPEG transcoder
+            JPEGTranscoder t = new JPEGTranscoder();
+            
+            // Set the transcoding hints.
+            t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
+                    new Float(.8));
+            
+            // Create the transcoder input.
+            TranscoderInput input = new TranscoderInput(new ByteArrayInputStream(svg.getBytes()));
+            // Create the transcoder output.
+            ByteArrayOutputStream ostream = new ByteArrayOutputStream();
+            TranscoderOutput output = new TranscoderOutput(ostream);
+            
+            // Save the image.
+            t.transcode(input, output);
+            
+            // Flush and close the stream.
+            ostream.flush();
+            ostream.close();
+            return ostream.toByteArray();
+        } catch (TranscoderException | IOException ex) {
+            throw new PDFException("SVG conversion failed: " + ex);
+        }
     }
 
     /*

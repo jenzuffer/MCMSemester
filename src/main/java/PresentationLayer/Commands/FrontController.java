@@ -8,6 +8,7 @@ package PresentationLayer.Commands;
 import PresentationLayer.Commands.Command;
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
+import FunctionLayer.Exceptions.PDFException;
 import FunctionLayer.Exceptions.UserException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.mail.EmailException;
 
 /**
  *
@@ -48,6 +50,12 @@ public class FrontController extends HttpServlet {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         } catch (UserException ex) {
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (PDFException ex) {
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("error.jsp").forward(request, response);
+        } catch (EmailException ex) {
             request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
