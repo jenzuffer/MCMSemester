@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-secondary" name="submit" value="Edit Order"><i class="fas fa-pen"></i> Update Order</button>
                             <button type="submit" class="btn btn-secondary" style="margin-left: 15px" name="submit" value="View Order content"><i class="fas fa-list-ul"></i> View Content</button>
-                            <button type="submit" class="btn btn-secondary" style="margin-left: 15px" name="submit" value="sendEmail"><i class="far fa-envelope"></i> Send Confirmation</button>
+                            <button type="submit" class="btn btn-secondary" style="margin-left: 15px" name="submit" value="Send confirmation"><i class="far fa-envelope"></i> Send Confirmation</button>
                         </div>
                     </div>
                     <input type="hidden" name="OrderID" value="<%=order.getOrderID()%>">

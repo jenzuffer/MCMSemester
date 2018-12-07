@@ -52,6 +52,7 @@ public class DataMapperTest {
         assertEquals(expectedCustomderID, customerID);
     }
 
+    /*
     @Test
     public void getCarportIDByCustomerIDTest() throws Exception {
         String phonenumber = "23456789";
@@ -60,6 +61,7 @@ public class DataMapperTest {
         int expectedCarportID = 3;
         assertEquals(expectedCarportID, carport);
     }
+    */
     @Test
     public void getAllMaterialsByTypeTest() throws Exception {
         String type = "spærtræ";
