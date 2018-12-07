@@ -11,7 +11,10 @@ package FunctionLayer.Exceptions;
  */
 public class DataException extends Exception {
 
-    //måske Exception som parameter
+    /**
+     * DataException to handle the DataMapper
+     * @param msg error message that is to be displayed
+     */
     public DataException(String msg /*, Exception ex */) {
         //this.ex = ex;
         super(msg);

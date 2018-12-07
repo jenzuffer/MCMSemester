@@ -11,6 +11,10 @@ package FunctionLayer.Exceptions;
  */
 public class UserException extends Exception {
 
+    /**
+     * UserException to handle the UserMapper
+     * @param message error message that is to be displayed
+     */
     public UserException(String message) {
         super(message);
     }

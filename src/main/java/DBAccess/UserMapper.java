@@ -1,6 +1,5 @@
 package DBAccess;
 
-import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.UserException;
 import FunctionLayer.User;
 import java.sql.Connection;

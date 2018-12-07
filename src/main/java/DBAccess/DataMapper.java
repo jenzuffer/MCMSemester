@@ -9,8 +9,6 @@ import FunctionLayer.Carport;
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Material;
-import FunctionLayer.User;
-import PresentationLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,6 +30,7 @@ public class DataMapper {
      * @param indexID the id of a certain material
      * @return the List of materials
      * @throws DataException if query fails
+     * @deprecated 
      */
     public static List<Material> calculateOrder(int indexID) throws DataException {
         List<Material> materials = new ArrayList();
@@ -189,7 +188,7 @@ public class DataMapper {
      *
      *
      * @param phoneNumber finds a customer based on their phone number
-     * @return an int representing a customers id
+     * @return CustomerID an int representing a customers id
      * @throws DataException if query fails
      */
     public static int getCustomerIDByPhoneNumber(String phoneNumber) throws DataException {
@@ -267,7 +266,7 @@ public class DataMapper {
      * @throws DataException if query fails
      */
     public static void updateProductOrAdd(int productID, String name, double price, String description, int length, String unit, String type) throws DataException {
-        String l_sSQL = "";
+        String l_sSQL;
         if (productID != 0) {
             l_sSQL = "INSERT INTO `Produkter` (`Id`,`Navn`,`Pris`,`Beskrivelse`,`Længde`,`Enhed`,`Type`) VALUES (" + productID + ", ?, ?, ?, ?, ?, ?)"
                     + "ON DUPLICATE KEY UPDATE `Navn`= ?,`Pris`= ?,`Beskrivelse`= ?,`Længde`= ?,`Enhed`= ?,`Type`= ?";

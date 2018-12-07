@@ -11,6 +11,10 @@ package FunctionLayer.Exceptions;
  */
 public class OrderException extends Exception {
 
+    /**
+     * OrderException to handle the OrderMapper
+     * @param msg error message that is to be displayed
+     */
     public OrderException(String msg /*, Exception ex */) {
         //this.ex = ex;
         super(msg);
