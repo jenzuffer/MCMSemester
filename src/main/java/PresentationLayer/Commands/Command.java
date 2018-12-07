@@ -34,6 +34,7 @@ abstract class Command {
         commands.put("login", new GoToLoginPage());
         commands.put("employeepage", new GoToEmployeePage());
         commands.put("logout", new LogOut());
+        commands.put("showorder", new ShowOrder());
         //add methods here for the controller
     }
     

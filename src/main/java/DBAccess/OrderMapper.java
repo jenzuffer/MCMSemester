@@ -69,6 +69,35 @@ public class OrderMapper {
         }
         return orderlist;
     }
+    
+        /**
+     * returns a order based on id
+     *
+     * @param id search for certain order
+     * @return a Order
+     * @throws OrderException if query fails
+     */
+    public static Order getOrderById(int id) throws OrderException {
+        Order order = null;
+        String SQL = "SELECT Name, Adress, City, Phonenumber, Email, Role, OrderID,"
+                + " customerID, c1.idCarport, Width, Length, ShedWidth, ShedLength, Roof, Shed FROM `Customer` m1,"
+                + " `Carport` c1, `Order` o1 WHERE m1.ID = o1.customerID AND c1.idCarport = o1.idCarport AND OrderID = ?";
+        try {
+            Connection l_cCon = Connector.connection();
+            PreparedStatement l_pStatement = l_cCon.prepareStatement(SQL);
+            l_pStatement.setInt(1, id);
+            ResultSet l_rsSearch = l_pStatement.executeQuery(SQL);
+            if (l_rsSearch.next()) {
+                order = new Order(l_rsSearch.getInt("OrderID"), l_rsSearch.getInt("customerID"), l_rsSearch.getInt("idCarport"),
+                        l_rsSearch.getString("Name"), l_rsSearch.getString("Adress"), l_rsSearch.getString("City"), l_rsSearch.getString("Phonenumber"),
+                        l_rsSearch.getString("Email"), l_rsSearch.getString("Role"), l_rsSearch.getInt("Width"), l_rsSearch.getInt("Length"), l_rsSearch.getInt("ShedWidth"),
+                        l_rsSearch.getInt("ShedLength"), l_rsSearch.getBoolean("Roof"), l_rsSearch.getBoolean("Shed"));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            throw new OrderException("Failed retrieving orderlist" + ex.getMessage());
+        }
+        return order;
+    }
 
      /**
      * Deletes an Order from the DB

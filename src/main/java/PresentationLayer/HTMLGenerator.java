@@ -99,6 +99,56 @@ public class HTMLGenerator {
         return sb.toString();
     }
 
+    public String getOrders(List<Order> data) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("  <thead>\n"
+                + "    <tr>\n"
+                + "      <th scope=\"col\">Order ID</th>\n"
+                + "      <th scope=\"col\">Name</th>\n"
+                + "      <th scope=\"col\">Adress</th>\n"
+                + "      <th scope=\"col\">City</th>\n"
+                + "      <th scope=\"col\">Phonenumber</th>\n"
+                + "      <th scope=\"col\">Email</th>\n"
+                + "      <th scope=\"col\">Order options</th>\n"
+                + "    </tr>\n"
+                + "  </thead>\n"
+                + "  <tbody>");
+
+        for (Order order : data) {
+            sb.append("<tr><td>")
+                    .append(order.getOrderID())
+                    .append("</td><td>")
+                    .append(order.getName())
+                    .append("</td><td>")
+                    .append(order.getAdress())
+                    .append("</td><td>")
+                    .append(order.getCity())
+                    .append("</td><td>")
+                    .append(order.getPhoneNumber())
+                    .append("</td><td>")
+                    .append(order.getEmail())
+                    .append("</td><td>")
+                    .append("<div class=\"btn-group\" role=\"group\">")
+                    .append("<form action=\"FrontController\" method=\"post\">")
+                    .append("<button type=\"submit\" class=\"btn btn-info\"><i class=\"fas fa-folder-open\"></i></button>\n")
+                    .append("<input type=\"hidden\" name=\"command\" value=\"showorder\">")
+                    .append("<input type=\"hidden\" name=\"orderid\" value=\"")
+                    .append(order.getOrderID())
+                    .append("\">")
+                    .append("</form>")
+                    .append("<form action=\"FrontController\" method=\"post\">")
+                    .append("<button type=\"submit\" class=\"btn btn-danger\"><i class=\"far fa-trash-alt\"></i></button>\n")
+                    .append("</form>")
+                    .append("</div>")
+                    .append("</td>")
+                    .append("</tr>");
+        }
+        sb.append("</tbody>");
+        sb.append("</tbody>");
+        return sb.toString();
+    }
+
+    /*
     public String getOrders(List<Order> tableData) {
         StringBuilder sb = new StringBuilder();
         sb.append("  <thead>\n"
@@ -169,4 +219,5 @@ public class HTMLGenerator {
         sb.append("</tbody>");
         return sb.toString();
     }
+     */
 }
