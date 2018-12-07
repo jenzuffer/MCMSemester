@@ -14,9 +14,10 @@
 <!DOCTYPE html>
 
 <%
-    Carport carport = (Carport) request.getSession().getAttribute("carport");
-    Collection<List<Material>> listOfListsOfMaterials = carport.getListOfLists().values();
-    HTMLGenerator html = new HTMLGenerator();
+    if (request.getSession().getAttribute("user") != null) {
+        Carport carport = (Carport) request.getSession().getAttribute("carport");
+        Collection<List<Material>> listOfListsOfMaterials = carport.getListOfLists().values();
+        HTMLGenerator html = new HTMLGenerator();
 
 %>
 
@@ -53,5 +54,15 @@
                 </div>
             </div>
         </div>
+        <%
+        } else {
+        %> 
+        <form id="1112" name="ChangeOrder" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="demos">
+        </form>
+        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1112').submit();</SCRIPT>
+            <%
+                }
+            %>
     </body>
 </html>

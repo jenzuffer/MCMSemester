@@ -14,13 +14,11 @@
         <title>SVG workshop</title>
     </head>
     <body>
-
         <%
-            
             Carport carport = (Carport) request.getSession().getAttribute("carport");
         %>
-        
-        
+
+
         <%= new SVGofCarport().carport(carport)%>
     </body>
 </html>
