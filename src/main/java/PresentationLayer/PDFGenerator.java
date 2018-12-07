@@ -119,10 +119,21 @@ public class PDFGenerator {
     private void setSVGImage(PDDocument document, String svg, PDPage page) throws UnsupportedEncodingException, FileNotFoundException, TranscoderException, IOException {
         PDImageXObject img = JPEGFactory.createFromStream(document, new ByteArrayInputStream(svgConversion(svg)));
         try (PDPageContentStream contents = new PDPageContentStream(document, page, PDPageContentStream.AppendMode.APPEND, false)) {
-            img.setHeight(img.getHeight() / 2);
-            img.setWidth(img.getWidth() / 2);
-            contents.drawImage(img, 400, 400);
-            contents.drawXObject(img, 200, 200, 200, 200);
+            carport.getLength();
+            carport.getWidth();
+            float x = page.getMediaBox().getUpperRightX();
+            float y = page.getMediaBox().getUpperRightY();
+            float viewboxX = 400;
+            float viewboxY = 400;
+            float centerX = x/2 - viewboxX/2 + ((float) carport.getLength());
+            float centerY = y/4;
+            System.out.println(x + "," + y);
+            System.out.println(x/2 + "," + y/2);
+            System.out.println((x/2 - viewboxX/2)+ "," + (y/2 - viewboxY/2));
+            System.out.println(x/2 - viewboxX/2 + "," + centerY);
+            
+            
+            contents.drawImage(img, x/2 - viewboxX/2 , y/2 - viewboxY/2, 400, 386);
             contents.close();
         }
     }

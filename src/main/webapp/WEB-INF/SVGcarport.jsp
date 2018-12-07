@@ -19,6 +19,6 @@
         %>
 
 
-        <%= new SVGofCarport().carport(carport)%>
+        <%= new SVGofCarport().carport(carport, 100, 100)%>
     </body>
 </html>

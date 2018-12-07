@@ -31,7 +31,7 @@ public class PDFRenderer extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException {
         Carport carport = (Carport) request.getSession().getAttribute("carport");
         
-        PDFGenerator pdfGen = new PDFGenerator(carport, new SVGofCarport().carport(carport));
+        PDFGenerator pdfGen = new PDFGenerator(carport, new SVGofCarport().carport(carport, 230,230));
         try {
             byte[] pdf = pdfGen.generatePdf();
             LogicFacade.inserPdf(1, pdf);

@@ -21,11 +21,11 @@ public class SVGofCarport {
                 + "</svg>";
     
     
-    public String carport(Carport carport) throws DataException {
+    public String carport(Carport carport, int sizeX, int sizeY) throws DataException {
         StringBuilder sb = new StringBuilder();
 
         sb.append(""
-                + "<svg width=\"100%\" height=\"100%\" viewbox=\"0 0 " + (carport.getLength() + 100) + " " + (carport.getLength() + 100) + "\">\n"
+                + "<svg width=\""+ sizeX +"%\" height=\""+ sizeY +"%\" viewbox=\"0 0 " + (100 + 780) + " " + (750 + 100) + "\">\n"
                 + "<defs>\n"
                 + "<marker id=\"beginArrow\" markerWidth=\"9\" markerHeight=\"9\" refX=\"1\" refY=\"4\" orient=\"auto\">\n"
                 + "<path d=\"M0,4 L8,0 L8,8 L0,4\" style=\"fill: #000000s;\" />\n"
@@ -34,7 +34,7 @@ public class SVGofCarport {
                 + "<path d=\"M0,0 L8,4 L0,8 L0,0\" style=\"fill: #000000;\" />\n"
                 + "</marker>\n"
                 + "</defs>\n");
-        sb.append("<rect x='0' y='0' width=\"100%\" height=\"100%\" style=\"stroke:#000000; fill:#ffffff;\"/>\n");
+        sb.append("<rect x='0' y='0' width=\"99%\" height=\"99%\" style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         sb.append("<rect x=\"50\" y=\"50\" width=\"").append(carport.getLength()).append("\" height='").append(carport.getWidth()).append("' style=\"stroke:#000000; fill:#ffffff;\"/>\n");
         int length = carport.getLength();
         int x = 1;
@@ -96,7 +96,7 @@ public class SVGofCarport {
 
                 + "<line label=\"test\" "
                 + "x1=\"20\" x2=\"20\" "
-                + "y1=\"50\" y2=\"770\" "
+                + "y1=\"50\" y2=\""+ (carport.getWidth() + 50) +"\" "
                 + "stroke=\"black\" "
                 + "style=\"marker-start: url(#beginArrow); "
                 + "marker-end: url(#endArrow)\">"
@@ -180,7 +180,7 @@ public class SVGofCarport {
 
     public void main(String[] args) throws DataException {
         SVGofCarport test = new SVGofCarport();
-        String f = test.carport(new Carport(600, 300));
+        String f = test.carport(new Carport(600, 300), 100, 100);
         System.out.println(f);
     }
 
