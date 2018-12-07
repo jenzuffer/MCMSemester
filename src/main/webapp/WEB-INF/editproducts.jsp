@@ -4,14 +4,16 @@
     Author     : mwn
 --%>
 
-<%@page import="FunctionLayer.User"%>
 <%@page import="FunctionLayer.LogicFacade"%>
 <%@page import="FunctionLayer.Material"%>
 <%@page import="PresentationLayer.HTMLGenerator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%
+    List<Material> list = (List<Material>) request.getAttribute("allproducts");
+    HTMLGenerator html = new HTMLGenerator();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,13 +28,6 @@
         <title>Edit products</title>
     </head>
     <body>
-        <%
-            if (request.getSession().getAttribute("user") != null) {
-                User user = (User) request.getSession().getAttribute("user");
-                if (user.getRole().equals("admin")) {
-                    List<Material> list = (List<Material>) request.getAttribute("allproducts");
-                    HTMLGenerator html = new HTMLGenerator();
-        %>
         <jsp:include page="navigator.jsp" />
         <div class="container-fluid">
             <div class="row">
@@ -67,22 +62,5 @@
             </div>
         </div>
         <script src="Ressources/editProducts.js"></script>
-        <% } else {
-        %>
-        <form id="1112" name="ChangeOrder" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="demos">
-        </form>
-        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1112').submit();</SCRIPT>
-            <%
-                }
-            } else {
-            %>
-        <form id="1113" name="ChangeOrder" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="demos">
-        </form>
-        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1113').submit();</SCRIPT>
-            <%
-                }
-            %>
     </body>
 </html>

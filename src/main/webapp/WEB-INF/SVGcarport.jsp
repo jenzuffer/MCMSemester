@@ -4,7 +4,6 @@
     Author     : Mark
 --%>
 
-<%@page import="FunctionLayer.User"%>
 <%@page import="FunctionLayer.Carport"%>
 <%@page import="PresentationLayer.SVGofCarport"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,17 +16,11 @@
     <body>
 
         <%
-            if (request.getSession().getAttribute("user") != null) {
-                Carport carport = (Carport) request.getSession().getAttribute("carport");
-                new SVGofCarport().carport(carport);
-            } else {
+            
+            Carport carport = (Carport) request.getSession().getAttribute("carport");
         %>
-        <form id="1112" name="ChangeOrder" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="demos">
-        </form>
-        <SCRIPT LANGUAGE="JavaScript">document.getElementById('1112').submit();</SCRIPT>
-            <%
-                }
-            %>
+        
+        
+        <%= new SVGofCarport().carport(carport)%>
     </body>
 </html>
