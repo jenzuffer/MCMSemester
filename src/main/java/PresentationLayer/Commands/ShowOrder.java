@@ -8,6 +8,8 @@ package PresentationLayer.Commands;
 import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Exceptions.UserException;
+import FunctionLayer.LogicFacade;
+import PresentationLayer.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,9 @@ public class ShowOrder extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws DataException, OrderException, UserException {
+        int orderId = Integer.valueOf(request.getParameter("orderid"));
+        Order order = LogicFacade.getOrderById(orderId);
+        request.setAttribute("order", order);
         return "detailedorder";
     }
     
