@@ -87,7 +87,7 @@ public class UpdateOrder extends Command {
                     request.getRequestDispatcher("/PDF").forward(request, response);
                     break;
                 } catch (ServletException | IOException ex) {
-                    Logger.getLogger(UpdateOrder.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new PDFException(ex.getMessage());
                 }
                 }
                 case "Send confirmation": {
