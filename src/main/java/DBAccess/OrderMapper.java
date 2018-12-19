@@ -7,7 +7,7 @@ package DBAccess;
 
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.User;
-import PresentationLayer.Order;
+import FunctionLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -5,7 +5,7 @@
  */
 package DBAccess;
 
-import PresentationLayer.Order;
+import FunctionLayer.Order;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

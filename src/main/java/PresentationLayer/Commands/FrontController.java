@@ -10,6 +10,7 @@ import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Exceptions.PDFException;
 import FunctionLayer.Exceptions.UserException;
+import PresentationLayer.Commands.Command;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

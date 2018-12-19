@@ -9,7 +9,7 @@ import FunctionLayer.Exceptions.DataException;
 import FunctionLayer.Exceptions.OrderException;
 import FunctionLayer.Exceptions.UserException;
 import FunctionLayer.LogicFacade;
-import PresentationLayer.Order;
+import FunctionLayer.Order;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
