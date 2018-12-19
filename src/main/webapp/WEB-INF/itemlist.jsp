@@ -45,14 +45,6 @@
                     <jsp:include page="SVGcarport.jsp" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <form action="FrontController" method="post">
-                        <input type="hidden" name="command" value="pdf">
-                        <input type="submit" value="Generate PDF">
-                    </form>
-                </div>
-            </div>
         </div>
         <%
         } else {
