@@ -18,8 +18,8 @@ public class OrderMapperTest {
     @Test
     public void TestgetOrderList() throws Exception {
         List<Order> OrderList = OrderMapper.getOrderList();
-        assertEquals("vej 6", OrderList.get(0).getAdress());
-        assertEquals(150, OrderList.get(0).getCarportID());
-        assertEquals(510, OrderList.get(0).getLength());
+        assertEquals("street 8", OrderList.get(0).getAdress());
+        assertEquals(156, OrderList.get(0).getCarportID());
+        assertEquals(780, OrderList.get(0).getLength());
     }
 }
